@@ -8,6 +8,9 @@ class Exercises extends Component {
         <Text>
           Placeholder Exercises component
         </Text>
+        <Text>
+          {`Nav Count: ${this.props.count}`}
+        </Text>
       </View>
     );
   }

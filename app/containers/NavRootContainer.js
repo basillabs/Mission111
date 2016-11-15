@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { push, pop } from '../actions/navActions';
 import moment from 'moment';
 
-import Welcome from '../components/Welcome';
-import Chapters from '../components/Chapters';
-import Exercises from '../components/Exercises';
-import Story from '../components/Story';
-import Vocab from '../components/Vocab';
+import WelcomeContainer from '../containers/WelcomeContainer';
+import ChaptersContainer from '../containers/ChaptersContainer';
+import ExercisesContainer from '../containers/ExercisesContainer';
+import StoryContainer from '../containers/StoryContainer';
+import VocabContainer from '../containers/VocabContainer';
 
 const { CardStack: NavigationCardStack } = NavigationExperimental;
 
@@ -90,15 +90,15 @@ class NavRoot extends Component {
      */
     switch (key) {
       case `${SCENE_PREFIX}chapters`:
-         return <Chapters handleNavigate={this.handleNavigate} />;
+         return <ChaptersContainer handleNavigate={this.handleNavigate} />;
       case `${SCENE_PREFIX}exercises`:
-         return <Exercises handleNavigate={this.handleNavigate} />;
+         return <ExercisesContainer handleNavigate={this.handleNavigate} />;
       case `${SCENE_PREFIX}story`:
-         return <Story handleNavigate={this.handleNavigate} />;
+         return <StoryContainer handleNavigate={this.handleNavigate} />;
       case `${SCENE_PREFIX}vocab`:
-         return <Vocab handleNavigate={this.handleNavigate} />;
+         return <VocabContainer handleNavigate={this.handleNavigate} />;
       default:
-        return <Welcome handleNavigate={this.handleNavigate} />;
+        return <WelcomeContainer handleNavigate={this.handleNavigate} />;
     }
   }
 
