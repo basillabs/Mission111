@@ -9,6 +9,7 @@ class Welcome extends Component {
   }
 
   onClick(key) {
+    this.props.incrementCount();
     this.props.handleNavigate({
       type: 'push',
       route: {
@@ -50,5 +51,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
+
+Welcome.propTypes = {
+  incrementCount: React.PropTypes.func,
+  handleNavigate: React.PropTypes.func,
+};
 
 export default Welcome;

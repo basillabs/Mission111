@@ -8,6 +8,9 @@ class Story extends Component {
         <Text>
           Placeholder Story component
         </Text>
+        <Text>
+          {`Nav Count: ${this.props.count}`}
+        </Text>
       </View>
     );
   }

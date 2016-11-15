@@ -8,6 +8,9 @@ class Chapters extends Component {
         <Text>
           Placeholder Chapters component
         </Text>
+        <Text>
+          {`Nav Count: ${this.props.count}`}
+        </Text>
       </View>
     );
   }
