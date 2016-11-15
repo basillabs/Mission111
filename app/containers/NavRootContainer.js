@@ -6,7 +6,10 @@ import { push, pop } from '../actions/navActions';
 import moment from 'moment';
 
 import Welcome from '../components/Welcome';
-import PlaceHolder from '../components/PlaceHolder';
+import Chapters from '../components/Chapters';
+import Exercises from '../components/Exercises';
+import Story from '../components/Story';
+import Vocab from '../components/Vocab';
 
 const { CardStack: NavigationCardStack } = NavigationExperimental;
 
@@ -86,8 +89,14 @@ class NavRoot extends Component {
      *     return <ChapterListContainer handleNavigate={this.handleNavigate} />;
      */
     switch (key) {
-      case `${SCENE_PREFIX}placeHolder`:
-         return <PlaceHolder handleNavigate={this.handleNavigate} />;
+      case `${SCENE_PREFIX}chapters`:
+         return <Chapters handleNavigate={this.handleNavigate} />;
+      case `${SCENE_PREFIX}exercises`:
+         return <Exercises handleNavigate={this.handleNavigate} />;
+      case `${SCENE_PREFIX}story`:
+         return <Story handleNavigate={this.handleNavigate} />;
+      case `${SCENE_PREFIX}vocab`:
+         return <Vocab handleNavigate={this.handleNavigate} />;
       default:
         return <Welcome handleNavigate={this.handleNavigate} />;
     }

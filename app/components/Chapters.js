@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import {View, Text} from 'react-native';
 
-class Welcome extends Component {
+class Chapters extends Component {
   render() {
     return (
       <View>
         <Text>
-          Placeholder component
+          Placeholder Chapters component
         </Text>
       </View>
     );
   }
 }
 
-export default Welcome;
+export default Chapters;
