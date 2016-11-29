@@ -6,10 +6,7 @@ import { push, pop } from '../actions/navActions';
 import moment from 'moment';
 
 import WelcomeContainer from '../containers/WelcomeContainer';
-import ChaptersContainer from '../containers/ChaptersContainer';
-import ExercisesContainer from '../containers/ExercisesContainer';
 import StoryContainer from '../containers/StoryContainer';
-import VocabContainer from '../containers/VocabContainer';
 
 const { CardStack: NavigationCardStack } = NavigationExperimental;
 
@@ -89,14 +86,8 @@ class NavRoot extends Component {
      *     return <ChapterListContainer handleNavigate={this.handleNavigate} />;
      */
     switch (key) {
-      case `${SCENE_PREFIX}chapters`:
-         return <ChaptersContainer handleNavigate={this.handleNavigate} />;
-      case `${SCENE_PREFIX}exercises`:
-         return <ExercisesContainer handleNavigate={this.handleNavigate} />;
       case `${SCENE_PREFIX}story`:
          return <StoryContainer handleNavigate={this.handleNavigate} />;
-      case `${SCENE_PREFIX}vocab`:
-         return <VocabContainer handleNavigate={this.handleNavigate} />;
       default:
         return <WelcomeContainer handleNavigate={this.handleNavigate} />;
     }
@@ -109,7 +100,6 @@ class NavRoot extends Component {
         navigationState={this.props.navigation}
         onNavigate={this.handleNavigate}
         renderScene={this.renderScene}
-        gestureResponseDistance={200}
         onNavigateBack={this.handleBackAction}
         style={{ backgroundColor: 'black' }}
         cardStyle={{ opacity: 1 }}
