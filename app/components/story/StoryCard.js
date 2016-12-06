@@ -10,12 +10,16 @@ class Story extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          Placeholder Story card component
-        </Text>
-        <Text>
-          {this.props.text}
-        </Text>
+        <View style={[styles.card, styles.topCard]} >
+          <Text style={styles.text}>
+            {this.props.topText}
+          </Text>
+        </View>
+        <View style={[styles.card, styles.bottomCard]} >
+          <Text style={styles.text}>
+            {this.props.bottomText}
+          </Text>
+        </View>
       </View>
     );
   }
@@ -24,7 +28,19 @@ class Story extends Component {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
-    marginTop: 30,
+  },
+  card: {
+    flex: 1,
+    borderTopWidth: 1,
+    borderColor: 'black',
+    padding: 30,
+  },
+  topCard: {
+    transform: [{rotate: '180deg'}],
+  },
+  text: {
+    fontSize: 17,
+    lineHeight: 24,
   },
 });
 
