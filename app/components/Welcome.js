@@ -8,27 +8,32 @@ class Welcome extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick(chapterId) {
+  onClick(type) {
     this.props.handleNavigate({
       type: 'push',
-      route: { key: 'story', },
+      route: {
+        key: 'storyList',
+      },
+      data: {
+        language: type,
+      }
     });
   }
 
   render() {
     return (
       <View style={styles.wrapper} >
-        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 1)} >
-          <Text style={styles.text}>Click here for Story 1</Text>
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.onClick.bind(this, 'English')}
+        >
+          <Text style={styles.text}>Click here for One Language</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 2)} >
-          <Text style={styles.text}>Click here for Story 2</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 3)} >
-          <Text style={styles.text}>Click here for Story 3</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 4)} >
-          <Text style={styles.text}>Click here for Story 4</Text>
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.onClick.bind(this, 'Swedish')}
+        >
+          <Text style={styles.text}>Click here for Two Languages</Text>
         </TouchableHighlight>
       </View>
     );

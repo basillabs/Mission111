@@ -9,7 +9,6 @@ function navigationState(state = {
   key: 'root',
   routes: [{
     key: 'welcome',
-    title: 'Welcome',
   }],
 }, action) {
   switch (action.type) {
