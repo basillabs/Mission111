@@ -1,9 +1,12 @@
 import {
   SET_LANGUAGE,
 } from '../actions/languageActions';
+import {
+  EN_LANG,
+} from '../constants/languageConstants';
 
 const defaultState = {
-  code: 'EN',
+  code: EN_LANG,
 };
 
 export default function(state = defaultState, action = {}) {
