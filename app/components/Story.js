@@ -60,6 +60,7 @@ class Story extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'black',
     paddingTop: 20,
     flex: 1,
   },

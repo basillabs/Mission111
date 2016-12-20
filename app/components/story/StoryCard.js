@@ -27,20 +27,25 @@ class Story extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: Dimensions.get('window').width,
+    width: Dimensions.get('window').width
   },
   card: {
     flex: 1,
+    backgroundColor: '#f2f2f2',
     borderTopWidth: 1,
     borderColor: 'black',
-    padding: 30,
+    borderRadius: 4,
+    margin: 8,
+    padding: 16,
+    paddingTop: 24
   },
   topCard: {
     transform: [{rotate: '180deg'}],
   },
   text: {
-    fontSize: 17,
-    lineHeight: 24,
+    color: '#1f1f1f',
+    fontSize: 16,
+    lineHeight: 20,
   },
 });
 
