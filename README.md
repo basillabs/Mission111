@@ -15,3 +15,11 @@ npm install
 react-native run-ios
 ```
 
+## Running Unit Tests
+
+```bash
+npm run test
+```
+
+See: [Running unit tests before every git push](https://github.com/youmeforever/Mission111/wiki/Running-unit-tests-before-every-git-push)
+
