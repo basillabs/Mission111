@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import StoryCard from './story/StoryCard';
 import ViewPager from 'react-native-viewpager';
-import Arabic from '../../stories/ar/chapters.js';
-import English from '../../stories/en/chapters.js';
+import Arabic from '../../stories/arabic/chapters.js';
+import English from '../../stories/english/chapters.js';
+import Persian from '../../stories/persian/chapters.js';
+import Swedish from '../../stories/swedish/chapters.js';
 
 class Story extends Component {
   constructor(props) {

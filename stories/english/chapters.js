@@ -1,6 +1,7 @@
 export default {
-  language: "Arabic",
+  language: "English",
   chapters: [
     require('./1.json'),
+    require('./2.json')
   ],
 };
