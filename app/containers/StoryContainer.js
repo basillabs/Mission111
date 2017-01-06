@@ -5,20 +5,20 @@ import Story from '../components/Story';
 
 function mapStateToProps(state) {
   return {
-    count: state.welcome.count,
+    chapterId: state.welcome.chapterId,
   };
 }
 
 class StoryContainer extends Component {
   render() {
     return (
-      <Story count={this.props.count}/>
+      <Story chapterId={this.props.chapterId} />
     );
   }
 }
 
 StoryContainer.propTypes = {
-  count: React.PropTypes.number,
+  chapterId: React.PropTypes.number,
 };
 
 export default connect(mapStateToProps)(StoryContainer);

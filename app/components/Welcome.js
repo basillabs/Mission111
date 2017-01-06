@@ -9,6 +9,7 @@ class Welcome extends Component {
   }
 
   onClick(chapterId) {
+    this.props.setChapter(chapterId);
     this.props.handleNavigate({
       type: 'push',
       route: { key: 'story', },
@@ -18,16 +19,16 @@ class Welcome extends Component {
   render() {
     return (
       <View style={styles.wrapper} >
-        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 1)} >
+        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 0)} >
           <Text style={styles.text}>Click here for Story 1</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 2)} >
+        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 1)} >
           <Text style={styles.text}>Click here for Story 2</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 3)} >
+        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 2)} >
           <Text style={styles.text}>Click here for Story 3</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 4)} >
+        <TouchableHighlight style={styles.button} onPress={this.onClick.bind(this, 3)} >
           <Text style={styles.text}>Click here for Story 4</Text>
         </TouchableHighlight>
       </View>

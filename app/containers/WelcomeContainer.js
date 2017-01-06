@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { incrementCount } from '../actions/welcome';
+import { incrementCount, setChapter } from '../actions/welcome';
 
 import Welcome from '../components/Welcome';
 
@@ -14,6 +14,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     incrementCount: () => dispatch(incrementCount()),
+    setChapter: (chapterId) => dispatch(setChapter(chapterId)),
   };
 }
 
@@ -23,6 +24,7 @@ class WelcomeContainer extends Component {
       <Welcome
         incrementCount={this.props.incrementCount}
         handleNavigate={this.props.handleNavigate}
+        setChapter={this.props.setChapter}
       />
     );
   }

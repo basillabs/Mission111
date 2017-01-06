@@ -12,10 +12,10 @@ class Story extends Component {
 
     const tempData = [];
 
-    English.chapters[0].sections.forEach((section, index) => {
+    English.chapters[this.props.chapterId].sections.forEach((section, index) => {
       tempData.push({
-        topText: Arabic.chapters[0].sections[index],
-        bottomText: English.chapters[0].sections[index],
+        topText: Arabic.chapters[this.props.chapterId].sections[index],
+        bottomText: English.chapters[this.props.chapterId].sections[index],
       });
     });
 
