@@ -50,8 +50,19 @@ class Story extends Component {
           <Text>Back</Text>
         </TouchableHighlight>
         <ViewPager
+          style={styles.topCard}
           dataSource={this.state.data}
-          renderPage={(data) => <StoryCard topText={data.topText} bottomText={data.bottomText} />}
+          renderPage={(data) => <StoryCard text={data.topText} />}
+        />
+        <View style={styles.toolbar}>
+          <View style={styles.icon}></View>
+          <View style={styles.pageIndicators}></View>
+          <View style={styles.icon}></View>
+        </View>
+        <ViewPager
+          style={styles.bottomCard}
+          dataSource={this.state.data}
+          renderPage={(data) => <StoryCard text={data.bottomText} />}
         />
       </View>
     );
@@ -64,10 +75,27 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     flex: 1,
   },
+  toolbar: {
+    height: 56,
+    padding: 16,
+    flexDirection: 'row'
+  },
+  icon: {
+    backgroundColor: 'white',
+    width: 24,
+    height: 24
+  },
+  pageIndicators: {
+    flex: 1
+  },
   button: {
+    backgroundColor: 'white',
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     paddingVertical: 10,
+  },
+  topCard: {
+    transform: [{rotate: '180deg'}],
   }
 });
 

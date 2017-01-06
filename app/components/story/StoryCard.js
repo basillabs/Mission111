@@ -10,14 +10,9 @@ class Story extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={[styles.card, styles.topCard]} >
+        <View style={styles.card} >
           <Text style={styles.text}>
-            {this.props.topText}
-          </Text>
-        </View>
-        <View style={[styles.card, styles.bottomCard]} >
-          <Text style={styles.text}>
-            {this.props.bottomText}
+            {this.props.text}
           </Text>
         </View>
       </View>
@@ -38,9 +33,6 @@ const styles = StyleSheet.create({
     margin: 8,
     padding: 16,
     paddingTop: 24
-  },
-  topCard: {
-    transform: [{rotate: '180deg'}],
   },
   text: {
     color: '#1f1f1f',
