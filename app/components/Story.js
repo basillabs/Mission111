@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import StoryCard from './story/StoryCard';
 import ViewPager from 'react-native-viewpager';
 
@@ -29,16 +30,48 @@ class Story extends Component {
     this.state = {
       data: ds.cloneWithPages(tempData),
     };
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    this.props.handleNavigate({
+      type: 'pop',
+      route: {key: 'pop'},
+    });
   }
 
   render() {
     return (
-      <ViewPager
-        dataSource={this.state.data}
-        renderPage={(data) => <StoryCard topText={data.topText} bottomText={data.bottomText} />}
-      />
+      <View style={styles.container}>
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.onClick}
+        >
+          <Text>Back</Text>
+        </TouchableHighlight>
+        <ViewPager
+          dataSource={this.state.data}
+          renderPage={(data) => <StoryCard topText={data.topText} bottomText={data.bottomText} />}
+        />
+      </View>
     );
   }
 }
+
+Story.propTypes = {
+  handleNavigate: React.PropTypes.func.isRequired,
+};
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20,
+    flex: 1,
+  },
+  button: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    paddingVertical: 10,
+  }
+});
 
 export default Story;
