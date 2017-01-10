@@ -36,13 +36,13 @@ class Welcome extends Component {
           style={styles.button}
           onPress={this.onClick.bind(this, EN_LANG)}
         >
-          <Text style={styles.text}>Click here for One Language</Text>
+          <Text style={styles.text}>One Language</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
           onPress={this.onClick.bind(this, SV_LANG)}
         >
-          <Text style={styles.text}>Click here for Two Languages</Text>
+          <Text style={styles.text}>Two Languages</Text>
         </TouchableHighlight>
       </View>
     );

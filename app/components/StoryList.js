@@ -12,22 +12,22 @@ import {
 
 const ENGLISH_LIST = [
   {
-    title: 'Click here for story 1',
+    title: 'Story One',
     id: 1,
     type: 'single',
   },
   {
-    title: 'Click here for story 2',
+    title: 'Story Two',
     id: 2,
     type: 'single',
   },
   {
-    title: 'Click here for story 3',
+    title: 'Story Three',
     id: 3,
     type: 'single',
   },
   {
-    title: 'Click here for story 4',
+    title: 'Story Four',
     id: 4,
     type: 'single',
   },
@@ -35,22 +35,22 @@ const ENGLISH_LIST = [
 
 const SWEDISH_LIST = [
   {
-    title: 'Klicka här för Story 1',
+    title: 'Story En',
     id: 1,
     type: 'pair',
   },
   {
-    title: 'Klicka här för Story 2',
+    title: 'Story Två',
     id: 2,
     type: 'pair',
   },
   {
-    title: 'Klicka här för Story 3',
+    title: 'Story Tre',
     id: 3,
     type: 'pair',
   },
   {
-    title: 'Klicka här för Story 4',
+    title: 'Story Fyra',
     id: 4,
     type: 'pair',
   },
