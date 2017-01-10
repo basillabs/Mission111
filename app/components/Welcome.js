@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableHighlight, View, Text } from 'react-native';
+import {
+  StyleSheet,
+  TouchableHighlight,
+  View,
+  Text
+} from 'react-native';
+import {
+  EN_LANG,
+  SV_LANG,
+} from '../constants/languageConstants';
 
 class Welcome extends Component {
   constructor(props) {
@@ -25,13 +34,13 @@ class Welcome extends Component {
       <View style={styles.wrapper} >
         <TouchableHighlight
           style={styles.button}
-          onPress={this.onClick.bind(this, 'English')}
+          onPress={this.onClick.bind(this, EN_LANG)}
         >
           <Text style={styles.text}>Click here for One Language</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
-          onPress={this.onClick.bind(this, 'Swedish')}
+          onPress={this.onClick.bind(this, SV_LANG)}
         >
           <Text style={styles.text}>Click here for Two Languages</Text>
         </TouchableHighlight>

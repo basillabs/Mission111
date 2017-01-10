@@ -3,11 +3,6 @@ import { connect } from 'react-redux';
 
 import StoryList from '../components/StoryList';
 
-function mapStateToProps(state) {
-  return {
-  };
-}
-
 class StoryListContainer extends Component {
   render() {
     return (
@@ -16,4 +11,4 @@ class StoryListContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps)(StoryListContainer);
+export default connect()(StoryListContainer);

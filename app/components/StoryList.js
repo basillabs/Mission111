@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableHighlight, View, Text } from 'react-native';
+import {
+  StyleSheet,
+  TouchableHighlight,
+  View,
+  Text,
+} from 'react-native';
+import {
+  EN_LANG,
+  SV_LANG,
+} from '../constants/languageConstants';
 
 const ENGLISH_LIST = [
   {
@@ -77,7 +86,7 @@ class StoryList extends Component {
 
   render() {
     let list;
-    if (this.props.language === 'English') {
+    if (this.props.language === EN_LANG) {
       list = ENGLISH_LIST;
     } else {
       list = SWEDISH_LIST;
@@ -108,6 +117,7 @@ const styles = StyleSheet.create({
 StoryList.propTypes = {
   incrementCount: React.PropTypes.func,
   handleNavigate: React.PropTypes.func,
+  language: React.PropTypes.string,
 };
 
 export default StoryList;

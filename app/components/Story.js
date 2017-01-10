@@ -58,6 +58,10 @@ class Story extends Component {
   }
 }
 
+Story.propTypes = {
+  handleNavigate: React.PropTypes.func.isRequired,
+};
+
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
