@@ -8,13 +8,11 @@ class Story extends Component {
   constructor(props) {
     super(props);
 
-    const tempData = [];
-
-    English.chapters[0].sections.forEach((section, index) => {
-      tempData.push({
+    const tempData = English.chapters[0].sections.map((section, index) => {
+      return {
         topText: Arabic.chapters[0].sections[index],
-        bottomText: English.chapters[0].sections[index],
-      });
+        bottomText: section,
+      };
     });
 
     const ds = new ViewPager.DataSource({pageHasChanged: (r1, r2) => r1.text !== r2.text});
