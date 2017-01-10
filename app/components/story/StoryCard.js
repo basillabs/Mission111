@@ -6,7 +6,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-class Story extends Component {
+class StoryCard extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Story;
+export default StoryCard;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight,   Dimensions,
+ } from 'react-native';
 import StoryCard from './story/StoryCard';
 import ViewPager from 'react-native-viewpager';
 import Arabic from '../../stories/ar/chapters.js';
@@ -22,7 +23,9 @@ class Story extends Component {
     this.state = {
       data: ds.cloneWithPages(tempData),
     };
+
     this.onClick = this.onClick.bind(this);
+    this._renderPage = this._renderPage.bind(this);
   }
 
   onClick() {
@@ -30,6 +33,22 @@ class Story extends Component {
       type: 'pop',
       route: {key: 'pop'},
     });
+  }
+
+  _renderPage(data) {
+    if (this.props.viewMode === 'single') {
+      return (
+        <View style={styles.container}>
+          <View style={styles.card}>
+            <Text style={styles.text}>
+              {data.topText}
+            </Text>
+          </View>
+        </View>
+      );
+    }
+
+    return <StoryCard topText={data.topText} bottomText={data.bottomText} />;
   }
 
   render() {
@@ -43,7 +62,7 @@ class Story extends Component {
         </TouchableHighlight>
         <ViewPager
           dataSource={this.state.data}
-          renderPage={(data) => <StoryCard topText={data.topText} bottomText={data.bottomText} />}
+          renderPage={this._renderPage}
         />
       </View>
     );
@@ -52,18 +71,26 @@ class Story extends Component {
 
 Story.propTypes = {
   handleNavigate: React.PropTypes.func.isRequired,
+  viewMode: React.PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
     flex: 1,
   },
   button: {
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
     paddingVertical: 10,
-  }
+    paddingHorizontal: 10,
+    marginTop: 15,
+  },
+  card: {
+    flex: 1,
+    padding: 30,
+  },
+  text: {
+    fontSize: 17,
+    lineHeight: 24,
+  },
 });
 
 export default Story;
