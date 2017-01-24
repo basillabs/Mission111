@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
 });
 
 StoryList.propTypes = {
-  incrementCount: React.PropTypes.func,
   handleNavigate: React.PropTypes.func,
   language: React.PropTypes.string,
 };

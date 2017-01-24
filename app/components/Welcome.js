@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
 });
 
 Welcome.propTypes = {
-  incrementCount: React.PropTypes.func,
   handleNavigate: React.PropTypes.func,
 };
 
