@@ -5,7 +5,7 @@ import Story from '../components/Story';
 
 function mapStateToProps(state) {
   return {
-    count: state.welcome.count,
+    chapterId: state.welcome.chapterId,
   };
 }
 
@@ -14,7 +14,7 @@ class StoryContainer extends Component {
     return (
       <Story viewMode={this.props.data.type}
              handleNavigate={this.props.handleNavigate}
-             count={this.props.count} />
+             chapterId={this.props.chapterId} />
     );
   }
 }

@@ -60,11 +60,11 @@ class StoryList extends Component {
   constructor(props) {
     super(props);
 
-    this.onClick = this.onClick.bind(this);
     this.renderRows = this.renderRows.bind(this);
   }
 
   onClick(chapterId, type) {
+    this.props.setChapter(chapterId);
     this.props.handleNavigate({
       type: 'push',
       route: { key: 'story', },
@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
 });
 
 StoryList.propTypes = {
-  incrementCount: React.PropTypes.func,
   handleNavigate: React.PropTypes.func,
   language: React.PropTypes.string,
 };
