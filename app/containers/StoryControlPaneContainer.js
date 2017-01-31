@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { showMenu } from '../actions/navActions';
+import { showMenu } from '../actions/menuActions';
 import StoryControlPane from '../components/StoryControlPane';
 
 function mapDispatchToProps(dispatch) {

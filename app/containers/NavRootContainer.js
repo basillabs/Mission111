@@ -18,7 +18,7 @@ const SCENE_PREFIX = 'scene_';
 function mapStateToProps(state) {
   return {
     navigation: state.navReducer,
-    days: state.days,
+    drawerOpen: state.menu.open,
   };
 }
 
@@ -107,6 +107,7 @@ class NavRoot extends Component {
         type="static"
         openDrawerOffset={100}
         tweenHandler={Drawer.tweenPresets.parallax}
+        open={this.props.drawerOpen}
       >
         <NavigationCardStack
           direction="horizontal"
@@ -124,10 +125,10 @@ class NavRoot extends Component {
 }
 
 NavRoot.propTypes = {
-  navigation: React.PropTypes.object,
-  days: React.PropTypes.object,
-  popRoute: React.PropTypes.func,
-  pushRoute: React.PropTypes.func,
+  navigation: React.PropTypes.object.isRequired,
+  popRoute: React.PropTypes.func.isRequired,
+  pushRoute: React.PropTypes.func.isRequired,
+  drawerOpen: React.PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavRoot);

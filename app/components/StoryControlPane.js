@@ -18,15 +18,14 @@ class StoryControlPane extends Component {
   render() {
     return (
       <View style={styles.pane}>
-        <View onTouch={this._onMenuTap}>
-          <Text style={styles.icon}>hamburger</Text>
-        </View>
+        <TouchableHighlight onPress={this._onMenuTap}>
+          <Text style={styles.icon}>🍔</Text>
+        </TouchableHighlight>
       </View>
     );
   }
 
   _onMenuTap() {
-    debugger;
     this.props.showMenu();
   }
 }
@@ -38,6 +37,7 @@ StoryControlPane.propTypes = {
 const styles = StyleSheet.create({
   pane: {
     backgroundColor: 'black',
+    padding: 10,
   },
   icon: {
     color: 'white',
