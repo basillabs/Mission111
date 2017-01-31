@@ -1,7 +1,7 @@
 import {
   MENU_OPEN,
   MENU_CLOSE,
-} from '../actions/menuActions';
+} from '../constants/menuConstants';
 
 function menuState(state = {
   open: false,

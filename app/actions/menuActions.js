@@ -1,5 +1,7 @@
-export const MENU_OPEN = 'MENU_OPEN';
-export const MENU_CLOSE = 'MENU_CLOSE';
+import {
+  MENU_OPEN,
+  MENU_CLOSE,
+} from '../constants/menuConstants';
 
 export function showMenu() {
   return {

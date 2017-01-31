@@ -1,6 +1,6 @@
 import navReducer from './navReducer';
 import languageReducer from './languageReducer';
-import menu from './menu';
+import menuReducer from './menuReducer';
 import { combineReducers } from 'redux';
 
 import { SET_CHAPTER } from '../actions/welcome';
@@ -23,7 +23,7 @@ const app = combineReducers({
   welcome,
   navReducer,
   languageReducer,
-  menu,
+  menuReducer,
 });
 
 export default app;

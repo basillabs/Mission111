@@ -19,7 +19,7 @@ const SCENE_PREFIX = 'scene_';
 function mapStateToProps(state) {
   return {
     navigation: state.navReducer,
-    drawerOpen: state.menu.open,
+    drawerOpen: state.menuReducer.open,
   };
 }
 
