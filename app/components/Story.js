@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight,   Dimensions,
+import { StyleSheet, Text, View, TouchableHighlight, Dimensions,
  } from 'react-native';
 import StoryCard from './story/StoryCard';
 import ViewPager from 'react-native-viewpager';
@@ -22,33 +22,41 @@ class Story extends Component {
     const ds = new ViewPager.DataSource({pageHasChanged: (r1, r2) => r1.text !== r2.text});
     this.state = {
       data: ds.cloneWithPages(tempData),
+      isSplit: this.props.viewMode === 'pair'
     };
 
-    this.onClick = this.onClick.bind(this);
+    this.onClickBack = this.onClickBack.bind(this);
+    this.onClickToggle = this.onClickToggle.bind(this);
     this._renderPage = this._renderPage.bind(this);
   }
 
-  onClick() {
+  onClickBack() {
     this.props.handleNavigate({
       type: 'pop',
       route: {key: 'pop'},
     });
   }
 
+  onClickToggle() {
+    this.setState({
+      isSplit: !this.state.isSplit
+    });
+  }
+
   _renderPage(data) {
-    if (this.props.viewMode === 'single') {
-      return (
-        <View style={styles.container}>
-          <View style={styles.card}>
-            <Text style={styles.text}>
-              {data.topText}
-            </Text>
-          </View>
-        </View>
-      );
+    if (this.state.isSplit) {
+      return <StoryCard topText={data.topText} bottomText={data.bottomText} />;
     }
 
-    return <StoryCard topText={data.topText} bottomText={data.bottomText} />;
+    return (
+      <View style={styles.container}>
+        <View style={styles.card}>
+          <Text style={styles.text}>
+            {data.bottomText}
+          </Text>
+        </View>
+      </View>
+    );
   }
 
   render() {
@@ -56,7 +64,7 @@ class Story extends Component {
       <View style={styles.container}>
         <TouchableHighlight
           style={styles.button}
-          onPress={this.onClick}
+          onPress={this.onClickBack}
         >
           <Text>Back</Text>
         </TouchableHighlight>
@@ -64,6 +72,12 @@ class Story extends Component {
           dataSource={this.state.data}
           renderPage={this._renderPage}
         />
+        <TouchableHighlight
+          style={styles.toggle}
+          onPress={this.onClickToggle}
+        >
+          <Text>Toggle View</Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -82,6 +96,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     marginTop: 15,
+  },
+  toggle: {
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
   card: {
     flex: 1,
