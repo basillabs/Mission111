@@ -3,6 +3,7 @@ import { BackAndroid, NavigationExperimental } from 'react-native';
 
 import { connect } from 'react-redux';
 import { push, pop } from '../actions/navActions';
+import { hideMenu } from '../actions/menuActions';
 import moment from 'moment';
 import Drawer from 'react-native-drawer';
 import SideMenuContainer from '../containers/SideMenuContainer';
@@ -26,6 +27,7 @@ function mapDispatchToProps(dispatch) {
   return {
     pushRoute: (route) => dispatch(push(route)),
     popRoute: () => dispatch(pop()),
+    hideMenu: () => dispatch(hideMenu()),
   };
 }
 
@@ -35,6 +37,7 @@ class NavRoot extends Component {
     this.renderScene = this.renderScene.bind(this);
     this.handleBackAction = this.handleBackAction.bind(this);
     this.handleNavigate = this.handleNavigate.bind(this);
+    this.onDrawerClose = this.onDrawerClose.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +46,10 @@ class NavRoot extends Component {
 
   componentWillUnmount() {
     BackAndroid.removeEventListener('hardwareBackPress', this.handleBackAction);
+  }
+
+  onDrawerClose() {
+    this.props.hideMenu();
   }
 
   handleBackAction() {
@@ -108,6 +115,8 @@ class NavRoot extends Component {
         openDrawerOffset={100}
         tweenHandler={Drawer.tweenPresets.parallax}
         open={this.props.drawerOpen}
+        captureGestures={false}
+        onClose={this.onDrawerClose}
       >
         <NavigationCardStack
           direction="horizontal"
@@ -129,6 +138,7 @@ NavRoot.propTypes = {
   popRoute: React.PropTypes.func.isRequired,
   pushRoute: React.PropTypes.func.isRequired,
   drawerOpen: React.PropTypes.bool.isRequired,
+  hideMenu: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavRoot);
