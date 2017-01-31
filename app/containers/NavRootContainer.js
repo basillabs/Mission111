@@ -4,7 +4,8 @@ import { BackAndroid, NavigationExperimental } from 'react-native';
 import { connect } from 'react-redux';
 import { push, pop } from '../actions/navActions';
 import moment from 'moment';
-
+import Drawer from 'react-native-drawer';
+import SideMenuContainer from '../containers/SideMenuContainer';
 import WelcomeContainer from '../containers/WelcomeContainer';
 import StoryContainer from '../containers/StoryContainer';
 import StoryListContainer from '../containers/StoryListContainer';
@@ -84,7 +85,7 @@ class NavRoot extends Component {
 
     /*
      * Add possibe scenes here:
-     * example: 
+     * example:
      *   case `${SCENE_PREFIX}chapterList`:
      *     return <ChapterListContainer handleNavigate={this.handleNavigate} />;
      */
@@ -100,16 +101,24 @@ class NavRoot extends Component {
 
   render() {
     return (
-      <NavigationCardStack
-        direction="horizontal"
-        navigationState={this.props.navigation}
-        onNavigate={this.handleNavigate}
-        renderScene={this.renderScene}
-        onNavigateBack={this.handleBackAction}
-        gestureResponseDistance={100}
-        style={{ backgroundColor: 'black' }}
-        cardStyle={{ opacity: 1 }}
-      />
+      <Drawer
+        content={<SideMenuContainer />}
+        tapToClose={true}
+        type="static"
+        openDrawerOffset={100}
+        tweenHandler={Drawer.tweenPresets.parallax}
+      >
+        <NavigationCardStack
+          direction="horizontal"
+          navigationState={this.props.navigation}
+          onNavigate={this.handleNavigate}
+          renderScene={this.renderScene}
+          onNavigateBack={this.handleBackAction}
+          gestureResponseDistance={100}
+          style={{ backgroundColor: 'black' }}
+          cardStyle={{ opacity: 1 }}
+        />
+      </Drawer>
     );
   }
 }

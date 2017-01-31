@@ -6,6 +6,7 @@ import {
   Dimensions,
   Animated,
 } from 'react-native';
+import StoryControlPaneContainer from '../../containers/StoryControlPaneContainer';
 
 const midHeight = Dimensions.get('window').height/2;
 
@@ -47,6 +48,7 @@ class StoryCard extends Component {
             {this.props.topText}
           </Text>
         </Animated.View>
+        <StoryControlPaneContainer />
         <View style={[ styles.card, styles.bottomCard]} >
           <Text style={styles.text}>
             {this.props.bottomText}

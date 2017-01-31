@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight, Dimensions,
  } from 'react-native';
 import StoryCard from './story/StoryCard';
+import StoryControlPaneContainer from '../containers/StoryControlPaneContainer';
 import ViewPager from 'react-native-viewpager';
 import Arabic from '../../stories/ar/chapters.js';
 import English from '../../stories/en/chapters.js';
