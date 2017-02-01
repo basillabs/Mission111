@@ -65,12 +65,6 @@ class Story extends Component {
           dataSource={this.state.data}
           renderPage={this._renderPage}
         />
-        <TouchableHighlight
-          style={styles.toggle}
-          onPress={this.onClickToggle}
-        >
-          <Text>Toggle View</Text>
-        </TouchableHighlight>
       </View>
     );
   }
@@ -89,10 +83,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingHorizontal: 10,
     marginTop: 15,
-  },
-  toggle: {
-    paddingVertical: 10,
-    paddingHorizontal: 10,
   },
   card: {
     flex: 1,

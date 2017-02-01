@@ -15,7 +15,7 @@ class SideMenuContainer extends Component {
     let chapters = this._getChapters();
 
     return (
-      <SideMenu chapters={chapters} />
+      <SideMenu chapters={chapters} {...this.props} />
     );
   }
 

@@ -61,6 +61,9 @@ class StoryCard extends Component {
 
 StoryCard.propTypes = {
   isSplit: React.PropTypes.bool.isRequired
+  topText: React.PropTypes.string.isRequired,
+  bottomText: React.PropTypes.string.isRequired,
+  onToggleTap: React.PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

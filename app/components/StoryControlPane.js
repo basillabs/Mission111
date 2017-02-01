@@ -9,34 +9,30 @@ import {
 
 
 class StoryControlPane extends Component {
-  constructor(props) {
-    super(props);
-
-    this._onMenuTap = this._onMenuTap.bind(this);
-  }
-
   render() {
     return (
       <View style={styles.pane}>
-        <TouchableHighlight onPress={this._onMenuTap}>
+        <TouchableHighlight onPress={this.props.showMenu}>
           <Text style={styles.icon}>🍔</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this.props.onToggleTap}>
+          <Text style={styles.icon}>⬜</Text>
         </TouchableHighlight>
       </View>
     );
-  }
-
-  _onMenuTap() {
-    this.props.showMenu();
   }
 }
 
 StoryControlPane.propTypes = {
   showMenu: React.PropTypes.func.isRequired,
+  onToggleTap: React.PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
   pane: {
     backgroundColor: 'black',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     padding: 10,
   },
   icon: {

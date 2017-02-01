@@ -111,8 +111,9 @@ class NavRoot extends Component {
       <Drawer
         content={<SideMenuContainer />}
         tapToClose={true}
-        type="static"
+        type="overlay"
         openDrawerOffset={100}
+        closedDrawerOffset={0}
         tweenHandler={Drawer.tweenPresets.parallax}
         open={this.props.drawerOpen}
         captureGestures={false}
@@ -132,6 +133,12 @@ class NavRoot extends Component {
     );
   }
 }
+
+        // styles={drawerStyles}
+// const drawerStyles = {
+  // drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
+  // main: {paddingLeft: 3},
+// }
 
 NavRoot.propTypes = {
   navigation: React.PropTypes.object.isRequired,

@@ -12,7 +12,7 @@ function mapDispatchToProps(dispatch) {
 class StoryControlPaneContainer extends Component {
   render() {
     return (
-      <StoryControlPane showMenu={this.props.showMenu} />
+      <StoryControlPane showMenu={this.props.showMenu} {...this.props} />
     );
   }
 }
