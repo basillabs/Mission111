@@ -44,19 +44,11 @@ class Story extends Component {
   }
 
   _renderPage(data) {
-    if (this.state.isSplit) {
-      return <StoryCard topText={data.topText} bottomText={data.bottomText} />;
-    }
-
-    return (
-      <View style={styles.container}>
-        <View style={styles.card}>
-          <Text style={styles.text}>
-            {data.bottomText}
-          </Text>
-        </View>
-      </View>
-    );
+    return <StoryCard
+              topText={data.topText} 
+              bottomText={data.bottomText} 
+              isSplit={this.state.isSplit} 
+            />;
   }
 
   render() {
@@ -93,7 +85,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    paddingVertical: 10,
+    paddingTop: 10,
     paddingHorizontal: 10,
     marginTop: 15,
   },
