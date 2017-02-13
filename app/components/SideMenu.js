@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     paddingBottom: 8,
   },
+  selectedItem: {
+    fontWeight: 'bold',
+  }
 });
 
 class SideMenu extends Component {
@@ -29,11 +32,15 @@ class SideMenu extends Component {
     return (
       <View scrollsToTop={false} style={styles.menu}>
         {this.props.chapters.map((chapter, i) => {
+          const style = (i + 1 === this.props.chapterId)
+            ? [styles.item, styles.selectedItem]
+            : styles.item;
+
           return (
             <Text
               key={`chapter-${i}`}
-              onPress={() => false}
-              style={styles.item}>
+              onPress={this._onChapterSelection.bind(this, i + 1)}
+              style={style}>
             {chapter.title}
             </Text>
           );
@@ -41,6 +48,10 @@ class SideMenu extends Component {
       </View>
     );
 	}
+
+  _onChapterSelection(chapterIndex) {
+    this.props.setChapter(chapterIndex);
+  }
 }
 SideMenu.propTypes = {
   chapters: React.PropTypes.array,

@@ -3,12 +3,21 @@ import {View, Text} from 'react-native';
 import { connect } from 'react-redux';
 import SideMenu from '../components/SideMenu';
 import Stories from '../../stories';
+import { setChapter } from '../actions/chapterActions';
 
 function mapStateToProps(state) {
   return {
     languageCode: state.languageReducer.code,
+    chapterId: state.chapterReducer.chapterId,
   };
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setChapter: (chapterId) => dispatch(setChapter(chapterId)),
+  };
+}
+
 
 class SideMenuContainer extends Component {
   render() {
@@ -25,7 +34,9 @@ class SideMenuContainer extends Component {
 }
 
 SideMenuContainer.propTypes = {
+  chapterId: React.PropTypes.number.isRequired,
   languageCode: React.PropTypes.string.isRequired,
+  setChapter: React.PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(SideMenuContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SideMenuContainer);
