@@ -14,7 +14,10 @@ class Story extends Component {
   constructor(props) {
     super(props);
 
-    this.state = this._initializeDataSource();
+    this.state = {
+      data: this._initializeDataSource(),
+      isSplit: this.props.viewMode === 'pair',
+    };
 
     this.onClickBack = this.onClickBack.bind(this);
     this.onClickToggle = this.onClickToggle.bind(this);
@@ -22,12 +25,9 @@ class Story extends Component {
   }
 
   _initializeDataSource(chapterId) {
-    let dataSource = new ViewPager.DataSource({ pageHasChanged: (r1, r2) => r1.text !== r2.text });
+    const dataSource = new ViewPager.DataSource({ pageHasChanged: (r1, r2) => r1.text !== r2.text });
 
-    return {
-      data: dataSource.cloneWithPages(this._getChapterData(chapterId)),
-      isSplit: this.props.viewMode === 'pair',
-    };
+    return dataSource.cloneWithPages(this._getChapterData(chapterId));
   }
 
   _getChapterData(chapterId) {
@@ -48,7 +48,9 @@ class Story extends Component {
       // The chapter has changed. Reinitialize the data source
       // and set its page back to zero after the data source has
       // been refreshed.
-      this.setState(this._initializeDataSource(nextProps.chapterId), () => {
+      this.setState({
+        data: this._initializeDataSource(nextProps.chapterId),
+      }, () => {
         this.viewpager.goToPage(0, false);
       });
     }

@@ -9,39 +9,11 @@ import {
   PanResponder,
   Text,
 } from 'react-native';
+import ChapterList from './ChapterList';
 
 const ANIMATION_DURATION = 400;
 const MENU_OFFSET = 80;
 const DeviceScreen = Dimensions.get('window');
-
-const styles = StyleSheet.create({
-  container: {
-    bottom: 0,
-    flex: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    top: 0,
-    zIndex: 1000000,
-  },
-  menu: {
-    flex: 1,
-    backgroundColor: 'white',
-    paddingTop: 20,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-    width: DeviceScreen.width - MENU_OFFSET,
-  },
-  item: {
-    fontSize: 16,
-    paddingTop: 8,
-    paddingBottom: 8,
-  },
-  selectedItem: {
-    fontWeight: 'bold',
-  },
-});
-
 
 class SideMenu extends Component {
   constructor(props) {
@@ -51,6 +23,8 @@ class SideMenu extends Component {
       menuLeft: new Animated.Value(-DeviceScreen.width),
       menuWidth: new Animated.Value(0),
     };
+
+    this._onChapterSelection = this._onChapterSelection.bind(this);
   }
 
   componentWillMount() {
@@ -98,22 +72,12 @@ class SideMenu extends Component {
           left: this.state.menuLeft,
         }
       ]} {...this._panResponder.panHandlers}>
-        <View style={styles.menu}>
-          {this.props.chapters.map((chapter, i) => {
-            const style = (i + 1 === this.props.chapterId)
-              ? [styles.item, styles.selectedItem]
-              : styles.item;
-
-            return (
-              <Text
-                key={`chapter-${i}`}
-                onPress={this._onChapterSelection.bind(this, i + 1)}
-                style={style}>
-              {chapter.title}
-              </Text>
-            );
-          })}
-        </View>
+        <ChapterList
+          selectedChapterId={this.props.chapterId}
+          onChapterTap={this._onChapterSelection}
+          style={styles.menu}
+          {...this.props}
+        />
       </Animated.View>
     );
   }
@@ -134,5 +98,18 @@ SideMenu.defaultProps = {
   chapters: [],
   isOpen: false,
 };
+
+const styles = StyleSheet.create({
+  container: {
+    bottom: 0,
+    overflow: 'hidden',
+    position: 'absolute',
+    top: 0,
+    zIndex: 1000000,
+  },
+  menu: {
+    width: DeviceScreen.width - MENU_OFFSET,
+  },
+});
 
 export default SideMenu;
