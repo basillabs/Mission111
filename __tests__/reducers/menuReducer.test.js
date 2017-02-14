@@ -6,7 +6,7 @@ import {
 import {
   MENU_OPEN,
   MENU_CLOSE,
-} from '../../app/constants/languageConstants';
+} from '../../app/constants/menuConstants';
 
 describe('menu reducer', () => {
   describe('default state', () => {
