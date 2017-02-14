@@ -69,9 +69,10 @@ class Story extends Component {
 
   _renderPage(data) {
     return <StoryCard
-              topText={data.topText} 
-              bottomText={data.bottomText} 
-              isSplit={this.state.isSplit} 
+              topText={data.topText}
+              bottomText={data.bottomText}
+              isSplit={this.state.isSplit}
+              onToggleTap={this.onClickToggle}
             />;
   }
 
