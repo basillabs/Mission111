@@ -7,6 +7,8 @@ import {
   Animated,
 } from 'react-native';
 
+const midHeight = Dimensions.get('window').height/2;
+
 class StoryCard extends Component {
   constructor(props) {
     super(props); 
@@ -17,7 +19,7 @@ class StoryCard extends Component {
 
   componentWillMount() {
     if (this.props.isSplit) {
-      this.state.height.setValue(Dimensions.get('window').height/2);
+      this.state.height.setValue(midHeight);
     } else {
       this.state.height.setValue(0);
     }
@@ -28,7 +30,7 @@ class StoryCard extends Component {
       Animated.timing(
         this.state.height,
         { 
-          toValue: this.props.isSplit ? 0 : Dimensions.get('window').height/2,
+          toValue: this.props.isSplit ? 0 : midHeight,
           duration: 100
         }
       ).start();
