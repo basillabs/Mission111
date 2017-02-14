@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Dimensions,
+import { StyleSheet, Text, View, TouchableHighlight, StatusBar, Dimensions,
  } from 'react-native';
 import StoryCard from './story/StoryCard';
 import StoryControlPaneContainer from '../containers/StoryControlPaneContainer';
@@ -107,6 +107,25 @@ Story.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  button: {
+    backgroundColor: "white"
+  },
+  toggle: {
+    backgroundColor: "white"
+  },
+  bar: {
+    position: "absolute",
+    top: (Dimensions.get('window').height / 2) - 7,
+    flexDirection: "row"
+  },
+  card: {
+    flex: 1,
+    padding: 30,
+  },
+  text: {
+    fontSize: 17,
+    lineHeight: 24,
   },
 });
 

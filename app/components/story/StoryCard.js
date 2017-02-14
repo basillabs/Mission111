@@ -62,7 +62,13 @@ class StoryCard extends Component {
   render() {
     return (
       <View style={styles.container}>
+<<<<<<< HEAD
         <Animated.View style={this.getTopCardStyles()}>
+=======
+        <Animated.View style={[{height: this.state.height},
+                                styles.card,
+                                styles.topCard]} >
+>>>>>>> styled the cards
           <Text style={styles.text}>
             {this.props.topText}
           </Text>
@@ -127,17 +133,24 @@ StoryCard.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
+    backgroundColor: "black"
   },
   card: {
-    borderTopWidth: 1,
-    borderColor: 'black',
-    padding: 20,
+    backgroundColor: "white",
+    flex: 1,
+    padding: 30,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 60
   },
   collapsedCard: {
     padding: 0,
   },
   topCard: {
     transform: [{rotate: '180deg'}],
+    marginTop: 0
   },
   text: {
     fontSize: 17,
