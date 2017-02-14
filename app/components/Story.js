@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight, StatusBar, Dimensions,
  } from 'react-native';
 import StoryCard from './story/StoryCard';
+<<<<<<< HEAD
 import StoryControlPaneContainer from '../containers/StoryControlPaneContainer';
+=======
+import Icon from './Icon';
+>>>>>>> Icons are working
 import ViewPager from 'react-native-viewpager';
 import Stories from '../../stories';
 import SideMenuContainer from '../containers/SideMenuContainer';
@@ -109,10 +113,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: "white"
+
   },
   toggle: {
-    backgroundColor: "white"
+
   },
   bar: {
     position: "absolute",
