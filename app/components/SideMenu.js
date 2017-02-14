@@ -89,7 +89,7 @@ class SideMenu extends Component {
     }
   }
 
-	render() {
+  render() {
     return (
       <Animated.View scrollsToTop={false} style={[
         styles.container, {
@@ -115,7 +115,7 @@ class SideMenu extends Component {
         </View>
       </Animated.View>
     );
-	}
+  }
 
   _onChapterSelection(chapterIndex) {
     this.props.hideMenu();
