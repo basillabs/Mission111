@@ -64,6 +64,7 @@ class SideMenu extends Component {
       onPanResponderRelease: (evt, gestureState) => {
         if (gestureState.moveX === 0 && gestureState.moveY === 0
           && gestureState.x0 > DeviceScreen.width - MENU_OFFSET) {
+          // When there's a tap outside the visible part of the side menu, close it.
           this.props.hideMenu();
         }
       },
