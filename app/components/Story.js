@@ -14,22 +14,44 @@ class Story extends Component {
   constructor(props) {
     super(props);
 
-    const tempData = English.chapters[this.props.chapterId - 1].sections.map((section, index) =>
-      ({
-        topText: Arabic.chapters[this.props.chapterId - 1].sections[index],
-        bottomText: English.chapters[this.props.chapterId - 1].sections[index],
-      })
-    );
-
-    const ds = new ViewPager.DataSource({pageHasChanged: (r1, r2) => r1.text !== r2.text});
-    this.state = {
-      data: ds.cloneWithPages(tempData),
-      isSplit: this.props.viewMode === 'pair'
-    };
+    this.state = this._initializeDataSource();
 
     this.onClickBack = this.onClickBack.bind(this);
     this.onClickToggle = this.onClickToggle.bind(this);
     this._renderPage = this._renderPage.bind(this);
+  }
+
+  _initializeDataSource(chapterId) {
+    let dataSource = new ViewPager.DataSource({ pageHasChanged: (r1, r2) => r1.text !== r2.text });
+
+    return {
+      data: dataSource.cloneWithPages(this._getChapterData(chapterId)),
+      isSplit: this.props.viewMode === 'pair',
+    };
+  }
+
+  _getChapterData(chapterId) {
+    if (!chapterId) {
+      chapterId = this.props.chapterId;
+    }
+
+    return English.chapters[chapterId - 1].sections.map((section, index) =>
+      ({
+        topText: Arabic.chapters[chapterId - 1].sections[index],
+        bottomText: English.chapters[chapterId - 1].sections[index],
+      })
+    );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.chapterId !== nextProps.chapterId) {
+      // The chapter has changed. Reinitialize the data source
+      // and set its page back to zero after the data source has
+      // been refreshed.
+      this.setState(this._initializeDataSource(nextProps.chapterId), () => {
+        this.viewpager.goToPage(0, false);
+      });
+    }
   }
 
   onClickBack() {
@@ -64,6 +86,7 @@ class Story extends Component {
           <Text>Back</Text>
         </TouchableHighlight>
         <ViewPager
+          ref={(viewpager) => {this.viewpager = viewpager}}
           dataSource={this.state.data}
           renderPage={this._renderPage}
         />
