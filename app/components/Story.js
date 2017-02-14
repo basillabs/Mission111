@@ -8,6 +8,7 @@ import Arabic from '../../stories/ar/chapters.js';
 import English from '../../stories/en/chapters.js';
 import Persian from '../../stories/fa/chapters.js';
 import Swedish from '../../stories/sv/chapters.js';
+import SideMenuContainer from '../containers/SideMenuContainer';
 
 class Story extends Component {
   constructor(props) {
@@ -55,6 +56,7 @@ class Story extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <SideMenuContainer />
         <TouchableHighlight
           style={styles.button}
           onPress={this.onClickBack}

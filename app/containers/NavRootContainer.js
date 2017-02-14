@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { BackAndroid, NavigationExperimental } from 'react-native';
+import { BackAndroid, NavigationExperimental, StyleSheet } from 'react-native';
 
 import { connect } from 'react-redux';
 import { push, pop } from '../actions/navActions';
-import { hideMenu } from '../actions/menuActions';
 import moment from 'moment';
-import Drawer from 'react-native-drawer';
-import SideMenuContainer from '../containers/SideMenuContainer';
 import WelcomeContainer from '../containers/WelcomeContainer';
 import StoryContainer from '../containers/StoryContainer';
 import StoryListContainer from '../containers/StoryListContainer';
@@ -19,7 +16,6 @@ const SCENE_PREFIX = 'scene_';
 function mapStateToProps(state) {
   return {
     navigation: state.navReducer,
-    drawerOpen: state.menuReducer.open,
   };
 }
 
@@ -27,7 +23,6 @@ function mapDispatchToProps(dispatch) {
   return {
     pushRoute: (route) => dispatch(push(route)),
     popRoute: () => dispatch(pop()),
-    hideMenu: () => dispatch(hideMenu()),
   };
 }
 
@@ -37,7 +32,7 @@ class NavRoot extends Component {
     this.renderScene = this.renderScene.bind(this);
     this.handleBackAction = this.handleBackAction.bind(this);
     this.handleNavigate = this.handleNavigate.bind(this);
-    this.onDrawerClose = this.onDrawerClose.bind(this);
+    this.onDrawerChange = this.onDrawerChange.bind(this);
   }
 
   componentDidMount() {
@@ -48,8 +43,12 @@ class NavRoot extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', this.handleBackAction);
   }
 
-  onDrawerClose() {
-    this.props.hideMenu();
+  onDrawerChange(isOpen) {
+    if (isOpen) {
+      this.props.showMenu();
+    } else {
+      this.props.hideMenu();
+    }
   }
 
   handleBackAction() {
@@ -108,44 +107,24 @@ class NavRoot extends Component {
 
   render() {
     return (
-      <Drawer
-        content={<SideMenuContainer />}
-        tapToClose={true}
-        type="overlay"
-        openDrawerOffset={100}
-        closedDrawerOffset={0}
-        tweenHandler={Drawer.tweenPresets.parallax}
-        open={this.props.drawerOpen}
-        captureGestures={false}
-        onClose={this.onDrawerClose}
-      >
-        <NavigationCardStack
-          direction="horizontal"
-          navigationState={this.props.navigation}
-          onNavigate={this.handleNavigate}
-          renderScene={this.renderScene}
-          onNavigateBack={this.handleBackAction}
-          gestureResponseDistance={100}
-          style={{ backgroundColor: 'black' }}
-          cardStyle={{ opacity: 1 }}
-        />
-      </Drawer>
+      <NavigationCardStack
+        direction="horizontal"
+        navigationState={this.props.navigation}
+        onNavigate={this.handleNavigate}
+        renderScene={this.renderScene}
+        onNavigateBack={this.handleBackAction}
+        gestureResponseDistance={100}
+        style={{ backgroundColor: 'black' }}
+        cardStyle={{ opacity: 1 }}
+      />
     );
   }
 }
-
-        // styles={drawerStyles}
-// const drawerStyles = {
-  // drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
-  // main: {paddingLeft: 3},
-// }
 
 NavRoot.propTypes = {
   navigation: React.PropTypes.object.isRequired,
   popRoute: React.PropTypes.func.isRequired,
   pushRoute: React.PropTypes.func.isRequired,
-  drawerOpen: React.PropTypes.bool.isRequired,
-  hideMenu: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavRoot);
