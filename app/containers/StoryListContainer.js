@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { setChapter } from '../actions/welcome';
+import { setChapter } from '../actions/chapterActions';
 import StoryList from '../components/StoryList';
 
 function mapDispatchToProps(dispatch) {

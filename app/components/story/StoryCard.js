@@ -6,14 +6,16 @@ import {
   Dimensions,
   Animated,
 } from 'react-native';
+import StoryControlPaneContainer from '../../containers/StoryControlPaneContainer';
+import { TOOLBAR_HEIGHT } from '../StoryControlPane';
 
-const midHeight = Dimensions.get('window').height/2;
+const midHeight = Dimensions.get('window').height/2 - TOOLBAR_HEIGHT;
 
 class StoryCard extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
     this.state = {
-      height: new Animated.Value() 
+      height: new Animated.Value()
     };
   }
 
@@ -29,7 +31,7 @@ class StoryCard extends Component {
     if (nextProps.isSplit != this.props.isSplit) {
       Animated.timing(
         this.state.height,
-        { 
+        {
           toValue: this.props.isSplit ? 0 : midHeight,
           duration: 100
         }
@@ -40,13 +42,12 @@ class StoryCard extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Animated.View style={[{height: this.state.height}, 
-                                styles.card, 
-                                styles.topCard]} >
+        <Animated.View style={this.getTopCardStyles()}>
           <Text style={styles.text}>
             {this.props.topText}
           </Text>
         </Animated.View>
+        <StoryControlPaneContainer {...this.props} />
         <View style={[ styles.card, styles.bottomCard]} >
           <Text style={styles.text}>
             {this.props.bottomText}
@@ -55,10 +56,30 @@ class StoryCard extends Component {
       </View>
     );
   }
+
+  getTopCardStyles() {
+    if (this.props.isSplit) {
+      return [
+        {height: this.state.height},
+        styles.card,
+        styles.topCard,
+      ];
+    } else {
+      return [
+        {height: this.state.height},
+        styles.card,
+        styles.topCard,
+        styles.collapsedCard,
+      ];
+    }
+  }
 }
 
 StoryCard.propTypes = {
-  isSplit: React.PropTypes.bool.isRequired
+  isSplit: React.PropTypes.bool.isRequired,
+  topText: React.PropTypes.string.isRequired,
+  bottomText: React.PropTypes.string.isRequired,
+  onToggleTap: React.PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -69,6 +90,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: 'black',
     padding: 20,
+  },
+  collapsedCard: {
+    padding: 0,
   },
   topCard: {
     transform: [{rotate: '180deg'}],

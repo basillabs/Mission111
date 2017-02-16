@@ -5,7 +5,7 @@ import Story from '../components/Story';
 
 function mapStateToProps(state) {
   return {
-    chapterId: state.welcome.chapterId,
+    chapterId: state.chapterReducer.chapterId,
   };
 }
 

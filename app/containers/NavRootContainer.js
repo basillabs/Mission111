@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { BackAndroid, NavigationExperimental } from 'react-native';
+import { BackAndroid, NavigationExperimental, StyleSheet } from 'react-native';
 
 import { connect } from 'react-redux';
 import { push, pop } from '../actions/navActions';
 import moment from 'moment';
-
 import WelcomeContainer from '../containers/WelcomeContainer';
 import StoryContainer from '../containers/StoryContainer';
 import StoryListContainer from '../containers/StoryListContainer';
@@ -17,7 +16,6 @@ const SCENE_PREFIX = 'scene_';
 function mapStateToProps(state) {
   return {
     navigation: state.navReducer,
-    days: state.days,
   };
 }
 
@@ -34,6 +32,7 @@ class NavRoot extends Component {
     this.renderScene = this.renderScene.bind(this);
     this.handleBackAction = this.handleBackAction.bind(this);
     this.handleNavigate = this.handleNavigate.bind(this);
+    this.onDrawerChange = this.onDrawerChange.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +41,14 @@ class NavRoot extends Component {
 
   componentWillUnmount() {
     BackAndroid.removeEventListener('hardwareBackPress', this.handleBackAction);
+  }
+
+  onDrawerChange(isOpen) {
+    if (isOpen) {
+      this.props.showMenu();
+    } else {
+      this.props.hideMenu();
+    }
   }
 
   handleBackAction() {
@@ -84,7 +91,7 @@ class NavRoot extends Component {
 
     /*
      * Add possibe scenes here:
-     * example: 
+     * example:
      *   case `${SCENE_PREFIX}chapterList`:
      *     return <ChapterListContainer handleNavigate={this.handleNavigate} />;
      */
@@ -115,10 +122,9 @@ class NavRoot extends Component {
 }
 
 NavRoot.propTypes = {
-  navigation: React.PropTypes.object,
-  days: React.PropTypes.object,
-  popRoute: React.PropTypes.func,
-  pushRoute: React.PropTypes.func,
+  navigation: React.PropTypes.object.isRequired,
+  popRoute: React.PropTypes.func.isRequired,
+  pushRoute: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavRoot);
