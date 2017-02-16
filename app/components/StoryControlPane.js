@@ -7,6 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 
+export const TOOLBAR_HEIGHT = 40;
 
 class StoryControlPane extends Component {
   render() {
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 10,
+    height: TOOLBAR_HEIGHT,
   },
   icon: {
     color: 'white',

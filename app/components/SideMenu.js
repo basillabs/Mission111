@@ -21,7 +21,7 @@ class SideMenu extends Component {
       menuWidth: new Animated.Value(0),
     };
 
-    this._onChapterSelection = this._onChapterSelection.bind(this);
+    this.onChapterSelection = this.onChapterSelection.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -54,7 +54,7 @@ class SideMenu extends Component {
         <View style={styles.menu}>
           <ChapterList
             selectedChapterId={this.props.chapterId}
-            onChapterTap={this._onChapterSelection}
+            onChapterTap={this.onChapterSelection}
             {...this.props}
           />
         </View>
@@ -67,7 +67,7 @@ class SideMenu extends Component {
     );
   }
 
-  _onChapterSelection(chapterIndex) {
+  onChapterSelection(chapterIndex) {
     this.props.hideMenu();
     this.props.setChapter(chapterIndex);
   }

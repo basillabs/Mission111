@@ -7,8 +7,9 @@ import {
   Animated,
 } from 'react-native';
 import StoryControlPaneContainer from '../../containers/StoryControlPaneContainer';
+import { TOOLBAR_HEIGHT } from '../StoryControlPane';
 
-const midHeight = Dimensions.get('window').height/2;
+const midHeight = Dimensions.get('window').height/2 - TOOLBAR_HEIGHT;
 
 class StoryCard extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class StoryCard extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Animated.View style={this._getTopCardStyles()}>
+        <Animated.View style={this.getTopCardStyles()}>
           <Text style={styles.text}>
             {this.props.topText}
           </Text>
@@ -56,7 +57,7 @@ class StoryCard extends Component {
     );
   }
 
-  _getTopCardStyles() {
+  getTopCardStyles() {
     if (this.props.isSplit) {
       return [
         {height: this.state.height},

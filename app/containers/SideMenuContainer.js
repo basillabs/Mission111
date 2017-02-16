@@ -25,14 +25,14 @@ function mapDispatchToProps(dispatch) {
 
 class SideMenuContainer extends Component {
   render() {
-    let chapters = this._getChapters();
+    let chapters = this.getChapters();
 
     return (
       <SideMenu chapters={chapters} {...this.props} />
     );
   }
 
-  _getChapters() {
+  getChapters() {
     return Stories[this.props.languageCode].chapters;
   }
 }

@@ -15,22 +15,22 @@ class Story extends Component {
     super(props);
 
     this.state = {
-      data: this._initializeDataSource(),
+      data: this.initializeDataSource(),
       isSplit: this.props.viewMode === 'pair',
     };
 
     this.onClickBack = this.onClickBack.bind(this);
     this.onClickToggle = this.onClickToggle.bind(this);
-    this._renderPage = this._renderPage.bind(this);
+    this.renderPage = this.renderPage.bind(this);
   }
 
-  _initializeDataSource(chapterId) {
+  initializeDataSource(chapterId) {
     const dataSource = new ViewPager.DataSource({ pageHasChanged: (r1, r2) => r1.text !== r2.text });
 
-    return dataSource.cloneWithPages(this._getChapterData(chapterId));
+    return dataSource.cloneWithPages(this.getChapterData(chapterId));
   }
 
-  _getChapterData(chapterId) {
+  getChapterData(chapterId) {
     if (!chapterId) {
       chapterId = this.props.chapterId;
     }
@@ -49,7 +49,7 @@ class Story extends Component {
       // and set its page back to zero after the data source has
       // been refreshed.
       this.setState({
-        data: this._initializeDataSource(nextProps.chapterId),
+        data: this.initializeDataSource(nextProps.chapterId),
       }, () => {
         this.viewpager.goToPage(0, false);
       });
@@ -69,7 +69,7 @@ class Story extends Component {
     });
   }
 
-  _renderPage(data) {
+  renderPage(data) {
     return <StoryCard
               topText={data.topText}
               bottomText={data.bottomText}
@@ -91,7 +91,7 @@ class Story extends Component {
         <ViewPager
           ref={(viewpager) => {this.viewpager = viewpager}}
           dataSource={this.state.data}
-          renderPage={this._renderPage}
+          renderPage={this.renderPage}
         />
       </View>
     );
