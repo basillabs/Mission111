@@ -10,7 +10,7 @@ class ChapterList extends Component {
   render() {
     return (
       <ScrollView
-        style={[styles.menu, this.props.style]}
+        style={styles.menu}
         automaticallyAdjustContentInsets={false}>
         {this.props.chapters.map((chapter, i) => {
           const style = (i + 1 === this.props.selectedChapterId)

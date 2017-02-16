@@ -3,16 +3,13 @@ import {
   Animated,
   Dimensions,
   StyleSheet,
-  ScrollView,
   View,
-  Image,
-  PanResponder,
-  Text,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import ChapterList from './ChapterList';
 
 const ANIMATION_DURATION = 400;
-const MENU_OFFSET = 80;
+const MENU_OFFSET = 150;
 const DeviceScreen = Dimensions.get('window');
 
 class SideMenu extends Component {
@@ -25,24 +22,6 @@ class SideMenu extends Component {
     };
 
     this._onChapterSelection = this._onChapterSelection.bind(this);
-  }
-
-  componentWillMount() {
-    this._panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onStartShouldSetPanResponderCapture: () => false,
-      onMoveShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponderCapture: () => false,
-      onPanResponderTerminationRequest: () => true,
-      onShouldBlockNativeResponder: () => false,
-      onPanResponderRelease: (evt, gestureState) => {
-        if (gestureState.moveX === 0 && gestureState.moveY === 0
-          && gestureState.x0 > DeviceScreen.width - MENU_OFFSET) {
-          // When there's a tap outside the visible part of the side menu, close it.
-          this.props.hideMenu();
-        }
-      },
-    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -71,13 +50,19 @@ class SideMenu extends Component {
           width: this.state.menuWidth,
           left: this.state.menuLeft,
         }
-      ]} {...this._panResponder.panHandlers}>
-        <ChapterList
-          selectedChapterId={this.props.chapterId}
-          onChapterTap={this._onChapterSelection}
-          style={styles.menu}
-          {...this.props}
-        />
+      ]} >
+        <View style={styles.menu}>
+          <ChapterList
+            selectedChapterId={this.props.chapterId}
+            onChapterTap={this._onChapterSelection}
+            {...this.props}
+          />
+        </View>
+        <TouchableWithoutFeedback
+          onPress={this.props.hideMenu}
+        >
+          <View style={styles.clear} />
+        </TouchableWithoutFeedback>
       </Animated.View>
     );
   }
@@ -101,6 +86,8 @@ SideMenu.defaultProps = {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    flexDirection: 'row',
     bottom: 0,
     overflow: 'hidden',
     position: 'absolute',
@@ -108,8 +95,17 @@ const styles = StyleSheet.create({
     zIndex: 1000000,
   },
   menu: {
+    flex: 1,
     width: DeviceScreen.width - MENU_OFFSET,
   },
+  // The 'clear' area that shows the UI underneath the
+  // side menu. This is implemented as a sibling of the
+  // menu in order to implement the "tap the area outside
+  // the menu to close it" behavior.
+  clear: {
+    flex: 1,
+    height: DeviceScreen.height,
+  }
 });
 
 export default SideMenu;
