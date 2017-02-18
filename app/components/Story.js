@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, StatusBar, Dimensions,
+import { StyleSheet, Text, View, TouchableHighlight, Dimensions,
  } from 'react-native';
 import StoryCard from './story/StoryCard';
 <<<<<<< HEAD
@@ -119,9 +119,9 @@ const styles = StyleSheet.create({
 
   },
   bar: {
-    position: "absolute",
+    position: 'absolute',
     top: (Dimensions.get('window').height / 2) - 7,
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   card: {
     flex: 1,

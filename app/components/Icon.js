@@ -12,9 +12,9 @@ import Svg,{
 const IconMap = {
   "hamburger": Hamburger,
   "chevron-up": ChevronUp
-}
+};
 
-export default function Icon (props) {
+export default function Icon(props) {
   let { name, style, fill = "black", size = 16, onClick, ...rest } = props;
   const Component = IconMap[props.name] ? IconMap[props.name] : null;
 
@@ -30,6 +30,14 @@ export default function Icon (props) {
     </Svg>
   )
 }
+
+Icon.propTypes = {
+  name: React.PropTypes.string.isRequired,
+  style: React.PropTypes.object,
+  size: React.PropTypes.number,
+  fill: React.PropTypes.string,
+  onClick: React.PropTypes.func
+};
 
 function Hamburger(props) {
   return (
