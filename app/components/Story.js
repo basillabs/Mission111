@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TouchableHighlight, Dimensions,
  } from 'react-native';
 import StoryCard from './story/StoryCard';
 import StoryControlPaneContainer from '../containers/StoryControlPaneContainer';
-import Icon from './Icon';
 import ViewPager from 'react-native-viewpager';
 import Stories from '../../stories';
 import SideMenuContainer from '../containers/SideMenuContainer';
@@ -108,12 +107,6 @@ Story.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  button: {
-
-  },
-  toggle: {
-
   },
   bar: {
     position: 'absolute',

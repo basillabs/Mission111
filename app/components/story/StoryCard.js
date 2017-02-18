@@ -133,8 +133,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
     padding: 30,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
+    borderRadius: 4,
     marginLeft: 5,
     marginRight: 5,
     marginTop: 60
