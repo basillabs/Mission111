@@ -62,13 +62,7 @@ class StoryCard extends Component {
   render() {
     return (
       <View style={styles.container}>
-<<<<<<< HEAD
         <Animated.View style={this.getTopCardStyles()}>
-=======
-        <Animated.View style={[{height: this.state.height},
-                                styles.card,
-                                styles.topCard]} >
->>>>>>> styled the cards
           <Text style={styles.text}>
             {this.props.topText}
           </Text>
