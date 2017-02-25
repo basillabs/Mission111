@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { setTopCode, setBottomCode } from '../actions/languageActions';
 import Story from '../components/Story';
 
 function mapStateToProps(state) {
   return {
     chapterId: state.chapterReducer.chapterId,
+    topCode: state.languageReducer.topCode,
+    bottomCode: state.languageReducer.bottomCode,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setTopCode: (code) => dispatch(setTopCode(code)),
+    setBottomCode: (code) => dispatch(setBottomCode(code)),
   };
 }
 
@@ -13,7 +23,8 @@ class StoryContainer extends Component {
     return (
       <Story viewMode={this.props.data.type}
              handleNavigate={this.props.handleNavigate}
-             chapterId={this.props.chapterId} />
+             {...this.props}
+      />
     );
   }
 }
@@ -30,4 +41,4 @@ StoryContainer.defaultProps = {
   },
 };
 
-export default connect(mapStateToProps)(StoryContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(StoryContainer);
