@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Dimensions,
- } from 'react-native';
-import StoryCard from './story/StoryCard';
-import StoryControlPaneContainer from '../containers/StoryControlPaneContainer';
+import {
+  StyleSheet,
+  View,
+} from 'react-native';
 import ViewPager from 'react-native-viewpager';
 import Stories from '../../stories';
+import StoryCard from './story/StoryCard';
+import StoryControlPaneContainer from '../containers/StoryControlPaneContainer';
 import SideMenuContainer from '../containers/SideMenuContainer';
 
 class Story extends Component {
@@ -22,23 +24,34 @@ class Story extends Component {
   }
 
   initializeDataSource(chapterId, topCode, bottomCode) {
-    const dataSource = new ViewPager.DataSource({ pageHasChanged: (r1, r2) => r1.text !== r2.text });
+    const dataSource = new ViewPager.DataSource({
+      pageHasChanged: (r1, r2) => r1.text !== r2.text,
+    });
 
     return dataSource.cloneWithPages(this.getChapterData(chapterId, topCode, bottomCode));
   }
 
-  getChapterData(chapterId = this.props.chapterId, 
+  getChapterData(chapterId = this.props.chapterId,
                  topCode = this.props.topCode,
                  bottomCode = this.props.bottomCode) {
-    const topChapters = Stories[topCode].chapters;
-    const bottomChapters = Stories[bottomCode].chapters;
-    
-    return bottomChapters[chapterId - 1].sections.map((section, index) =>
+    const topChapter = Stories[topCode].chapters[chapterId - 1];
+    const bottomChapter = Stories[bottomCode].chapters[chapterId - 1];
+
+    const titleData = [{
+      topText: topChapter.title,
+      bottomText: bottomChapter.title,
+      isTitleCard: true,
+      allowLanguageSelection: true,
+    }];
+
+    const chapterData = bottomChapter.sections.map((section, index) =>
       ({
-        topText: topChapters[chapterId - 1].sections[index],
-        bottomText: bottomChapters[chapterId - 1].sections[index],
-      })
+        topText: topChapter.sections[index],
+        bottomText: bottomChapter.sections[index],
+      }),
     );
+
+    return titleData.concat(chapterData);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -52,11 +65,11 @@ class Story extends Component {
         this.viewpager.goToPage(0, false);
       });
     }
-    
+
     if (this.props.topCode !== nextProps.topCode || this.props.bottomCode != nextProps.bottomCode) {
       this.setState({
         data: this.initializeDataSource(this.props.chapterId,
-                                        nextProps.topCode, 
+                                        nextProps.topCode,
                                         nextProps.bottomCode),
       });
     }
@@ -65,7 +78,7 @@ class Story extends Component {
   onClickBack() {
     this.props.handleNavigate({
       type: 'pop',
-      route: {key: 'pop'},
+      route: { key: 'pop' },
     });
   }
 
@@ -81,6 +94,8 @@ class Story extends Component {
               bottomText={data.bottomText}
               isSplit={this.state.isSplit}
               onToggleTap={this.onClickToggle}
+              isTitleCard={data.isTitleCard}
+              allowLanguageSelection={data.allowLanguageSelection}
               {...this.props}
             />;
   }
@@ -90,7 +105,7 @@ class Story extends Component {
       <View style={styles.container}>
         <SideMenuContainer />
         <ViewPager
-          ref={(viewpager) => {this.viewpager = viewpager}}
+          ref={(viewpager) => { this.viewpager = viewpager; }}
           dataSource={this.state.data}
           renderPage={this.renderPage}
         />
@@ -107,19 +122,6 @@ Story.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  bar: {
-    position: 'absolute',
-    top: (Dimensions.get('window').height / 2) - 7,
-    flexDirection: 'row'
-  },
-  card: {
-    flex: 1,
-    padding: 30,
-  },
-  text: {
-    fontSize: 17,
-    lineHeight: 24,
   },
 });
 

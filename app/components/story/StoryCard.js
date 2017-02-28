@@ -13,6 +13,7 @@ import {
 } from '../../constants/languageConstants';
 import StoryControlPaneContainer from '../../containers/StoryControlPaneContainer';
 import { TOOLBAR_HEIGHT } from '../StoryControlPane';
+import LanguagePicker from '../LanguagePicker';
 
 const midHeight = Dimensions.get('window').height/2 - TOOLBAR_HEIGHT;
 const CODE_OPTIONS = [
@@ -63,37 +64,23 @@ class StoryCard extends Component {
     return (
       <View style={styles.container}>
         <Animated.View style={this.getTopCardStyles()}>
-          <Text style={styles.text}>
+          <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
             {this.props.topText}
           </Text>
-          <Picker 
-            itemStyle={styles.pickerItem}
-            selectedValue={this.props.topCode}
-            onValueChange={(code) => this.props.setTopCode(code)}>
-            {CODE_OPTIONS.map((option, i) => {
-              return <Picker.Item
-                       key={i}
-                       label={option.label}
-                       value={option.value} />
-            })}
-          </Picker>
+          {this.props.allowLanguageSelection ?
+            <LanguagePicker selectedValue={this.props.topCode}
+              onValueChange={(code) => this.props.setTopCode(code)} />
+            : null}
         </Animated.View>
         <StoryControlPaneContainer {...this.props} />
         <View style={[ styles.card, styles.bottomCard]} >
-          <Text style={styles.text}>
+          <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
             {this.props.bottomText}
           </Text>
-          <Picker
-            itemStyle={styles.pickerItem}
-            selectedValue={this.props.bottomCode}
-            onValueChange={(code) => this.props.setBottomCode(code)}>
-            {CODE_OPTIONS.map((option, i) => {
-              return <Picker.Item
-                       key={i}
-                       label={option.label}
-                       value={option.value} />
-            })}
-          </Picker>
+          {this.props.allowLanguageSelection ?
+            <LanguagePicker selectedValue={this.props.bottomCode}
+              onValueChange={(code) => this.props.setBottomCode(code)} />
+            : null}
         </View>
       </View>
     );
@@ -118,10 +105,12 @@ class StoryCard extends Component {
 }
 
 StoryCard.propTypes = {
+  isTitleCard: React.PropTypes.bool,
   isSplit: React.PropTypes.bool.isRequired,
   topText: React.PropTypes.string.isRequired,
   bottomText: React.PropTypes.string.isRequired,
   onToggleTap: React.PropTypes.func.isRequired,
+  allowLanguageSelection: React.PropTypes.bool,
 };
 
 const styles = StyleSheet.create({
@@ -149,10 +138,10 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 24,
   },
-  pickerItem: {
-    fontSize: 14,
-    textAlign: 'left',
-  }
+  titleCard: {
+    fontSize: 30,
+    lineHeight: 50,
+  },
 });
 
 export default StoryCard;
