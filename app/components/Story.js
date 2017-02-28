@@ -65,7 +65,7 @@ class Story extends Component {
 
   onClickToggle() {
     this.setState({
-      isSplit: !this.state.isSplit
+      isSplit: !this.state.isSplit,
     });
   }
 
@@ -82,12 +82,6 @@ class Story extends Component {
     return (
       <View style={styles.container}>
         <SideMenuContainer />
-        <TouchableHighlight
-          style={styles.button}
-          onPress={this.onClickBack}
-        >
-          <Text>Back</Text>
-        </TouchableHighlight>
         <ViewPager
           ref={(viewpager) => {this.viewpager = viewpager}}
           dataSource={this.state.data}
@@ -106,19 +100,6 @@ Story.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  button: {
-    paddingTop: 10,
-    paddingHorizontal: 10,
-    marginTop: 15,
-  },
-  card: {
-    flex: 1,
-    padding: 30,
-  },
-  text: {
-    fontSize: 17,
-    lineHeight: 24,
   },
 });
 

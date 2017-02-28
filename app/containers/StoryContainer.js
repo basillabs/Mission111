@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {View, Text} from 'react-native';
 import { connect } from 'react-redux';
 import Story from '../components/Story';
 
@@ -20,7 +19,15 @@ class StoryContainer extends Component {
 }
 
 StoryContainer.propTypes = {
-  count: React.PropTypes.number,
+  data: React.PropTypes.object.isRequired,
+  handleNavigate: React.PropTypes.func.isRequired,
+  chapterId: React.PropTypes.number.isRequired,
+};
+
+StoryContainer.defaultProps = {
+  data: {
+    type: 'pair',
+  },
 };
 
 export default connect(mapStateToProps)(StoryContainer);

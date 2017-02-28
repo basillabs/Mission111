@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { BackAndroid, NavigationExperimental, StyleSheet } from 'react-native';
 
 import { connect } from 'react-redux';
-import { push, pop } from '../actions/navActions';
 import moment from 'moment';
-import WelcomeContainer from '../containers/WelcomeContainer';
+import { push, pop } from '../actions/navActions';
 import StoryContainer from '../containers/StoryContainer';
-import StoryListContainer from '../containers/StoryListContainer';
 
 const { CardStack: NavigationCardStack } = NavigationExperimental;
 
 const KEY_DELIMITER = '/';
-const SCENE_PREFIX = 'scene_';
 
 function mapStateToProps(state) {
   return {
@@ -21,7 +18,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    pushRoute: (route) => dispatch(push(route)),
+    pushRoute: route => dispatch(push(route)),
     popRoute: () => dispatch(pop()),
   };
 }
@@ -87,22 +84,7 @@ class NavRoot extends Component {
 
   renderScene(props) {
     const { scene } = props;
-    const key = scene.key.split(KEY_DELIMITER)[0];
-
-    /*
-     * Add possibe scenes here:
-     * example:
-     *   case `${SCENE_PREFIX}chapterList`:
-     *     return <ChapterListContainer handleNavigate={this.handleNavigate} />;
-     */
-    switch (key) {
-      case `${SCENE_PREFIX}storyList`:
-         return <StoryListContainer handleNavigate={this.handleNavigate} data={scene.route.data} />;
-      case `${SCENE_PREFIX}story`:
-         return <StoryContainer handleNavigate={this.handleNavigate} data={scene.route.data} />;
-      default:
-        return <WelcomeContainer handleNavigate={this.handleNavigate} />;
-    }
+    return <StoryContainer handleNavigate={this.handleNavigate} data={scene.route.data} />;
   }
 
   render() {
