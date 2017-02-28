@@ -1,9 +1,11 @@
 import {
   AR_CODE,
   EN_CODE,
+} from '../constants/languageConstants';
+import {
   SET_TOP_CODE,
   SET_BOTTOM_CODE,
-} from '../constants/languageConstants';
+} from '../actions/languageActions';
 
 const defaultState = {
   topCode: AR_CODE,

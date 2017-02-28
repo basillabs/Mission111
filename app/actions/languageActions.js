@@ -1,7 +1,5 @@
-import {
-  SET_TOP_CODE,
-  SET_BOTTOM_CODE,
-} from '../constants/languageConstants';
+export const SET_TOP_CODE = 'SET_TOP_CODE';
+export const SET_BOTTOM_CODE = 'SET_BOTTOM_CODE';
 
 export function setTopCode(code) {
   return {

@@ -8,6 +8,3 @@ export const EN_CODE = 'EN';
 export const SV_CODE = 'SV';
 export const AR_CODE = 'AR';
 export const FA_CODE = 'FA';
-
-export const SET_TOP_CODE = 'SET_TOP_CODE';
-export const SET_BOTTOM_CODE = 'SET_BOTTOM_CODE';
