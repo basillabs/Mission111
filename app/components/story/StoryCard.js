@@ -79,49 +79,24 @@ class StoryCard extends Component {
             {this.props.topText}
           </Text>
 
-          <Picker
-            itemStyle={styles.pickerItem}
-            selectedValue={this.props.topCode}
-            onValueChange={(code) => this.props.setTopCode(code)}>
-            {CODE_OPTIONS.map((option, i) => {
-              return <Picker.Item
-                       key={i}
-                       label={option.label}
-                       value={option.value} />
-            })}
-          </Picker>
+          {this.props.allowLanguageSelection ?
+            <LanguagePicker selectedValue={this.props.topCode}
+              onValueChange={(code) => this.props.setTopCode(code)} />
+            : null}
+
         </Animated.View>
         <StoryControlPaneContainer {...this.props} />
-<<<<<<< HEAD
-        <View style={[ styles.card, styles.bottomCard]} >
-          <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
-            {this.props.bottomText}
-          </Text>
-          {this.props.allowLanguageSelection ?
-            <LanguagePicker selectedValue={this.props.bottomCode}
-              onValueChange={(code) => this.props.setBottomCode(code)} />
-            : null}
-        </View>
-=======
         <Animated.View style={this.getBottomCardStyles()}>
-          <View >
-            <Text style={styles.text}>
+          <View>
+            <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
               {this.props.bottomText}
             </Text>
-            <Picker
-              itemStyle={styles.pickerItem}
-              selectedValue={this.props.bottomCode}
-              onValueChange={(code) => this.props.setBottomCode(code)}>
-              {CODE_OPTIONS.map((option, i) => {
-                return <Picker.Item
-                         key={i}
-                         label={option.label}
-                         value={option.value} />
-              })}
-            </Picker>
+            {this.props.allowLanguageSelection ?
+              <LanguagePicker selectedValue={this.props.bottomCode}
+                onValueChange={(code) => this.props.setBottomCode(code)} />
+              : null}
           </View>
         </Animated.View>
->>>>>>> Added card styles
       </View>
     );
   }
