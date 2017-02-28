@@ -67,10 +67,18 @@ class StoryCard extends Component {
           <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
             {this.props.topText}
           </Text>
-          {this.props.allowLanguageSelection ?
-            <LanguagePicker selectedValue={this.props.topCode}
-              onValueChange={(code) => this.props.setTopCode(code)} />
-            : null}
+
+          <Picker
+            itemStyle={styles.pickerItem}
+            selectedValue={this.props.topCode}
+            onValueChange={(code) => this.props.setTopCode(code)}>
+            {CODE_OPTIONS.map((option, i) => {
+              return <Picker.Item
+                       key={i}
+                       label={option.label}
+                       value={option.value} />
+            })}
+          </Picker>
         </Animated.View>
         <StoryControlPaneContainer {...this.props} />
         <View style={[ styles.card, styles.bottomCard]} >
@@ -116,23 +124,17 @@ StoryCard.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
-    backgroundColor: "black"
   },
   card: {
-    backgroundColor: "white",
-    flex: 1,
-    padding: 30,
-    borderRadius: 4,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 60
+    borderTopWidth: 1,
+    borderColor: 'black',
+    padding: 20,
   },
   collapsedCard: {
     padding: 0,
   },
   topCard: {
     transform: [{rotate: '180deg'}],
-    marginTop: 0
   },
   text: {
     fontSize: 17,
