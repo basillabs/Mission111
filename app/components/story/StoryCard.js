@@ -15,7 +15,7 @@ import StoryControlPaneContainer from '../../containers/StoryControlPaneContaine
 import { TOOLBAR_HEIGHT } from '../StoryControlPane';
 import LanguagePicker from '../LanguagePicker';
 
-const midHeight = Dimensions.get('window').height/2 - TOOLBAR_HEIGHT;
+const midHeight = Dimensions.get('window').height/2 - (TOOLBAR_HEIGHT/2) - 8;
 const CODE_OPTIONS = [
   {
     label: EN_LABEL,
@@ -35,25 +35,36 @@ class StoryCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: new Animated.Value()
+      topHeight: new Animated.Value(),
+      bottomHeight: new Animated.Value(),
     };
 
   }
 
   componentWillMount() {
     if (this.props.isSplit) {
-      this.state.height.setValue(midHeight);
+      this.state.topHeight.setValue(midHeight);
+      this.state.bottomHeight.setValue(midHeight);
     } else {
-      this.state.height.setValue(0);
+      this.state.topHeight.setValue(0);
+      this.state.bottomHeight.setValue(1200);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSplit != this.props.isSplit) {
       Animated.timing(
-        this.state.height,
+        this.state.topHeight,
         {
           toValue: this.props.isSplit ? 0 : midHeight,
+          duration: 100
+        }
+      ).start();
+
+      Animated.timing(
+        this.state.bottomHeight,
+        {
+          toValue: this.props.isSplit ? 1200 : midHeight,
           duration: 100
         }
       ).start();
@@ -67,21 +78,25 @@ class StoryCard extends Component {
           <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
             {this.props.topText}
           </Text>
+
           {this.props.allowLanguageSelection ?
             <LanguagePicker selectedValue={this.props.topCode}
               onValueChange={(code) => this.props.setTopCode(code)} />
             : null}
+
         </Animated.View>
         <StoryControlPaneContainer {...this.props} />
-        <View style={[ styles.card, styles.bottomCard]} >
-          <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
-            {this.props.bottomText}
-          </Text>
-          {this.props.allowLanguageSelection ?
-            <LanguagePicker selectedValue={this.props.bottomCode}
-              onValueChange={(code) => this.props.setBottomCode(code)} />
-            : null}
-        </View>
+        <Animated.View style={this.getBottomCardStyles()}>
+          <View>
+            <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
+              {this.props.bottomText}
+            </Text>
+            {this.props.allowLanguageSelection ?
+              <LanguagePicker selectedValue={this.props.bottomCode}
+                onValueChange={(code) => this.props.setBottomCode(code)} />
+              : null}
+          </View>
+        </Animated.View>
       </View>
     );
   }
@@ -89,16 +104,30 @@ class StoryCard extends Component {
   getTopCardStyles() {
     if (this.props.isSplit) {
       return [
-        {height: this.state.height},
+        {height: this.state.topHeight},
         styles.card,
         styles.topCard,
       ];
     } else {
       return [
-        {height: this.state.height},
+        {height: this.state.topHeight},
         styles.card,
         styles.topCard,
         styles.collapsedCard,
+      ];
+    }
+  }
+
+  getBottomCardStyles() {
+    if (this.props.isSplit) {
+      return [
+        {height: this.state.bottomHeight},
+        styles.card,
+      ];
+    } else {
+      return [
+        {height: this.state.bottomHeight},
+        styles.card,
       ];
     }
   }
@@ -116,23 +145,19 @@ StoryCard.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
-    backgroundColor: "black"
   },
   card: {
+    borderRadius: 5,
+    padding: 20,
     backgroundColor: "white",
-    flex: 1,
-    padding: 30,
-    borderRadius: 4,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 60
+    margin: 4,
+    overflow: "hidden",
   },
   collapsedCard: {
     padding: 0,
   },
   topCard: {
     transform: [{rotate: '180deg'}],
-    marginTop: 0
   },
   text: {
     fontSize: 17,

@@ -34,6 +34,7 @@ class Story extends Component {
   getChapterData(chapterId = this.props.chapterId,
                  topCode = this.props.topCode,
                  bottomCode = this.props.bottomCode) {
+
     const topChapter = Stories[topCode].chapters[chapterId - 1];
     const bottomChapter = Stories[bottomCode].chapters[chapterId - 1];
 
@@ -122,6 +123,7 @@ Story.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "black",
   },
 });
 
