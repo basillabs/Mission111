@@ -8,6 +8,7 @@ import {
   Animated,
   Picker,
 } from 'react-native';
+import AudioPlayer from './AudioPlayer';
 import theme from '../../utils/theme';
 import LanguagePicker from '../LanguagePicker';
 import tracker from '../../tracker';
@@ -95,7 +96,7 @@ class StoryCard extends Component {
           <Text style={this.getTextStyles(topContent)}>
             {topContent.text}
           </Text>
-
+          <AudioPlayer />
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
               <Icon name="chevron-right" size={30} fill={theme.accent} />
@@ -112,7 +113,7 @@ class StoryCard extends Component {
           <Text style={this.getTextStyles(bottomContent)}>
             {bottomContent.text}
           </Text>
-
+          <AudioPlayer />
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
               <Icon name="chevron-right" size={30} fill={theme.accent} />
