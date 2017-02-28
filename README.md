@@ -9,6 +9,12 @@
 npm install
 ```
 
+Or (optional) install and use [yarn](https://yarnpkg.com) for faster package management
+
+```bash
+yarn install
+```
+
 ## Running
 
 ```bash
