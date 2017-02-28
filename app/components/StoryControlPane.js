@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Icon from './Icon';
 import {
   StyleSheet,
   Text,
@@ -14,10 +15,14 @@ class StoryControlPane extends Component {
     return (
       <View style={styles.pane}>
         <TouchableHighlight onPress={this.props.showMenu}>
-          <Text style={styles.icon}>🍔</Text>
+          <View>
+            <Icon name="hamburger" fill="white" />
+          </View>
         </TouchableHighlight>
         <TouchableHighlight onPress={this.props.onToggleTap}>
-          <Text style={styles.icon}>⬜</Text>
+          <View>
+            <Icon name="split-view" fill="white" />
+          </View>
         </TouchableHighlight>
       </View>
     );

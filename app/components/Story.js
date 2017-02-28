@@ -108,6 +108,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  bar: {
+    position: 'absolute',
+    top: (Dimensions.get('window').height / 2) - 7,
+    flexDirection: 'row'
+  },
+  card: {
+    flex: 1,
+    padding: 30,
+  },
+  text: {
+    fontSize: 17,
+    lineHeight: 24,
+  },
 });
 
 export default Story;

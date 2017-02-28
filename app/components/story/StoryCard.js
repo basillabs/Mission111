@@ -127,17 +127,23 @@ StoryCard.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
+    backgroundColor: "black"
   },
   card: {
-    borderTopWidth: 1,
-    borderColor: 'black',
-    padding: 20,
+    backgroundColor: "white",
+    flex: 1,
+    padding: 30,
+    borderRadius: 4,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 60
   },
   collapsedCard: {
     padding: 0,
   },
   topCard: {
     transform: [{rotate: '180deg'}],
+    marginTop: 0
   },
   text: {
     fontSize: 17,
