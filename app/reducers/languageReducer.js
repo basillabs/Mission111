@@ -1,21 +1,30 @@
 import {
-  SET_LANGUAGE,
-} from '../actions/languageActions';
-import {
-  EN_LANG,
+  AR_CODE,
+  EN_CODE,
 } from '../constants/languageConstants';
+import {
+  SET_TOP_CODE,
+  SET_BOTTOM_CODE,
+} from '../actions/languageActions';
 
 const defaultState = {
-  code: EN_LANG,
+  topCode: AR_CODE,
+  bottomCode: EN_CODE,
 };
 
-export default function(state = defaultState, action = {}) {
+function languageState(state = defaultState, action = {}) {
   switch (action.type) {
-    case SET_LANGUAGE:
+    case SET_TOP_CODE:
+      return Object.assign({}, state, { 
+        topCode: action.code, 
+      });
+    case SET_BOTTOM_CODE:
       return Object.assign({}, state, {
-        code: action.code,
+        bottomCode: action.code,
       });
     default:
       return state;
   }
 }
+
+export default languageState;

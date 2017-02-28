@@ -4,10 +4,7 @@ import { StyleSheet, Text, View, TouchableHighlight, Dimensions,
 import StoryCard from './story/StoryCard';
 import StoryControlPaneContainer from '../containers/StoryControlPaneContainer';
 import ViewPager from 'react-native-viewpager';
-import Arabic from '../../stories/ar/chapters.js';
-import English from '../../stories/en/chapters.js';
-import Persian from '../../stories/fa/chapters.js';
-import Swedish from '../../stories/sv/chapters.js';
+import Stories from '../../stories';
 import SideMenuContainer from '../containers/SideMenuContainer';
 
 class Story extends Component {
@@ -24,21 +21,22 @@ class Story extends Component {
     this.renderPage = this.renderPage.bind(this);
   }
 
-  initializeDataSource(chapterId) {
+  initializeDataSource(chapterId, topCode, bottomCode) {
     const dataSource = new ViewPager.DataSource({ pageHasChanged: (r1, r2) => r1.text !== r2.text });
 
-    return dataSource.cloneWithPages(this.getChapterData(chapterId));
+    return dataSource.cloneWithPages(this.getChapterData(chapterId, topCode, bottomCode));
   }
 
-  getChapterData(chapterId) {
-    if (!chapterId) {
-      chapterId = this.props.chapterId;
-    }
-
-    return English.chapters[chapterId - 1].sections.map((section, index) =>
+  getChapterData(chapterId = this.props.chapterId, 
+                 topCode = this.props.topCode,
+                 bottomCode = this.props.bottomCode) {
+    const topChapters = Stories[topCode].chapters;
+    const bottomChapters = Stories[bottomCode].chapters;
+    
+    return bottomChapters[chapterId - 1].sections.map((section, index) =>
       ({
-        topText: Arabic.chapters[chapterId - 1].sections[index],
-        bottomText: English.chapters[chapterId - 1].sections[index],
+        topText: topChapters[chapterId - 1].sections[index],
+        bottomText: bottomChapters[chapterId - 1].sections[index],
       })
     );
   }
@@ -52,6 +50,14 @@ class Story extends Component {
         data: this.initializeDataSource(nextProps.chapterId),
       }, () => {
         this.viewpager.goToPage(0, false);
+      });
+    }
+    
+    if (this.props.topCode !== nextProps.topCode || this.props.bottomCode != nextProps.bottomCode) {
+      this.setState({
+        data: this.initializeDataSource(this.props.chapterId,
+                                        nextProps.topCode, 
+                                        nextProps.bottomCode),
       });
     }
   }
@@ -75,6 +81,7 @@ class Story extends Component {
               bottomText={data.bottomText}
               isSplit={this.state.isSplit}
               onToggleTap={this.onClickToggle}
+              {...this.props}
             />;
   }
 

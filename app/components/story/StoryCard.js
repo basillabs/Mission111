@@ -5,11 +5,30 @@ import {
   StyleSheet,
   Dimensions,
   Animated,
+  Picker,
 } from 'react-native';
+import {
+  EN_LABEL, SV_LABEL, AR_LABEL,
+  EN_CODE, SV_CODE, AR_CODE,
+} from '../../constants/languageConstants';
 import StoryControlPaneContainer from '../../containers/StoryControlPaneContainer';
 import { TOOLBAR_HEIGHT } from '../StoryControlPane';
 
 const midHeight = Dimensions.get('window').height/2 - TOOLBAR_HEIGHT;
+const CODE_OPTIONS = [
+  {
+    label: EN_LABEL,
+    value: EN_CODE,
+  },
+  {
+    label: AR_LABEL,
+    value: AR_CODE,
+  },
+  {
+    label: SV_LABEL,
+    value: SV_CODE,
+  },
+];
 
 class StoryCard extends Component {
   constructor(props) {
@@ -17,6 +36,7 @@ class StoryCard extends Component {
     this.state = {
       height: new Animated.Value()
     };
+
   }
 
   componentWillMount() {
@@ -46,12 +66,34 @@ class StoryCard extends Component {
           <Text style={styles.text}>
             {this.props.topText}
           </Text>
+          <Picker 
+            itemStyle={styles.pickerItem}
+            selectedValue={this.props.topCode}
+            onValueChange={(code) => this.props.setTopCode(code)}>
+            {CODE_OPTIONS.map((option, i) => {
+              return <Picker.Item
+                       key={i}
+                       label={option.label}
+                       value={option.value} />
+            })}
+          </Picker>
         </Animated.View>
         <StoryControlPaneContainer {...this.props} />
         <View style={[ styles.card, styles.bottomCard]} >
           <Text style={styles.text}>
             {this.props.bottomText}
           </Text>
+          <Picker
+            itemStyle={styles.pickerItem}
+            selectedValue={this.props.bottomCode}
+            onValueChange={(code) => this.props.setBottomCode(code)}>
+            {CODE_OPTIONS.map((option, i) => {
+              return <Picker.Item
+                       key={i}
+                       label={option.label}
+                       value={option.value} />
+            })}
+          </Picker>
         </View>
       </View>
     );
@@ -101,6 +143,10 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 24,
   },
+  pickerItem: {
+    fontSize: 14,
+    textAlign: 'left',
+  }
 });
 
 export default StoryCard;
