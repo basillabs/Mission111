@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   pickerItem: {
     fontSize: 14,
     textAlign: 'left',
+    color: "#615334",
   },
 });
 
