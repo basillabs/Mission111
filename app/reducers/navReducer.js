@@ -6,9 +6,9 @@ const {
 
 function navigationState(state = {
   index: 0,
-  key: 'root',
+  key: 'story',
   routes: [{
-    key: 'welcome',
+    key: 'story',
   }],
 }, action) {
   switch (action.type) {
