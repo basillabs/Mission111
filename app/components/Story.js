@@ -107,7 +107,13 @@ class Story extends Component {
       <View style={styles.container}>
         <SideMenuContainer />
         <ViewPager
-          renderPageIndicator={() => <ViewPageIndicator style={styles.dotContainer}/> }
+          renderPageIndicator={() => {
+            return (
+              <ViewPageIndicator
+                isSplit={this.state.isSplit}
+              />
+            )}
+          }
           ref={(viewpager) => { this.viewpager = viewpager; }}
           dataSource={this.state.data}
           renderPage={this.renderPage}
@@ -126,10 +132,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "black",
-  },
-  dotContainer: {
-    justifyContent: "center",
-    backgroundColor: "purple",
   }
 });
 
