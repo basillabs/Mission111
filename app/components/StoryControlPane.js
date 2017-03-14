@@ -18,12 +18,12 @@ class StoryControlPane extends Component {
     return (
       <View style={styles.pane}>
         <TouchableHighlight onPress={this.props.showMenu}>
-          <View>
+          <View style={styles.icon}>
             <Icon name="hamburger" fill={BEIGE} />
           </View>
         </TouchableHighlight>
         <TouchableHighlight onPress={this.props.onToggleTap}>
-          <View>
+          <View style={styles.icon}>
             <Icon name="split-view" fill={BEIGE} />
           </View>
         </TouchableHighlight>
@@ -38,6 +38,10 @@ StoryControlPane.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  icon: {
+    position: 'relative',
+    top: 2,
+  },
   pane: {
     backgroundColor: DARK_BLUE,
     flexDirection: 'row',
