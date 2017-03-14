@@ -1,3 +1,20 @@
 import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
 
-export default const tracker = new GoogleAnalyticsTracker('');
+const tracker = new GoogleAnalyticsTracker('');
+
+const wrapper = {
+  trackScreenView(name) {
+    console.log("TRACKING SCREEN: ", name);
+
+    return tracker.trackScreenView(name);
+  },
+
+  trackEvent(category, name, details) {
+    console.log("TRACKING EVENT: ", category, name, details);
+
+    return tracker.trackEvent(category, name, details);
+  }
+}
+
+
+export default wrapper;
