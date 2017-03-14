@@ -11,6 +11,9 @@ import {
   EN_LABEL, SV_LABEL, AR_LABEL,
   EN_CODE, SV_CODE, AR_CODE,
 } from '../../constants/languageConstants';
+import {
+  DARK_BLUE, BEIGE, DARK_BEIGE, BROWN, RED
+} from '../../constants/colorConstants';
 import StoryControlPaneContainer from '../../containers/StoryControlPaneContainer';
 import { TOOLBAR_HEIGHT } from '../StoryControlPane';
 import LanguagePicker from '../LanguagePicker';
@@ -144,13 +147,13 @@ StoryCard.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
-    backgroundColor: "#181F42",
+    backgroundColor: DARK_BLUE,
   },
   card: {
     borderRadius: 5,
     padding: 15,
-    backgroundColor: "#FFF8E2",
-    borderColor: "#E4D1A9",
+    backgroundColor: BEIGE,
+    borderColor: DARK_BEIGE,
     borderWidth: 5,
     margin: 4,
     overflow: "hidden",
@@ -165,13 +168,13 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17,
     lineHeight: 24,
-    color: "#615334",
+    color: BROWN,
   },
   titleCard: {
     fontSize: 30,
     lineHeight: 50,
     textAlign: 'center',
-    color: '#C35138',
+    color: RED,
     fontWeight: "500",
     paddingTop: 35,
   },
