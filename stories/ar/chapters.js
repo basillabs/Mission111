@@ -27,6 +27,8 @@ export default {
     require('./24.json'),
     require('./25.json'),
     require('./26.json'),
-    require('./27.json')
+    require('./27.json'),
+    require('./28.json'),
+    require('./29.json')
   ],
 };
