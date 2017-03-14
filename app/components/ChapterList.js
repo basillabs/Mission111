@@ -4,7 +4,9 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-
+import {
+  BEIGE, BROWN, RED
+} from '../constants/colorConstants.js'
 
 class ChapterList extends Component {
   render() {
@@ -39,19 +41,21 @@ ChapterList.propTypes = {
 
 const styles = StyleSheet.create({
   menu: {
-    backgroundColor: 'white',
-    paddingTop: 26,
-    paddingLeft: 12,
+    paddingTop: 10,
+    paddingLeft: 20,
     paddingRight: 12,
     paddingBottom: 20,
+    backgroundColor: BEIGE,
   },
   item: {
+    color: BROWN,
     fontSize: 18,
     paddingTop: 8,
     paddingBottom: 8,
+    fontWeight: "500",
   },
   selectedItem: {
-    fontWeight: 'bold',
+    color: RED,
   },
 });
 

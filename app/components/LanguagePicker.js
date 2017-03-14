@@ -7,6 +7,9 @@ import {
   EN_LABEL, SV_LABEL, AR_LABEL,
   EN_CODE, SV_CODE, AR_CODE,
 } from '../constants/languageConstants';
+import {
+  BROWN
+} from '../constants/colorConstants';
 
 const CODE_OPTIONS = [
   {
@@ -49,6 +52,7 @@ const styles = StyleSheet.create({
   pickerItem: {
     fontSize: 14,
     textAlign: 'left',
+    color: BROWN,
   },
 });
 

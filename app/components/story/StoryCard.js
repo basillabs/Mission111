@@ -11,11 +11,15 @@ import {
   EN_LABEL, SV_LABEL, AR_LABEL,
   EN_CODE, SV_CODE, AR_CODE,
 } from '../../constants/languageConstants';
+import {
+  DARK_BLUE, BEIGE, DARK_BEIGE, BROWN, RED
+} from '../../constants/colorConstants';
 import StoryControlPaneContainer from '../../containers/StoryControlPaneContainer';
 import { TOOLBAR_HEIGHT } from '../StoryControlPane';
 import LanguagePicker from '../LanguagePicker';
 
 const midHeight = Dimensions.get('window').height/2 - (TOOLBAR_HEIGHT/2) - 8;
+const fullHeight = (midHeight * 2) + 8;
 const CODE_OPTIONS = [
   {
     label: EN_LABEL,
@@ -47,7 +51,7 @@ class StoryCard extends Component {
       this.state.bottomHeight.setValue(midHeight);
     } else {
       this.state.topHeight.setValue(0);
-      this.state.bottomHeight.setValue(1200);
+      this.state.bottomHeight.setValue(fullHeight);
     }
   }
 
@@ -64,7 +68,7 @@ class StoryCard extends Component {
       Animated.timing(
         this.state.bottomHeight,
         {
-          toValue: this.props.isSplit ? 1200 : midHeight,
+          toValue: this.props.isSplit ? fullHeight : midHeight,
           duration: 100
         }
       ).start();
@@ -111,8 +115,6 @@ class StoryCard extends Component {
     } else {
       return [
         {height: this.state.topHeight},
-        styles.card,
-        styles.topCard,
         styles.collapsedCard,
       ];
     }
@@ -145,16 +147,20 @@ StoryCard.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
+    backgroundColor: DARK_BLUE,
   },
   card: {
     borderRadius: 5,
-    padding: 20,
-    backgroundColor: "white",
+    padding: 15,
+    backgroundColor: BEIGE,
+    borderColor: DARK_BEIGE,
+    borderWidth: 5,
     margin: 4,
     overflow: "hidden",
   },
   collapsedCard: {
     padding: 0,
+    opacity: 0,
   },
   topCard: {
     transform: [{rotate: '180deg'}],
@@ -162,10 +168,15 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17,
     lineHeight: 24,
+    color: BROWN,
   },
   titleCard: {
     fontSize: 30,
     lineHeight: 50,
+    textAlign: 'center',
+    color: RED,
+    fontWeight: "500",
+    paddingTop: 35,
   },
 });
 
