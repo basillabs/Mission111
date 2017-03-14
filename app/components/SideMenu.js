@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import ChapterList from './ChapterList';
+import tracker from '../tracker';
 
 const ANIMATION_DURATION = 400;
 const MENU_OFFSET = 150;
@@ -68,6 +69,10 @@ class SideMenu extends Component {
   }
 
   onChapterSelection(chapterIndex) {
+    tracker.trackEvent('Tap', 'Chapter', {
+      label: 'chapter',
+      value: chapterIndex,
+    });
     this.props.hideMenu();
     this.props.setChapter(chapterIndex);
   }
