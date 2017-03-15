@@ -4,6 +4,7 @@ import {
   View,
 } from 'react-native';
 import ViewPager from 'react-native-viewpager';
+import ViewPageIndicator from './ViewPageIndicator';
 import Stories from '../../stories';
 import StoryCard from './story/StoryCard';
 import StoryControlPaneContainer from '../containers/StoryControlPaneContainer';
@@ -106,6 +107,7 @@ class Story extends Component {
       <View style={styles.container}>
         <SideMenuContainer />
         <ViewPager
+          renderPageIndicator={() => <ViewPageIndicator isSplit={this.state.isSplit} /> }
           ref={(viewpager) => { this.viewpager = viewpager; }}
           dataSource={this.state.data}
           renderPage={this.renderPage}
