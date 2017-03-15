@@ -17,7 +17,7 @@ var deviceWidth = Dimensions.get('window').width;
 var deviceHeight = Dimensions.get('window').height;
 
 var DOT_SIZE = 6;
-var DOT_SAPCE = 4;
+var DOT_SPACE = 4;
 
 var styles = StyleSheet.create({
   //New styles for positioning
@@ -44,8 +44,8 @@ var styles = StyleSheet.create({
     height: DOT_SIZE,
     borderRadius: DOT_SIZE / 2,
     backgroundColor: BEIGE,
-    marginLeft: DOT_SAPCE,
-    marginRight: DOT_SAPCE,
+    marginLeft: DOT_SPACE,
+    marginRight: DOT_SPACE,
     opacity: 0.3,
   },
 
@@ -55,7 +55,7 @@ var styles = StyleSheet.create({
     height: DOT_SIZE,
     borderRadius: DOT_SIZE / 2,
     backgroundColor: BEIGE,
-    margin: DOT_SAPCE,
+    margin: DOT_SPACE,
     bottom: 0,
   },
 });
@@ -87,7 +87,7 @@ var ViewPageIndicator = React.createClass({
     var split = this.props.isSplit ? { top: deviceHeight / 2 - 3} : { top: 18 };
 
     var pageCount = this.props.pageCount;
-    var itemWidth = DOT_SIZE + (DOT_SAPCE * 2);
+    var itemWidth = DOT_SIZE + (DOT_SPACE * 2);
     var offset = (this.state.viewWidth - itemWidth * pageCount) / 2 + itemWidth * this.props.activePage;
 
     //var left = offset;
