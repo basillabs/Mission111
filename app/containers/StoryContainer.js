@@ -8,6 +8,7 @@ function mapStateToProps(state) {
     chapterId: state.chapterReducer.chapterId,
     topCode: state.languageReducer.topCode,
     bottomCode: state.languageReducer.bottomCode,
+    isOpen: state.menuReducer.open,
   };
 }
 

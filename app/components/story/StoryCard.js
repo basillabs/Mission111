@@ -12,7 +12,7 @@ import {
   EN_CODE, SV_CODE, AR_CODE,
 } from '../../constants/languageConstants';
 import {
-  DARK_BLUE, BEIGE, DARK_BEIGE, BROWN, RED
+  BEIGE, DARK_BEIGE, BROWN, RED
 } from '../../constants/colorConstants';
 import StoryControlPaneContainer from '../../containers/StoryControlPaneContainer';
 import { TOOLBAR_HEIGHT } from '../StoryControlPane';
@@ -147,7 +147,6 @@ StoryCard.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
-    backgroundColor: DARK_BLUE,
   },
   card: {
     borderRadius: 5,

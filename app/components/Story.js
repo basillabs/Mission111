@@ -9,6 +9,9 @@ import Stories from '../../stories';
 import StoryCard from './story/StoryCard';
 import StoryControlPaneContainer from '../containers/StoryControlPaneContainer';
 import SideMenuContainer from '../containers/SideMenuContainer';
+import {
+  DARK_BLUE
+} from '../constants/colorConstants';
 
 class Story extends Component {
   constructor(props) {
@@ -106,12 +109,14 @@ class Story extends Component {
     return (
       <View style={styles.container}>
         <SideMenuContainer />
-        <ViewPager
-          renderPageIndicator={() => <ViewPageIndicator isSplit={this.state.isSplit} /> }
-          ref={(viewpager) => { this.viewpager = viewpager; }}
-          dataSource={this.state.data}
-          renderPage={this.renderPage}
-        />
+        <View style={this.props.isOpen ? styles.overlay : null}>
+          <ViewPager
+            renderPageIndicator={() => <ViewPageIndicator isSplit={this.state.isSplit} /> }
+            ref={(viewpager) => { this.viewpager = viewpager; }}
+            dataSource={this.state.data}
+            renderPage={this.renderPage}
+          />
+        </View>
       </View>
     );
   }
@@ -125,7 +130,10 @@ Story.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: DARK_BLUE,
+  },
+  overlay: {
+    opacity: 0.25,
   },
 });
 
