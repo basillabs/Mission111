@@ -13,6 +13,7 @@ import Stories from '../../stories';
 import StoryCard from './story/StoryCard';
 import SideMenuContainer from '../containers/SideMenuContainer';
 import { TOOLBAR_HEIGHT, MID_HEIGHT } from './story/StoryCard';
+import AudioStreamer from 'react-native-audio-streamer';
 import {
   FRICTION, TENSION
 } from '../constants/animationConstants';
@@ -69,10 +70,14 @@ class Story extends Component {
         topContent: {
           text: topChapter.sections[index],
           align: topLanguage.align,
+          trackId: `${chapterId}-${index}-top`,
+          trackUrl: 'https://ia600706.us.archive.org/4/items/Sample_Audio_Clips_mp3/KuumbaPodcast1.mp3',
         },
         bottomContent: {
           text: bottomChapter.sections[index],
           align: bottomLanguage.align,
+          trackId: `${chapterId}-${index}-bottom`,
+          trackUrl: 'https://ia600706.us.archive.org/4/items/Sample_Audio_Clips_mp3/KuumbaPodcast1.mp3',
         },
         index,
       }),
@@ -154,16 +159,19 @@ class Story extends Component {
       label: this.props.chapterId.toString(),
       value: pageNumber + 1,
     });
+
+    AudioStreamer.pause();
+    this.props.pauseAudioTrack();
   }
 
-  renderPage(data) {
+  renderPage(data, index) {
     return <StoryCard
               topContent={data.topContent}
               bottomContent={data.bottomContent}
               isSplit={this.state.isSplit}
               onToggleTap={this.onClickToggle}
               isTitleCard={data.isTitleCard}
-              allowLanguageSelection={data.allowLanguageSelection}
+              playAudioTrack={this.props.playAudioTrack}pauseAudioTrack={this.props.playAudioTrack}allowLanguageSelection={data.allowLanguageSelection}
               {...this.props}
             />;
   }
@@ -171,9 +179,15 @@ class Story extends Component {
   renderMenuIcon() {
     return (
       <View style={[styles.hamburger, this.getIconStyles()]}>
+        topText={data.topText}
+        bottomText={data.bottomText}
+        topTrackId={data.topTrackId}
         <TouchableWithoutFeedback onPress={this.props.showMenu}>
+        bottomTrackId={data.bottomTrackId}
           <View style={styles.icon}>
             <Icon name="hamburger" fill={theme.lightText} />
+        onToggleTap={this.onClickToggle}
+        playAudioTrack={this.props.playAudioTrack}
           </View>
         </TouchableWithoutFeedback>
       </View>
@@ -227,6 +241,9 @@ Story.propTypes = {
   showMenu: React.PropTypes.func.isRequired,
   topLanguage: React.PropTypes.object.isRequired,
   bottomLanguage: React.PropTypes.object.isRequired,
+  playAudioTrack: React.PropTypes.func.isRequired,
+  pauseAudioTrack: React.PropTypes.func.isRequired,
+  currentAudioTrack: React.PropTypes.string,
 };
 
 const styles = StyleSheet.create({

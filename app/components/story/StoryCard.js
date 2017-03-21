@@ -96,7 +96,14 @@ class StoryCard extends Component {
           <Text style={this.getTextStyles(topContent)}>
             {topContent.text}
           </Text>
-          <AudioPlayer />
+          <AudioPlayer
+            playAudioTrack={this.props.playAudioTrack}
+            pauseAudioTrack={this.props.pauseAudioTrack}
+            playing={this.props.currentAudioTrack === topContent.trackId}
+            currentAudioTrack={this.props.currentAudioTrack}
+            trackId={topContent.trackId}
+            trackUrl={topContent.trackUrl}
+          />
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
               <Icon name="chevron-right" size={30} fill={theme.accent} />
@@ -113,7 +120,14 @@ class StoryCard extends Component {
           <Text style={this.getTextStyles(bottomContent)}>
             {bottomContent.text}
           </Text>
-          <AudioPlayer />
+          <AudioPlayer
+            playAudioTrack={this.props.playAudioTrack}
+            pauseAudioTrack={this.props.pauseAudioTrack}
+            playing={this.props.currentAudioTrack === this.props.bottomTrackId}
+            currentAudioTrack={this.props.currentAudioTrack}
+            trackId={bottomContent.trackId}
+            trackUrl={bottomContent.trackUrl}
+          />
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
               <Icon name="chevron-right" size={30} fill={theme.accent} />
@@ -177,6 +191,11 @@ StoryCard.propTypes = {
   bottomContent: React.PropTypes.object.isRequired,
   onToggleTap: React.PropTypes.func.isRequired,
   allowLanguageSelection: React.PropTypes.bool,
+  currentAudioTrack: React.PropTypes.string,
+  topTrackId: React.PropTypes.string,
+  topTrackUrl: React.PropTypes.string,
+  bottomTrackId: React.PropTypes.string,
+  bottomTrackUrl: React.PropTypes.string,
 };
 
 const styles = StyleSheet.create({
