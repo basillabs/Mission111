@@ -21,7 +21,7 @@ class Story extends Component {
     this.state = {
       data: this.initializeDataSource(),
       isSplit: this.props.viewMode === 'pair',
-      fadeAnim: new Animated.Value(1),
+      fadeAnim: new Animated.Value(),
     };
 
     this.onClickBack = this.onClickBack.bind(this);
@@ -62,6 +62,15 @@ class Story extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
+    Animated.timing(
+      this.state.fadeAnim,
+      {
+        toValue: nextProps.isOpen ? 0.1 : 1,
+        duration: 400
+      }
+    ).start();
+
     if (this.props.chapterId !== nextProps.chapterId) {
       // The chapter has changed. Reinitialize the data source
       // and set its page back to zero after the data source has
@@ -82,15 +91,13 @@ class Story extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    Animated.timing(
-      this.state.fadeAnim,
-      {
-        toValue: this.props.isOpen ? 1 : 0.1,
-        duration: 400
-      }
-    ).start();
-  };
+  componentWillMount() {
+    if (this.props.isOpen) {
+      this.state.fadeAnim.setValue(0.15);
+    } else {
+      this.state.fadeAnim.setValue(1);
+    }
+  }
 
   onClickBack() {
     this.props.handleNavigate({
