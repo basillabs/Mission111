@@ -91,15 +91,15 @@ class StoryCard extends Component {
         </Animated.View>
         <StoryControlPaneContainer {...this.props} />
         <Animated.View style={this.getBottomCardStyles()}>
-          <View>
-            <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
-              {this.props.bottomText}
-            </Text>
-            {this.props.allowLanguageSelection ?
-              <LanguagePicker selectedValue={this.props.bottomCode}
-                onValueChange={(code) => this.props.setBottomCode(code)} />
-              : null}
-          </View>
+          <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
+            {this.props.bottomText}
+          </Text>
+
+          {this.props.allowLanguageSelection ?
+            <LanguagePicker selectedValue={this.props.bottomCode}
+              onValueChange={(code) => this.props.setBottomCode(code)} />
+            : null}
+
         </Animated.View>
       </View>
     );
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     margin: 4,
     overflow: "hidden",
+    justifyContent: 'space-between',
   },
   collapsedCard: {
     padding: 0,
