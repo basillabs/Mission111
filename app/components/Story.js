@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
+  Animated,
 } from 'react-native';
 import ViewPager from 'react-native-viewpager';
 import ViewPageIndicator from './ViewPageIndicator';
@@ -20,6 +21,7 @@ class Story extends Component {
     this.state = {
       data: this.initializeDataSource(),
       isSplit: this.props.viewMode === 'pair',
+      fadeAnim: new Animated.Value(),
     };
 
     this.onClickBack = this.onClickBack.bind(this);
@@ -60,6 +62,15 @@ class Story extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
+    Animated.timing(
+      this.state.fadeAnim,
+      {
+        toValue: nextProps.isOpen ? 0.1 : 1,
+        duration: 400
+      }
+    ).start();
+
     if (this.props.chapterId !== nextProps.chapterId) {
       // The chapter has changed. Reinitialize the data source
       // and set its page back to zero after the data source has
@@ -77,6 +88,14 @@ class Story extends Component {
                                         nextProps.topCode,
                                         nextProps.bottomCode),
       });
+    }
+  }
+
+  componentWillMount() {
+    if (this.props.isOpen) {
+      this.state.fadeAnim.setValue(0.15);
+    } else {
+      this.state.fadeAnim.setValue(1);
     }
   }
 
@@ -109,14 +128,14 @@ class Story extends Component {
     return (
       <View style={styles.container}>
         <SideMenuContainer />
-        <View style={this.props.isOpen ? styles.overlay : null}>
+        <Animated.View style={{opacity: this.state.fadeAnim}}>
           <ViewPager
             renderPageIndicator={() => <ViewPageIndicator isSplit={this.state.isSplit} /> }
             ref={(viewpager) => { this.viewpager = viewpager; }}
             dataSource={this.state.data}
             renderPage={this.renderPage}
           />
-        </View>
+        </Animated.View>
       </View>
     );
   }
@@ -131,9 +150,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: DARK_BLUE,
-  },
-  overlay: {
-    opacity: 0.25,
   },
 });
 
