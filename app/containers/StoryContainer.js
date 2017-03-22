@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setTopCode, setBottomCode } from '../actions/languageActions';
+import { showMenu } from '../actions/menuActions';
 import Story from '../components/Story';
 
 function mapStateToProps(state) {
@@ -16,6 +17,7 @@ function mapDispatchToProps(dispatch) {
   return {
     setTopCode: (code) => dispatch(setTopCode(code)),
     setBottomCode: (code) => dispatch(setBottomCode(code)),
+    showMenu: () => dispatch(showMenu()),
   };
 }
 
