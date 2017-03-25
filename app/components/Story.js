@@ -188,10 +188,10 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   hamburger: {
-    left: 10,
+    left: 4,
   },
   toggle: {
-    right: 10,
+    right: 4,
   },
 });
 
