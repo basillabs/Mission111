@@ -1,6 +1,6 @@
 import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
 
-const tracker = new GoogleAnalyticsTracker('');
+const tracker = new GoogleAnalyticsTracker('UA-96307080-1');
 
 const wrapper = {
   trackScreenView(name) {
