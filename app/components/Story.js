@@ -18,6 +18,7 @@ import {
   DARK_BLUE
 } from '../constants/colorConstants';
 import { TOOLBAR_HEIGHT, MID_HEIGHT } from './story/StoryCard';
+import tracker from '../tracker';
 
 const MID_ICON_HEIGHT = MID_HEIGHT + 4;
 
@@ -34,6 +35,7 @@ class Story extends Component {
     this.onClickBack = this.onClickBack.bind(this);
     this.onClickToggle = this.onClickToggle.bind(this);
     this.renderPage = this.renderPage.bind(this);
+    this.onChangePage = this.onChangePage.bind(this);
   }
 
   initializeDataSource(chapterId, topCode, bottomCode) {
@@ -56,20 +58,30 @@ class Story extends Component {
       bottomText: bottomChapter.title,
       isTitleCard: true,
       allowLanguageSelection: true,
+      index: -1,
     }];
 
     const chapterData = bottomChapter.sections.map((section, index) =>
       ({
         topText: topChapter.sections[index],
         bottomText: bottomChapter.sections[index],
+        index,
       }),
     );
 
     return titleData.concat(chapterData);
   }
 
-  componentWillReceiveProps(nextProps) {
+  trackChapterChange(chapterNumber) {
+    tracker.trackScreenView('Chapter ' + chapterNumber);
+  }
 
+  componentDidMount() {
+    this.trackChapterChange(this.props.chapterId);
+    this.onChangePage(0);
+  }
+
+  componentWillReceiveProps(nextProps) {
     Animated.timing(
       this.state.fadeAnim,
       {
@@ -79,6 +91,8 @@ class Story extends Component {
     ).start();
 
     if (this.props.chapterId !== nextProps.chapterId) {
+      this.trackChapterChange(nextProps.chapterId);
+
       // The chapter has changed. Reinitialize the data source
       // and set its page back to zero after the data source has
       // been refreshed.
@@ -114,6 +128,11 @@ class Story extends Component {
   }
 
   onClickToggle() {
+    tracker.trackEvent('Tap', 'ViewPane', {
+      label: 'expanded',
+      value: this.state.isSplit ? 1 : 0,
+    });
+
     this.setState({
       isSplit: !this.state.isSplit,
     });
@@ -131,6 +150,13 @@ class Story extends Component {
             />;
   }
 
+  onChangePage(pageNumber) {
+    tracker.trackEvent('View', 'Page', {
+      label: this.props.chapterId.toString(),
+      value: pageNumber + 1,
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -140,6 +166,7 @@ class Story extends Component {
             renderPageIndicator={() => <ViewPageIndicator isSplit={this.state.isSplit} /> }
             ref={(viewpager) => { this.viewpager = viewpager; }}
             dataSource={this.state.data}
+            onChangePage={this.onChangePage}
             renderPage={this.renderPage}
           />
           <TouchableHighlight onPress={this.props.showMenu}>
