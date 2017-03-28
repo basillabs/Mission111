@@ -18,6 +18,9 @@ import {
   DARK_BLUE
 } from '../constants/colorConstants';
 import { TOOLBAR_HEIGHT, MID_HEIGHT } from './story/StoryCard';
+import {
+  FRICTION, TENSION
+} from '../constants/animationConstants';
 import tracker from '../tracker';
 
 const MID_ICON_HEIGHT = MID_HEIGHT + 4;
@@ -82,11 +85,12 @@ class Story extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    Animated.timing(
+    Animated.spring(
       this.state.fadeAnim,
       {
-        toValue: nextProps.isOpen ? 0.1 : 1,
-        duration: 400
+        toValue: nextProps.isOpen ? 0.2 : 1,
+        friction: FRICTION,
+        tension: TENSION,
       }
     ).start();
 
