@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import ChapterList from './ChapterList';
 
-const ANIMATION_DURATION = 400;
+const ANIMATION_DURATION = 300;
 const MENU_OFFSET = 150;
 const DeviceScreen = Dimensions.get('window');
 
@@ -18,7 +18,6 @@ class SideMenu extends Component {
 
     this.state = {
       menuLeft: new Animated.Value(-DeviceScreen.width),
-      menuWidth: new Animated.Value(0),
     };
 
     this.onChapterSelection = this.onChapterSelection.bind(this);
@@ -26,20 +25,19 @@ class SideMenu extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isOpen) {
-      this.state.menuWidth.setValue(DeviceScreen.width);
-      Animated.timing(this.state.menuLeft, {
+      Animated.spring(this.state.menuLeft, {
           toValue: 0,
-          duration: ANIMATION_DURATION,
+          friction: 9,
+          tension: 55,
         }
       ).start();
     } else {
-      Animated.timing(this.state.menuLeft, {
+      Animated.spring(this.state.menuLeft, {
           toValue: -DeviceScreen.width,
-          duration: ANIMATION_DURATION,
+          friction: 9,
+          tension: 55,
         }
-      ).start(() => {
-        this.state.menuWidth.setValue(0);
-      });
+      ).start();
     }
   }
 
@@ -47,7 +45,7 @@ class SideMenu extends Component {
     return (
       <Animated.View scrollsToTop={false} style={[
         styles.container, {
-          width: this.state.menuWidth,
+          width: DeviceScreen.width,
           left: this.state.menuLeft,
         }
       ]} >

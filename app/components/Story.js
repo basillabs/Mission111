@@ -70,11 +70,12 @@ class Story extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-    Animated.timing(
+    Animated.spring(
       this.state.fadeAnim,
       {
-        toValue: nextProps.isOpen ? 0.1 : 1,
-        duration: 400
+        toValue: nextProps.isOpen ? 0.2 : 1,
+        friction: 9,
+        tension: 55,
       }
     ).start();
 
