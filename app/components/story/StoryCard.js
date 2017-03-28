@@ -15,6 +15,7 @@ import {
   BEIGE, DARK_BEIGE, BROWN, RED
 } from '../../constants/colorConstants';
 import LanguagePicker from '../LanguagePicker';
+import tracker from '../../tracker';
 
 export const TOOLBAR_HEIGHT = 40;
 const WINDOW_HEIGHT = Dimensions.get('window').height;
@@ -45,6 +46,8 @@ class StoryCard extends Component {
       bottomHeight: new Animated.Value(),
     };
 
+    this.setTopCode = this.setTopCode.bind(this);
+    this.setBottomCode = this.setBottomCode.bind(this);
   }
 
   componentWillMount() {
@@ -77,6 +80,24 @@ class StoryCard extends Component {
     }
   };
 
+  setTopCode(code) {
+    tracker.trackEvent('Tap', 'Top Language', {
+      label: code,
+      value: 1,
+    });
+
+    this.props.setTopCode(code);
+  }
+
+  setBottomCode(code) {
+    tracker.trackEvent('Tap', 'Bottom Language', {
+      label: code,
+      value: 1,
+    });
+
+    this.props.setBottomCode(code);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -87,7 +108,7 @@ class StoryCard extends Component {
 
           {this.props.allowLanguageSelection ?
             <LanguagePicker selectedValue={this.props.topCode}
-              onValueChange={(code) => this.props.setTopCode(code)} />
+              onValueChange={this.setTopCode} />
             : null}
 
         </Animated.View>
@@ -98,7 +119,7 @@ class StoryCard extends Component {
 
           {this.props.allowLanguageSelection ?
             <LanguagePicker selectedValue={this.props.bottomCode}
-              onValueChange={(code) => this.props.setBottomCode(code)} />
+              onValueChange={this.setBottomCode} />
             : null}
 
         </Animated.View>

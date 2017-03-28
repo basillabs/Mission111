@@ -10,6 +10,7 @@ import ChapterList from './ChapterList';
 import {
   FRICTION, TENSION
 } from '../constants/animationConstants';
+import tracker from '../tracker';
 
 const ANIMATION_DURATION = 300;
 const MENU_OFFSET = 150;
@@ -69,6 +70,10 @@ class SideMenu extends Component {
   }
 
   onChapterSelection(chapterIndex) {
+    tracker.trackEvent('Tap', 'Chapter', {
+      label: 'chapter',
+      value: chapterIndex,
+    });
     this.props.hideMenu();
     this.props.setChapter(chapterIndex);
   }
