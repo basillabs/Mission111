@@ -78,10 +78,10 @@ class Story extends Component {
 
   componentDidMount() {
     this.trackChapterChange(this.props.chapterId);
+    this.onChangePage(0);
   }
 
   componentWillReceiveProps(nextProps) {
-
     Animated.timing(
       this.state.fadeAnim,
       {
@@ -139,8 +139,6 @@ class Story extends Component {
   }
 
   renderPage(data) {
-    this.trackPageView(data);
-
     return <StoryCard
               topText={data.topText}
               bottomText={data.bottomText}
@@ -155,11 +153,8 @@ class Story extends Component {
   onChangePage(pageNumber) {
     tracker.trackEvent('View', 'Page', {
       label: this.props.chapterId.toString(),
-      value: pageNumber,
+      value: pageNumber + 1,
     });
-  }
-
-  trackPageView(pageData) {
   }
 
   render() {
