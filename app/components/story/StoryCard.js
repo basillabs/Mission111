@@ -8,6 +8,16 @@ import {
   Animated,
   Picker,
 } from 'react-native';
+
+import AudioButton from './AudioButton';
+import AudioMenu from './AudioMenu';
+
+import {
+  EN_LABEL, SV_LABEL, AR_LABEL,
+  EN_CODE, SV_CODE, AR_CODE,
+} from '../../constants/languageConstants';
+import {
+  BEIGE, DARK_BEIGE, BROWN, RED
 import AudioPlayer from './AudioPlayer';
 import theme from '../../utils/theme';
 import LanguagePicker from '../LanguagePicker';
@@ -27,10 +37,14 @@ class StoryCard extends Component {
     this.state = {
       topHeight: new Animated.Value(),
       bottomHeight: new Animated.Value(),
+      isTopAudioVisible: false,
+      isBottomAudioVisible: false,
     };
 
     this.setTopLanguage = this.setTopLanguage.bind(this);
     this.setBottomLanguage = this.setBottomLanguage.bind(this);
+    this.onToggleTopAudio = this.onToggleTopAudio.bind(this);
+    this.onToggleBottomAudio = this.onToggleBottomAudio.bind(this);
   }
 
   componentWillMount() {
@@ -63,6 +77,10 @@ class StoryCard extends Component {
     }
   };
 
+  onToggleTopAudio() {
+    this.setState({isTopAudioVisible: !this.state.isTopAudioVisible});
+  }
+
   setTopLanguage(language) {
     tracker.trackEvent('Tap', 'Top Language', {
       label: language.code,
@@ -70,6 +88,10 @@ class StoryCard extends Component {
     });
 
     this.props.setTopLanguage(language);
+  }
+
+  onToggleBottomAudio() {
+    this.setState({isBottomAudioVisible: !this.state.isBottomAudioVisible});
   }
 
   setBottomLanguage(language) {
@@ -96,10 +118,21 @@ class StoryCard extends Component {
           <Text style={this.getTextStyles(topContent)}>
             {topContent.text}
           </Text>
-          <AudioPlayer
+          {this.props.allowLanguageSelection ?
+            <LanguagePicker selectedValue={this.props.topCode}
+              onValueChange={(code) => this.props.setTopCode(code)} />
+            : null}
+          <AudioButton
+            isMenuVisible={this.state.isTopAudioVisible}
+            onToggle={this.onToggleTopAudio}
+            isMenuVisible={ this.state.isTopAudioVisible}
+            trackId={this.props.bottomTrackId}
+          />
+          <AudioMenu
+            isVisible={this.state.isTopAudioVisible}
             playAudioTrack={this.props.playAudioTrack}
             pauseAudioTrack={this.props.pauseAudioTrack}
-            playing={this.props.currentAudioTrack === topContent.trackId}
+            isPlaying={this.props.currentAudioTrack === topContent.trackId}
             currentAudioTrack={this.props.currentAudioTrack}
             trackId={topContent.trackId}
             trackUrl={topContent.trackUrl}
@@ -120,10 +153,21 @@ class StoryCard extends Component {
           <Text style={this.getTextStyles(bottomContent)}>
             {bottomContent.text}
           </Text>
-          <AudioPlayer
+          {this.props.allowLanguageSelection ?
+            <LanguagePicker selectedValue={this.props.bottomCode}
+              onValueChange={(code) => this.props.setBottomCode(code)} />
+            : null}
+          <AudioButton
+            isMenuVisible={this.state.isBottomAudioVisible}
+            onToggle={this.onToggleBottomAudio}
+            isMenuVisible={ this.state.isBottomAudioVisible}
+            trackId={this.props.bottomTrackId}
+          />
+          <AudioMenu
+            isVisible={this.state.isBottomAudioVisible}
             playAudioTrack={this.props.playAudioTrack}
             pauseAudioTrack={this.props.pauseAudioTrack}
-            playing={this.props.currentAudioTrack === this.props.bottomTrackId}
+            isPlaying={this.props.currentAudioTrack === bottomContent.trackId}
             currentAudioTrack={this.props.currentAudioTrack}
             trackId={bottomContent.trackId}
             trackUrl={bottomContent.trackUrl}
@@ -211,6 +255,7 @@ const styles = StyleSheet.create({
     margin: 9,
     overflow: "hidden",
     justifyContent: 'space-between',
+    position: 'relative',
   },
   collapsedCard: {
     padding: 0,

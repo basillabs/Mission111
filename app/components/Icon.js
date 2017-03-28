@@ -1,12 +1,7 @@
 import React from 'react';
 import Svg,{
-    Circle,
-    G,
-    Line,
     Path,
     Polygon,
-    Polyline,
-    Rect,
 } from 'react-native-svg';
 
 const IconMap = {

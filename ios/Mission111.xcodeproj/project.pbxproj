@@ -131,6 +131,13 @@
 			remoteGlobalIDString = 4EA3C7F71DED6DA700FF8C38;
 			remoteInfo = RNAudioStreamer;
 		};
+		ED32E8871E80D527000520F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8AF2DAF3A6774528AA5A71CD /* RNSVG.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = RNSVG;
+		};
 		EDCD7A1B1DF68125002735CE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
@@ -243,6 +250,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				D4BB23FBB30B4576AA0C9F4E /* libRNAudioStreamer.a in Frameworks */,
 				0C4DAE2B49B34F17A4743B50 /* libRNSVG.a in Frameworks */,
 				AFB7FF996093418A88332562 /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
 				D4BB23FBB30B4576AA0C9F4E /* libRNAudioStreamer.a in Frameworks */,
@@ -401,6 +409,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				0356D6312541472DB7CE5713 /* RNAudioStreamer.xcodeproj */,
 				8AF2DAF3A6774528AA5A71CD /* RNSVG.xcodeproj */,
 				EF99399F105B450CA8BDC52F /* RCTGoogleAnalyticsBridge.xcodeproj */,
 				0356D6312541472DB7CE5713 /* RNAudioStreamer.xcodeproj */,
@@ -443,6 +452,14 @@
 			isa = PBXGroup;
 			children = (
 				ED09D1F61E63B57B00F25F48 /* libRNAudioStreamer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ED32E8721E80D527000520F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED32E8881E80D527000520F4 /* libRNSVG.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -569,6 +586,10 @@
 					ProductGroup = ED09D1E11E63B57B00F25F48 /* Products */;
 					ProjectRef = 0356D6312541472DB7CE5713 /* RNAudioStreamer.xcodeproj */;
 				},
+				{
+					ProductGroup = ED32E8721E80D527000520F4 /* Products */;
+					ProjectRef = 8AF2DAF3A6774528AA5A71CD /* RNSVG.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -663,6 +684,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = ED09D1F51E63B57B00F25F48 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ED32E8881E80D527000520F4 /* libRNSVG.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSVG.a;
+			remoteRef = ED32E8871E80D527000520F4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		EDCD7A1C1DF68125002735CE /* libRCTImage-tvOS.a */ = {
@@ -847,6 +875,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-audio-streamer/ios/RNAudioStreamer/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-audio-streamer/ios/RNAudioStreamer/**",
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
