@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
+import Icon from './Icon';
 import {
   StyleSheet,
+  TouchableHighlight,
   View,
   Animated,
 } from 'react-native';
+import {
+  BEIGE,
+} from '../constants/colorConstants.js';
 import ViewPager from 'react-native-viewpager';
 import ViewPageIndicator from './ViewPageIndicator';
 import Stories from '../../stories';
 import StoryCard from './story/StoryCard';
-import StoryControlPaneContainer from '../containers/StoryControlPaneContainer';
 import SideMenuContainer from '../containers/SideMenuContainer';
 import {
   DARK_BLUE
 } from '../constants/colorConstants';
+import { TOOLBAR_HEIGHT, MID_HEIGHT } from './story/StoryCard';
+
+const MID_ICON_HEIGHT = MID_HEIGHT + 4;
 
 class Story extends Component {
   constructor(props) {
@@ -135,21 +142,56 @@ class Story extends Component {
             dataSource={this.state.data}
             renderPage={this.renderPage}
           />
+          <TouchableHighlight onPress={this.props.showMenu}>
+            <View style={[styles.hamburger, this.getIconStyles()]}>
+              <Icon name="hamburger" fill={BEIGE} />
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={this.onClickToggle}>
+            <View style={[styles.toggle, this.getIconStyles()]}>
+              <Icon name="split-view" fill={BEIGE} />
+            </View>
+          </TouchableHighlight>
         </Animated.View>
       </View>
     );
+  }
+
+  getIconStyles() {
+    if (this.state.isSplit) {
+      return [
+        {top: MID_ICON_HEIGHT},
+        styles.icon,
+      ];
+    } else {
+      return [
+        {top: 0},
+        styles.icon,
+      ];
+    }
   }
 }
 
 Story.propTypes = {
   handleNavigate: React.PropTypes.func.isRequired,
   viewMode: React.PropTypes.string.isRequired,
+  showMenu: React.PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: DARK_BLUE,
+  },
+  icon: {
+    position: 'absolute',
+    padding: 16,
+  },
+  hamburger: {
+    left: 4,
+  },
+  toggle: {
+    right: 4,
   },
 });
 

@@ -14,12 +14,14 @@ import {
 import {
   BEIGE, DARK_BEIGE, BROWN, RED
 } from '../../constants/colorConstants';
-import StoryControlPaneContainer from '../../containers/StoryControlPaneContainer';
-import { TOOLBAR_HEIGHT } from '../StoryControlPane';
 import LanguagePicker from '../LanguagePicker';
 
-const midHeight = Dimensions.get('window').height/2 - (TOOLBAR_HEIGHT/2) - 8;
-const fullHeight = (midHeight * 2) + 8;
+export const TOOLBAR_HEIGHT = 40;
+const WINDOW_HEIGHT = Dimensions.get('window').height;
+
+export const MID_HEIGHT = WINDOW_HEIGHT/2 - (TOOLBAR_HEIGHT/2) - 8;
+const FULL_HEIGHT = (MID_HEIGHT * 2) + 8;
+
 const CODE_OPTIONS = [
   {
     label: EN_LABEL,
@@ -47,11 +49,11 @@ class StoryCard extends Component {
 
   componentWillMount() {
     if (this.props.isSplit) {
-      this.state.topHeight.setValue(midHeight);
-      this.state.bottomHeight.setValue(midHeight);
+      this.state.topHeight.setValue(MID_HEIGHT);
+      this.state.bottomHeight.setValue(MID_HEIGHT);
     } else {
       this.state.topHeight.setValue(0);
-      this.state.bottomHeight.setValue(fullHeight);
+      this.state.bottomHeight.setValue(FULL_HEIGHT);
     }
   }
 
@@ -60,7 +62,7 @@ class StoryCard extends Component {
       Animated.timing(
         this.state.topHeight,
         {
-          toValue: this.props.isSplit ? 0 : midHeight,
+          toValue: this.props.isSplit ? 0 : MID_HEIGHT,
           duration: 100
         }
       ).start();
@@ -68,7 +70,7 @@ class StoryCard extends Component {
       Animated.timing(
         this.state.bottomHeight,
         {
-          toValue: this.props.isSplit ? fullHeight : midHeight,
+          toValue: this.props.isSplit ? FULL_HEIGHT : MID_HEIGHT,
           duration: 100
         }
       ).start();
@@ -89,7 +91,6 @@ class StoryCard extends Component {
             : null}
 
         </Animated.View>
-        <StoryControlPaneContainer {...this.props} />
         <Animated.View style={this.getBottomCardStyles()}>
           <Text style={[styles.text, this.props.isTitleCard ? styles.titleCard : null]}>
             {this.props.bottomText}
@@ -147,6 +148,8 @@ StoryCard.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
+    height: WINDOW_HEIGHT,
+    justifyContent: 'space-between',
   },
   card: {
     borderRadius: 5,
