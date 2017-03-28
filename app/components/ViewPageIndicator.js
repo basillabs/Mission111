@@ -76,9 +76,9 @@ var ViewPageIndicator = React.createClass({
   renderIndicator(page) {
     //var isTabActive = this.props.activePage === page;
     return (
-      <TouchableOpacity style={styles.tab} key={'idc_' + page} onPress={() => this.props.goToPage(page)}>
+      <View style={styles.tab} key={'idc_' + page}>
         <View style={styles.dot} />
-      </TouchableOpacity>
+      </View>
     );
   },
 
