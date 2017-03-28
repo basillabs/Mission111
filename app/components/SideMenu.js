@@ -7,6 +7,9 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import ChapterList from './ChapterList';
+import {
+  FRICTION, TENSION
+} from '../constants/animationConstants';
 
 const ANIMATION_DURATION = 300;
 const MENU_OFFSET = 150;
@@ -27,15 +30,15 @@ class SideMenu extends Component {
     if (nextProps.isOpen) {
       Animated.spring(this.state.menuLeft, {
           toValue: 0,
-          friction: 9,
-          tension: 55,
+          friction: FRICTION,
+          tension: TENSION,
         }
       ).start();
     } else {
       Animated.spring(this.state.menuLeft, {
           toValue: -DeviceScreen.width,
-          friction: 9,
-          tension: 55,
+          friction: FRICTION,
+          tension: TENSION,
         }
       ).start();
     }

@@ -18,6 +18,9 @@ import {
   DARK_BLUE
 } from '../constants/colorConstants';
 import { TOOLBAR_HEIGHT, MID_HEIGHT } from './story/StoryCard';
+import {
+  FRICTION, TENSION
+} from '../constants/animationConstants';
 
 const MID_ICON_HEIGHT = MID_HEIGHT + 4;
 
@@ -74,8 +77,8 @@ class Story extends Component {
       this.state.fadeAnim,
       {
         toValue: nextProps.isOpen ? 0.2 : 1,
-        friction: 9,
-        tension: 55,
+        friction: FRICTION,
+        tension: TENSION,
       }
     ).start();
 
