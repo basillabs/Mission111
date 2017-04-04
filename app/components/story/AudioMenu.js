@@ -14,6 +14,8 @@ import Svg,{
 
 import AudioStreamer from 'react-native-audio-streamer';
 
+import { GOLD } from '../../constants/colorConstants';
+
 const HIDDEN_Y = -40;
 const VISIBLE_Y = 10;
 
@@ -132,15 +134,15 @@ const styles = StyleSheet.create({
 });
 
 function rewindIcon() {
-  return (<Path fill={"#93732E"} d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>);
+  return (<Path fill={GOLD} d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>);
 }
 
 function playIcon() {
-  return (<Path fill={"#93732E"} d="M8 5v14l11-7z"/>);
+  return (<Path fill={GOLD} d="M8 5v14l11-7z"/>);
 }
 
 function pauseIcon() {
-  return (<Path fill={"#93732E"} d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>);
+  return (<Path fill={GOLD} d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>);
 }
 
 export default AudioMenu;
