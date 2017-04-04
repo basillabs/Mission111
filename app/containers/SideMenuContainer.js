@@ -8,7 +8,7 @@ import { hideMenu, showMenu } from '../actions/menuActions';
 
 function mapStateToProps(state) {
   return {
-    bottomCode: state.languageReducer.bottomCode,
+    language: state.languageReducer.bottomLanguage,
     chapterId: state.chapterReducer.chapterId,
     isOpen: state.menuReducer.open,
   };
@@ -33,13 +33,13 @@ class SideMenuContainer extends Component {
   }
 
   getChapters() {
-    return Stories[this.props.bottomCode].chapters;
+    return Stories[this.props.language.code].chapters;
   }
 }
 
 SideMenuContainer.propTypes = {
   chapterId: React.PropTypes.number.isRequired,
-  bottomCode: React.PropTypes.string.isRequired,
+  language: React.PropTypes.object.isRequired,
   setChapter: React.PropTypes.func.isRequired,
   isOpen: React.PropTypes.bool.isRequired,
   hideMenu: React.PropTypes.func.isRequired,
