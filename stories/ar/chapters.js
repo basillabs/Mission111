@@ -28,8 +28,6 @@ export default {
     require('./25.json'),
     require('./26.json'),
     require('./27.json'),
-    
-    // TODO: replace below google translated stories with official translations
     require('./28.json'),
     require('./29.json')
   ],
