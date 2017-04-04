@@ -1,25 +1,32 @@
 import languageReducer from '../../app/reducers/languageReducer';
 import {
-  setLanguage
+  setTopLanguage,
+  setBottomLanguage,
 } from '../../app/actions/languageActions';
-import {
-  EN_LANG,
-  SV_LANG,
-} from '../../app/constants/languageConstants';
+import languageData from '../../data/languages';
 
 describe('language reducer', () => {
   describe('default state', () => {
-    it('defaults to EN', () => {
+    it('defaults to AR + EN', () => {
       const state = languageReducer();
-      expect(state.code).toBe(EN_LANG);
+      expect(state.bottomLanguage.code).toBe(languageData.languages.EN.code);
+      expect(state.topLanguage.code).toBe(languageData.languages.AR.code);
     });
   });
 
-  describe('set language', () => {
+  describe('set top language', () => {
     it('sets the language code', () => {
       const state = languageReducer({},
-        setLanguage(SV_LANG));
-      expect(state.code).toBe(SV_LANG);
+        setTopLanguage(languageData.languages.SV));
+      expect(state.topLanguage.code).toBe(languageData.languages.SV.code);
+    });
+  });
+
+  describe('set bottom language', () => {
+    it('sets the language code', () => {
+      const state = languageReducer({},
+        setBottomLanguage(languageData.languages.SV));
+      expect(state.bottomLanguage.code).toBe(languageData.languages.SV.code);
     });
   });
 });

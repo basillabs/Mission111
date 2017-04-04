@@ -1,16 +1,16 @@
-export const SET_TOP_CODE = 'SET_TOP_CODE';
-export const SET_BOTTOM_CODE = 'SET_BOTTOM_CODE';
+export const SET_TOP_LANGUAGE = 'SET_TOP_LANGUAGE';
+export const SET_BOTTOM_LANGUAGE = 'SET_BOTTOM_LANGUAGE';
 
-export function setTopCode(code) {
+export function setTopLanguage(language) {
   return {
-    type: SET_TOP_CODE,
-    code: code,
+    type: SET_TOP_LANGUAGE,
+    language,
   };
 }
 
-export function setBottomCode(code) {
+export function setBottomLanguage(language) {
   return {
-    type: SET_BOTTOM_CODE,
-    code: code,
+    type: SET_BOTTOM_LANGUAGE,
+    language,
   };
 }

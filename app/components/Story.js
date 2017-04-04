@@ -41,24 +41,29 @@ class Story extends Component {
     this.onChangePage = this.onChangePage.bind(this);
   }
 
-  initializeDataSource(chapterId, topCode, bottomCode) {
+  initializeDataSource(chapterId, topLanguage, bottomLanguage) {
     const dataSource = new ViewPager.DataSource({
       pageHasChanged: (r1, r2) => r1.text !== r2.text,
     });
 
-    return dataSource.cloneWithPages(this.getChapterData(chapterId, topCode, bottomCode));
+    return dataSource.cloneWithPages(this.getChapterData(chapterId, topLanguage, bottomLanguage));
   }
 
   getChapterData(chapterId = this.props.chapterId,
-                 topCode = this.props.topCode,
-                 bottomCode = this.props.bottomCode) {
-
-    const topChapter = Stories[topCode].chapters[chapterId - 1];
-    const bottomChapter = Stories[bottomCode].chapters[chapterId - 1];
+                 topLanguage = this.props.topLanguage,
+                 bottomLanguage = this.props.bottomLanguage) {
+    const topChapter = Stories[topLanguage.code].chapters[chapterId - 1];
+    const bottomChapter = Stories[bottomLanguage.code].chapters[chapterId - 1];
 
     const titleData = [{
-      topText: topChapter.title,
-      bottomText: bottomChapter.title,
+      topContent: {
+        text: topChapter.title,
+        align: topLanguage.align,
+      },
+      bottomContent: {
+        text: bottomChapter.title,
+        align: bottomLanguage.align,
+      },
       isTitleCard: true,
       allowLanguageSelection: true,
       index: -1,
@@ -66,8 +71,14 @@ class Story extends Component {
 
     const chapterData = bottomChapter.sections.map((section, index) =>
       ({
-        topText: topChapter.sections[index],
-        bottomText: bottomChapter.sections[index],
+        topContent: {
+          text: topChapter.sections[index],
+          align: topLanguage.align,
+        },
+        bottomContent: {
+          text: bottomChapter.sections[index],
+          align: bottomLanguage.align,
+        },
         index,
       }),
     );
@@ -107,11 +118,12 @@ class Story extends Component {
       });
     }
 
-    if (this.props.topCode !== nextProps.topCode || this.props.bottomCode != nextProps.bottomCode) {
+    if (this.props.topLanguage.code !== nextProps.topLanguage.code ||
+      this.props.bottomLanguage.code != nextProps.bottomLanguage.code) {
       this.setState({
         data: this.initializeDataSource(this.props.chapterId,
-                                        nextProps.topCode,
-                                        nextProps.bottomCode),
+                                        nextProps.topLanguage,
+                                        nextProps.bottomLanguage),
       });
     }
   }
@@ -144,8 +156,8 @@ class Story extends Component {
 
   renderPage(data) {
     return <StoryCard
-              topText={data.topText}
-              bottomText={data.bottomText}
+              topContent={data.topContent}
+              bottomContent={data.bottomContent}
               isSplit={this.state.isSplit}
               onToggleTap={this.onClickToggle}
               isTitleCard={data.isTitleCard}
@@ -207,6 +219,8 @@ Story.propTypes = {
   handleNavigate: React.PropTypes.func.isRequired,
   viewMode: React.PropTypes.string.isRequired,
   showMenu: React.PropTypes.func.isRequired,
+  topLanguage: React.PropTypes.object.isRequired,
+  bottomLanguage: React.PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({

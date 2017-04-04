@@ -84,6 +84,7 @@ SideMenu.propTypes = {
   setChapter: React.PropTypes.func.isRequired,
   isOpen: React.PropTypes.bool.isRequired,
   hideMenu: React.PropTypes.func.isRequired,
+  language: React.PropTypes.object.isRequired,
 };
 SideMenu.defaultProps = {
   chapters: [],

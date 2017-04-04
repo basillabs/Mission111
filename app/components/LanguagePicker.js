@@ -4,39 +4,40 @@ import {
   Picker,
 } from 'react-native';
 import {
-  EN_LABEL, SV_LABEL, AR_LABEL,
-  EN_CODE, SV_CODE, AR_CODE,
-} from '../constants/languageConstants';
-import {
   BROWN
 } from '../constants/colorConstants';
+import languageData from '../../data/languages';
 
-const CODE_OPTIONS = [
-  {
-    label: EN_LABEL,
-    value: EN_CODE,
-  },
-  {
-    label: AR_LABEL,
-    value: AR_CODE,
-  },
-  {
-    label: SV_LABEL,
-    value: SV_CODE,
-  },
-];
+const supportedLanguages = languageData.supported_languages.map((langCode) => {
+  return languageData.languages[langCode];
+});
 
 class LanguagePicker extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onValueChange = this.onValueChange.bind(this);
+  }
+
+  onValueChange(code) {
+    this.props.onValueChange(languageData.languages[code]);
+  }
+
   render() {
+    const selectedValue = this.props.selectedValue.code;
+
     return (
       <Picker
         itemStyle={styles.pickerItem}
-        {...this.props}>
-        {CODE_OPTIONS.map((option, i) => {
+        {...this.props}
+        selectedValue={selectedValue}
+        onValueChange={this.onValueChange}
+      >
+        {supportedLanguages.map((option, i) => {
           return <Picker.Item
                    key={i}
-                   label={option.label}
-                   value={option.value} />;
+                   label={option.display_names[option.code]}
+                   value={option.code} />;
         })}
       </Picker>
     );
@@ -44,7 +45,7 @@ class LanguagePicker extends Component {
 }
 
 LanguagePicker.propTypes = {
-  selectedValue: React.PropTypes.string.isRequired,
+  selectedValue: React.PropTypes.object.isRequired,
   onValueChange: React.PropTypes.func.isRequired,
 };
 
