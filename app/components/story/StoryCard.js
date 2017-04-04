@@ -9,8 +9,10 @@ import {
   Picker,
 } from 'react-native';
 import {
-  WHITE, BLACK, BLUE,
-} from '../../constants/colorConstants';
+  EN_LABEL, SV_LABEL, AR_LABEL,
+  EN_CODE, SV_CODE, AR_CODE,
+} from '../../constants/languageConstants';
+import theme from '../../utils/theme';
 import LanguagePicker from '../LanguagePicker';
 import tracker from '../../tracker';
 
@@ -189,7 +191,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 5,
     padding: 15,
-    backgroundColor: WHITE,
+    backgroundColor: theme.cardBackground,
     margin: 9,
     overflow: "hidden",
     justifyContent: 'space-between',
@@ -204,12 +206,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17,
     lineHeight: 24,
-    color: BLACK,
+    color: theme.text,
   },
   titleCard: {
     fontSize: 24,
     lineHeight: 30,
-    color: BLUE,
+    color: theme.title,
     fontWeight: "500",
     paddingTop: 35,
     width: TITLE_WIDTH,

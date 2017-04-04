@@ -11,7 +11,7 @@ var {
   Animated,
 } = ReactNative;
 
-import { DARK_GRAY, BLUE } from '../constants/colorConstants';
+
 
 var deviceWidth = Dimensions.get('window').width;
 var deviceHeight = Dimensions.get('window').height;
@@ -43,7 +43,7 @@ var styles = StyleSheet.create({
     width: DOT_SIZE,
     height: DOT_SIZE,
     borderRadius: DOT_SIZE / 2,
-    backgroundColor: DARK_GRAY,
+
     marginLeft: DOT_SPACE,
     marginRight: DOT_SPACE,
     opacity: 0.3,
@@ -54,7 +54,7 @@ var styles = StyleSheet.create({
     width: DOT_SIZE,
     height: DOT_SIZE,
     borderRadius: DOT_SIZE / 2,
-    backgroundColor: BLUE,
+    backgroundColor: theme.cardBackground,
     margin: DOT_SPACE,
     bottom: 0,
   },
