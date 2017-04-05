@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Icon from '.././Icon';
 import {
   View,
   Text,
@@ -8,13 +9,15 @@ import {
   Picker,
 } from 'react-native';
 import {
-  BEIGE, DARK_BEIGE, BROWN, RED
+  WHITE, BLACK, BLUE,
 } from '../../constants/colorConstants';
 import LanguagePicker from '../LanguagePicker';
 import tracker from '../../tracker';
 
 export const TOOLBAR_HEIGHT = 40;
 const WINDOW_HEIGHT = Dimensions.get('window').height;
+const WINDOW_WIDTH = Dimensions.get('window').width;
+const TITLE_WIDTH = WINDOW_WIDTH - 115;
 
 export const MID_HEIGHT = WINDOW_HEIGHT/2 - (TOOLBAR_HEIGHT/2) - 8;
 const FULL_HEIGHT = (MID_HEIGHT * 2) + 8;
@@ -95,21 +98,33 @@ class StoryCard extends Component {
             {topContent.text}
           </Text>
 
+          {this.props.isTitleCard ?
+            <View style={styles.chevron}>
+              <Icon name="chevron-right" size={30} fill={BLUE} />
+            </View>
+          : null}
+
           {allowLanguageSelection ?
             <LanguagePicker selectedValue={topLanguage}
               onValueChange={this.setTopLanguage} />
-            : null}
+          : null}
 
         </Animated.View>
         <Animated.View style={this.getBottomCardStyles()}>
           <Text style={this.getTextStyles(bottomContent)}>
             {bottomContent.text}
           </Text>
+      
+          {this.props.isTitleCard ?
+            <View style={styles.chevron}>
+              <Icon name="chevron-right" size={30} fill={BLUE} />
+            </View>
+          : null}
 
           {allowLanguageSelection ?
             <LanguagePicker selectedValue={bottomLanguage}
               onValueChange={this.setBottomLanguage} />
-            : null}
+          : null}
 
         </Animated.View>
       </View>
@@ -167,17 +182,15 @@ StoryCard.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    width: Dimensions.get('window').width,
+    width: WINDOW_WIDTH,
     height: WINDOW_HEIGHT,
     justifyContent: 'space-between',
   },
   card: {
     borderRadius: 5,
     padding: 15,
-    backgroundColor: BEIGE,
-    borderColor: DARK_BEIGE,
-    borderWidth: 5,
-    margin: 4,
+    backgroundColor: WHITE,
+    margin: 9,
     overflow: "hidden",
     justifyContent: 'space-between',
   },
@@ -191,15 +204,20 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17,
     lineHeight: 24,
-    color: BROWN,
+    color: BLACK,
   },
   titleCard: {
-    fontSize: 30,
-    lineHeight: 50,
-    textAlign: 'center',
-    color: RED,
+    fontSize: 24,
+    lineHeight: 30,
+    color: BLUE,
     fontWeight: "500",
     paddingTop: 35,
+    width: TITLE_WIDTH,
+  },
+  chevron: {
+    position: 'absolute',
+    top: 54,
+    right: 35,
   },
   rtl: {
     textAlign: 'right',
