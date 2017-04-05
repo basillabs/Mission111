@@ -5,7 +5,7 @@ import {
   Text,
 } from 'react-native';
 import {
-  BEIGE, BROWN, RED
+  BLUE, WHITE,
 } from '../constants/colorConstants.js'
 
 class ChapterList extends Component {
@@ -19,8 +19,8 @@ class ChapterList extends Component {
             <Text
               key={`chapter-${i}`}
               onPress={this.props.onChapterTap.bind(null, i + 1)}
-              style={this.getItemStyle(i)}>
-            {chapter.title}
+              style={styles.item}>
+              {chapter.title}
             </Text>
           );
         })}
@@ -53,10 +53,10 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 12,
     paddingHorizontal: 20,
-    backgroundColor: BEIGE,
+    backgroundColor: BLUE,
   },
   item: {
-    color: BROWN,
+    color: WHITE,
     fontSize: 18,
     paddingTop: 8,
     paddingBottom: 8,
@@ -67,9 +67,6 @@ const styles = StyleSheet.create({
   },
   ltr: {
     textAlign: 'left',
-  },
-  selectedItem: {
-    color: RED,
   },
 });
 
