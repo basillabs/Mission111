@@ -100,7 +100,7 @@ class StoryCard extends Component {
 
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
-              <Icon name="chevron-right" fill={BLUE} />
+              <Icon name="chevron-right" size={30} fill={BLUE} />
             </View>
           : null}
 
@@ -117,7 +117,7 @@ class StoryCard extends Component {
       
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
-              <Icon name="chevron-right" fill={BLUE} />
+              <Icon name="chevron-right" size={30} fill={BLUE} />
             </View>
           : null}
 
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   },
   chevron: {
     position: 'absolute',
-    top: 60,
+    top: 54,
     right: 35,
   },
   rtl: {
