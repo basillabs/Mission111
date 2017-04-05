@@ -9,7 +9,7 @@ import {
   Picker,
 } from 'react-native';
 import {
-  WHITE, DARK_GRAY, BLUE,
+  WHITE, BLACK, BLUE,
 } from '../../constants/colorConstants';
 import LanguagePicker from '../LanguagePicker';
 import tracker from '../../tracker';
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17,
     lineHeight: 24,
-    color: DARK_GRAY,
+    color: BLACK,
   },
   titleCard: {
     fontSize: 24,
