@@ -114,7 +114,7 @@ class StoryCard extends Component {
           <Text style={this.getTextStyles(bottomContent)}>
             {bottomContent.text}
           </Text>
-      
+
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
               <Icon name="chevron-right" size={30} fill={BLUE} />
