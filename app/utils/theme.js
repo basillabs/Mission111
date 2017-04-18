@@ -1,17 +1,17 @@
 import {
-  DARK_BLUE,
-  DARK_BEIGE,
-  BEIGE,
-  BROWN,
-  RED,
+  BLUE,
+  WHITE,
+  GRAY,
+  DARK_GRAY,
+  BLACK,
 } from '../constants/colorConstants';
 
 export default {
-  chrome: DARK_BLUE,
-  cardBorder: DARK_BEIGE,
-  cardBackground: BEIGE,
-  menuBackground: BEIGE,
-  text: BROWN,
-  title: RED,
-  selectedText: RED,
+  chrome: BLUE,
+  cardBorder: BLACK,
+  cardBackground: WHITE,
+  menuBackground: BLUE,
+  text: BLACK,
+  title: BLUE,
+  selectedText: DARK_GRAY,
 };
