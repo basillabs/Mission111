@@ -11,6 +11,7 @@ import {
   FRICTION, TENSION
 } from '../constants/animationConstants';
 import tracker from '../tracker';
+import theme from '../utils/theme';
 
 const ANIMATION_DURATION = 300;
 const MENU_OFFSET = 150;
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
   menu: {
     flex: 1,
     width: DeviceScreen.width - MENU_OFFSET,
+    backgroundColor: theme.menuBackground,
   },
   // The 'clear' area that shows the UI underneath the
   // side menu. This is implemented as a sibling of the
