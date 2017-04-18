@@ -30,7 +30,7 @@ class SideMenu extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isOpen) {
       Animated.spring(this.state.menuLeft, {
-          toValue: 0,
+          toValue: -10,
           friction: FRICTION,
           tension: TENSION,
         }
@@ -49,7 +49,7 @@ class SideMenu extends Component {
     return (
       <Animated.View scrollsToTop={false} style={[
         styles.container, {
-          width: DeviceScreen.width,
+          width: DeviceScreen.width + 20,
           left: this.state.menuLeft,
         }
       ]} >
