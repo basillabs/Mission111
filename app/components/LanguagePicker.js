@@ -3,9 +3,7 @@ import {
   StyleSheet,
   Picker,
 } from 'react-native';
-import {
-  DARK_GRAY
-} from '../constants/colorConstants';
+import theme from '../utils/theme';
 import languageData from '../../data/languages';
 
 const supportedLanguages = languageData.supported_languages.map((langCode) => {
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
   pickerItem: {
     fontSize: 14,
     textAlign: 'left',
-    color: DARK_GRAY,
+    color: theme.lightText,
   },
 });
 
