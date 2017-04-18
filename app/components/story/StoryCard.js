@@ -8,9 +8,7 @@ import {
   Animated,
   Picker,
 } from 'react-native';
-import {
-  WHITE, BLACK, BLUE,
-} from '../../constants/colorConstants';
+import theme from '../../utils/theme';
 import LanguagePicker from '../LanguagePicker';
 import tracker from '../../tracker';
 
@@ -100,7 +98,7 @@ class StoryCard extends Component {
 
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
-              <Icon name="chevron-right" size={30} fill={BLUE} />
+              <Icon name="chevron-right" size={30} fill={theme.accent} />
             </View>
           : null}
 
@@ -117,7 +115,7 @@ class StoryCard extends Component {
 
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
-              <Icon name="chevron-right" size={30} fill={BLUE} />
+              <Icon name="chevron-right" size={30} fill={theme.accent} />
             </View>
           : null}
 
@@ -189,7 +187,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 5,
     padding: 15,
-    backgroundColor: WHITE,
+    backgroundColor: theme.cardBackground,
     margin: 9,
     overflow: "hidden",
     justifyContent: 'space-between',
@@ -204,12 +202,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17,
     lineHeight: 24,
-    color: BLACK,
+    color: theme.text,
   },
   titleCard: {
     fontSize: 24,
     lineHeight: 30,
-    color: BLUE,
+    color: theme.accent,
     fontWeight: "500",
     paddingTop: 35,
     width: TITLE_WIDTH,

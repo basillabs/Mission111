@@ -6,14 +6,12 @@ import {
   View,
   Animated,
 } from 'react-native';
+import theme from '../utils/theme';
 import ViewPager from 'react-native-viewpager';
 import ViewPageIndicator from './ViewPageIndicator';
 import Stories from '../../stories';
 import StoryCard from './story/StoryCard';
 import SideMenuContainer from '../containers/SideMenuContainer';
-import {
-  DARK_GRAY, GRAY, BLUE,
-} from '../constants/colorConstants';
 import { TOOLBAR_HEIGHT, MID_HEIGHT } from './story/StoryCard';
 import {
   FRICTION, TENSION
@@ -185,13 +183,13 @@ class Story extends Component {
           <TouchableHighlight onPress={this.props.showMenu}
                               style={[styles.hamburger, this.getIconStyles()]}>
             <View>
-              <Icon name="hamburger" fill={DARK_GRAY} />
+              <Icon name="hamburger" fill={theme.lightText} />
             </View>
           </TouchableHighlight>
           <TouchableHighlight onPress={this.onClickToggle}
                               style={[styles.toggle, this.getIconStyles()]}>
             <View>
-              <Icon name="split-view" fill={BLUE} />
+              <Icon name="split-view" fill={theme.accent} />
             </View>
           </TouchableHighlight>
         </Animated.View>
@@ -225,7 +223,7 @@ Story.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: GRAY,
+    backgroundColor: theme.chrome,
   },
   icon: {
     position: 'absolute',

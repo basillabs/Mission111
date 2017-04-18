@@ -10,8 +10,8 @@ var {
   View,
   Animated,
 } = ReactNative;
+import theme from '../utils/theme';
 
-import { DARK_GRAY, BLUE } from '../constants/colorConstants';
 
 var deviceWidth = Dimensions.get('window').width;
 var deviceHeight = Dimensions.get('window').height;
@@ -43,7 +43,7 @@ var styles = StyleSheet.create({
     width: DOT_SIZE,
     height: DOT_SIZE,
     borderRadius: DOT_SIZE / 2,
-    backgroundColor: DARK_GRAY,
+    backgroundColor: theme.lightText,
     marginLeft: DOT_SPACE,
     marginRight: DOT_SPACE,
     opacity: 0.3,
@@ -54,7 +54,7 @@ var styles = StyleSheet.create({
     width: DOT_SIZE,
     height: DOT_SIZE,
     borderRadius: DOT_SIZE / 2,
-    backgroundColor: BLUE,
+    backgroundColor: theme.accent,
     margin: DOT_SPACE,
     bottom: 0,
   },

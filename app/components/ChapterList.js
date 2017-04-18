@@ -4,9 +4,7 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import {
-  BLUE, WHITE,
-} from '../constants/colorConstants.js'
+import theme from '../utils/theme';
 
 class ChapterList extends Component {
   render() {
@@ -53,10 +51,10 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 12,
     paddingHorizontal: 20,
-    backgroundColor: BLUE,
+    backgroundColor: theme.menuBackground,
   },
   item: {
-    color: WHITE,
+    color: theme.menuText,
     fontSize: 18,
     paddingTop: 8,
     paddingBottom: 8,
