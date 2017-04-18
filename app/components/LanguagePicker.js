@@ -3,11 +3,8 @@ import {
   StyleSheet,
   Picker,
 } from 'react-native';
-import {
-  EN_LABEL, SV_LABEL, AR_LABEL,
-  EN_CODE, SV_CODE, AR_CODE,
-} from '../constants/languageConstants';
 import theme from '../utils/theme';
+import languageData from '../../data/languages';
 
 const supportedLanguages = languageData.supported_languages.map((langCode) => {
   return languageData.languages[langCode];
@@ -54,7 +51,7 @@ const styles = StyleSheet.create({
   pickerItem: {
     fontSize: 14,
     textAlign: 'left',
-    color: theme.text,
+    color: theme.lightText,
   },
 });
 

@@ -10,7 +10,7 @@ var {
   View,
   Animated,
 } = ReactNative;
-
+import theme from '../utils/theme';
 
 
 var deviceWidth = Dimensions.get('window').width;
@@ -43,7 +43,7 @@ var styles = StyleSheet.create({
     width: DOT_SIZE,
     height: DOT_SIZE,
     borderRadius: DOT_SIZE / 2,
-
+    backgroundColor: theme.lightText,
     marginLeft: DOT_SPACE,
     marginRight: DOT_SPACE,
     opacity: 0.3,
@@ -54,7 +54,7 @@ var styles = StyleSheet.create({
     width: DOT_SIZE,
     height: DOT_SIZE,
     borderRadius: DOT_SIZE / 2,
-    backgroundColor: theme.cardBackground,
+    backgroundColor: theme.accent,
     margin: DOT_SPACE,
     bottom: 0,
   },

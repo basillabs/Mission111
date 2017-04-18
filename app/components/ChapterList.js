@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.menuBackground,
   },
   item: {
-    color: theme.text,
+    color: theme.menuText,
     fontSize: 18,
     paddingTop: 8,
     paddingBottom: 8,

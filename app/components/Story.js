@@ -182,12 +182,12 @@ class Story extends Component {
           />
           <TouchableHighlight onPress={this.props.showMenu}>
             <View style={[styles.hamburger, this.getIconStyles()]}>
-              <Icon name="hamburger" fill={theme.cardBackground} />
+              <Icon name="hamburger" fill={theme.lightText} />
             </View>
           </TouchableHighlight>
           <TouchableHighlight onPress={this.onClickToggle}>
             <View style={[styles.toggle, this.getIconStyles()]}>
-              <Icon name="split-view" fill={theme.cardBackground} />
+              <Icon name="split-view" fill={theme.accent} />
             </View>
           </TouchableHighlight>
         </Animated.View>

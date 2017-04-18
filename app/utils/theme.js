@@ -7,11 +7,12 @@ import {
 } from '../constants/colorConstants';
 
 export default {
-  chrome: BLUE,
+  chrome: GRAY,
   cardBorder: BLACK,
   cardBackground: WHITE,
   menuBackground: BLUE,
+  menuText: WHITE,
   text: BLACK,
-  title: BLUE,
-  selectedText: DARK_GRAY,
+  accent: BLUE,
+  lightText: DARK_GRAY,
 };
