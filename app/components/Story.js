@@ -172,7 +172,7 @@ class Story extends Component {
     return (
       <View style={styles.container}>
         <SideMenuContainer />
-        <Animated.View style={{opacity: this.state.fadeAnim}}>
+        <Animated.View style={{opacity: this.state.fadeAnim, flexGrow: 1}}>
           <ViewPager
             renderPageIndicator={() => <ViewPageIndicator isSplit={this.state.isSplit} /> }
             ref={(viewpager) => { this.viewpager = viewpager; }}
@@ -180,13 +180,15 @@ class Story extends Component {
             onChangePage={this.onChangePage}
             renderPage={this.renderPage}
           />
-          <TouchableHighlight onPress={this.props.showMenu}>
-            <View style={[styles.hamburger, this.getIconStyles()]}>
+          <TouchableHighlight onPress={this.props.showMenu}
+                              style={[styles.hamburger, this.getIconStyles()]}>
+            <View>
               <Icon name="hamburger" fill={theme.lightText} />
             </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={this.onClickToggle}>
-            <View style={[styles.toggle, this.getIconStyles()]}>
+          <TouchableHighlight onPress={this.onClickToggle}
+                              style={[styles.toggle, this.getIconStyles()]}>
+            <View>
               <Icon name="split-view" fill={theme.accent} />
             </View>
           </TouchableHighlight>
