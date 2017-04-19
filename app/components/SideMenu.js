@@ -30,7 +30,7 @@ class SideMenu extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isOpen) {
       Animated.spring(this.state.menuLeft, {
-          toValue: 0,
+          toValue: -10,
           friction: FRICTION,
           tension: TENSION,
         }
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   menu: {
     flex: 1,
-    width: DeviceScreen.width - MENU_OFFSET,
+    width: DeviceScreen.width - MENU_OFFSET + 20,
   },
   // The 'clear' area that shows the UI underneath the
   // side menu. This is implemented as a sibling of the
