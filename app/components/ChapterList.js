@@ -3,6 +3,8 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  View,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import theme from '../utils/theme';
 
@@ -14,12 +16,18 @@ class ChapterList extends Component {
         automaticallyAdjustContentInsets={false}>
         {this.props.chapters.map((chapter, i) => {
           return (
-            <Text
+            <TouchableWithoutFeedback
               key={`chapter-${i}`}
-              onPress={this.props.onChapterTap.bind(null, i + 1)}
-              style={styles.item}>
-              {chapter.title}
-            </Text>
+              onPress={this.props.onChapterTap.bind(null, i + 1)}>
+              <View style={styles.row}>
+                <Text style={styles.item}>
+                  {chapter.story + ". "}
+                </Text>
+                <Text style={[styles.item, styles.title]}>
+                  {chapter.title}
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
           );
         })}
       </ScrollView>
@@ -53,12 +61,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: theme.menuBackground,
   },
+  row: {
+    flexDirection: 'row',
+  },
   item: {
     color: theme.menuText,
     fontSize: 18,
     paddingTop: 8,
     paddingBottom: 8,
     fontWeight: "500",
+  },
+  title: {
+    flex: 1,
   },
   rtl: {
     textAlign: 'right',
