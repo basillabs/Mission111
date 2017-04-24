@@ -13,7 +13,7 @@ import {
 import tracker from '../tracker';
 
 const ANIMATION_DURATION = 300;
-const MENU_OFFSET = 150;
+const MENU_OFFSET = 130;
 const DeviceScreen = Dimensions.get('window');
 
 class SideMenu extends Component {
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   menu: {
     flex: 1,
-    width: DeviceScreen.width - MENU_OFFSET + 20,
+    width: DeviceScreen.width - MENU_OFFSET,
   },
   // The 'clear' area that shows the UI underneath the
   // side menu. This is implemented as a sibling of the
