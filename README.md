@@ -4,9 +4,17 @@
 
 1. Install [node.js](https://nodejs.org)
 2. Install Xcode and run it once to install command line tools
+3. Install React Native's CLI (`npm install -g react-native-cli`)
+4. Install project dependencies
 
 ```bash
 npm install
+```
+
+Or (optional) install and use [yarn](https://yarnpkg.com) for faster package management
+
+```bash
+yarn install
 ```
 
 ## Running
