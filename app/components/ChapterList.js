@@ -13,6 +13,7 @@ class ChapterList extends Component {
     return (
       <ScrollView
         style={styles.container}
+        contentContainerStyle={styles.containerContent}
         automaticallyAdjustContentInsets={false}>
         {this.props.chapters.map((chapter, i) => {
           return (
@@ -59,6 +60,9 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 20,
     backgroundColor: theme.menuBackground,
+  },
+  containerContent: {
+    paddingBottom: 20,
   },
   ltrRow: {
     flexDirection: 'row',
