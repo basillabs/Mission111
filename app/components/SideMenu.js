@@ -11,6 +11,7 @@ import {
   FRICTION, TENSION
 } from '../constants/animationConstants';
 import tracker from '../tracker';
+import theme from '../utils/theme';
 
 const ANIMATION_DURATION = 300;
 const MENU_OFFSET = 130;
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
     zIndex: 1000000,
   },
   menu: {
+    backgroundColor: theme.menuBackground,
     flex: 1,
     width: DeviceScreen.width - MENU_OFFSET,
   },
