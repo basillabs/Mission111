@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Icon from './Icon';
 import {
   StyleSheet,
-  TouchableHighlight,
+  TouchableWithoutFeedback,
   View,
   Animated,
 } from 'react-native';
@@ -149,6 +149,13 @@ class Story extends Component {
     });
   }
 
+  onChangePage(pageNumber) {
+    tracker.trackEvent('View', 'Page', {
+      label: this.props.chapterId.toString(),
+      value: pageNumber + 1,
+    });
+  }
+
   renderPage(data) {
     return <StoryCard
               topContent={data.topContent}
@@ -161,11 +168,28 @@ class Story extends Component {
             />;
   }
 
-  onChangePage(pageNumber) {
-    tracker.trackEvent('View', 'Page', {
-      label: this.props.chapterId.toString(),
-      value: pageNumber + 1,
-    });
+  renderMenuIcon() {
+    return (
+      <View style={[styles.hamburger, this.getIconStyles()]}>
+        <TouchableWithoutFeedback onPress={this.props.showMenu}>
+          <View>
+            <Icon name="hamburger" fill={theme.lightText} />
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
+    );
+  }
+
+  renderViewToggleIcon() {
+    return (
+      <View style={[styles.toggle, this.getIconStyles()]}>
+        <TouchableWithoutFeedback onPress={this.onClickToggle}>
+          <View>
+            <Icon name="split-view" fill={theme.accent} />
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
+    );
   }
 
   render() {
@@ -180,18 +204,8 @@ class Story extends Component {
             onChangePage={this.onChangePage}
             renderPage={this.renderPage}
           />
-          <TouchableHighlight onPress={this.props.showMenu}
-                              style={[styles.hamburger, this.getIconStyles()]}>
-            <View>
-              <Icon name="hamburger" fill={theme.lightText} />
-            </View>
-          </TouchableHighlight>
-          <TouchableHighlight onPress={this.onClickToggle}
-                              style={[styles.toggle, this.getIconStyles()]}>
-            <View>
-              <Icon name="split-view" fill={theme.accent} />
-            </View>
-          </TouchableHighlight>
+          {this.renderMenuIcon()}
+          {this.renderViewToggleIcon()}
         </Animated.View>
       </View>
     );
