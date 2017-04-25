@@ -13,7 +13,7 @@ import {
 import tracker from '../tracker';
 
 const ANIMATION_DURATION = 300;
-const MENU_OFFSET = 150;
+const MENU_OFFSET = 130;
 const DeviceScreen = Dimensions.get('window');
 
 class SideMenu extends Component {
@@ -30,7 +30,7 @@ class SideMenu extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isOpen) {
       Animated.spring(this.state.menuLeft, {
-          toValue: 0,
+          toValue: -10,
           friction: FRICTION,
           tension: TENSION,
         }

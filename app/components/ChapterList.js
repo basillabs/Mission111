@@ -10,7 +10,7 @@ class ChapterList extends Component {
   render() {
     return (
       <ScrollView
-        contentContainerStyle={styles.container}
+        style={styles.container}
         automaticallyAdjustContentInsets={false}>
         {this.props.chapters.map((chapter, i) => {
           return (
@@ -50,7 +50,8 @@ ChapterList.propTypes = {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingLeft: 30,
+    paddingRight: 20,
     backgroundColor: theme.menuBackground,
   },
   item: {
