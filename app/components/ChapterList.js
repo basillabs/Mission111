@@ -20,8 +20,8 @@ class ChapterList extends Component {
               key={`chapter-${i}`}
               onPress={this.props.onChapterTap.bind(null, i + 1)}>
               <View style={styles.row}>
-                <Text style={styles.item}>
-                  {chapter.story + ". "}
+                <Text style={[styles.item, styles.index]}>
+                  {`${chapter.story}. `}
                 </Text>
                 <Text style={[styles.item, styles.title]}>
                   {chapter.title}
@@ -58,7 +58,8 @@ ChapterList.propTypes = {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingLeft: 30,
+    paddingRight: 20,
     backgroundColor: theme.menuBackground,
   },
   row: {
@@ -70,6 +71,10 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     paddingBottom: 8,
     fontWeight: "500",
+  },
+  index: {
+    textAlign: 'left',
+    width: 35,
   },
   title: {
     flex: 1,
