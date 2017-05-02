@@ -172,7 +172,7 @@ class Story extends Component {
     return (
       <View style={[styles.hamburger, this.getIconStyles()]}>
         <TouchableWithoutFeedback onPress={this.props.showMenu}>
-          <View>
+          <View style={styles.icon}>
             <Icon name="hamburger" fill={theme.lightText} />
           </View>
         </TouchableWithoutFeedback>
@@ -184,7 +184,7 @@ class Story extends Component {
     return (
       <View style={[styles.toggle, this.getIconStyles()]}>
         <TouchableWithoutFeedback onPress={this.onClickToggle}>
-          <View>
+          <View style={styles.icon}>
             <Icon name="split-view" fill={theme.accent} />
           </View>
         </TouchableWithoutFeedback>
@@ -212,17 +212,12 @@ class Story extends Component {
   }
 
   getIconStyles() {
-    if (this.state.isSplit) {
-      return [
-        {top: MID_ICON_HEIGHT},
-        styles.icon,
-      ];
-    } else {
-      return [
-        {top: 0},
-        styles.icon,
-      ];
-    }
+    const top = this.state.isSplit ? MID_ICON_HEIGHT : -4;
+
+    return [
+      { top },
+      styles.iconContainer,
+    ];
   }
 }
 
@@ -239,8 +234,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.chrome,
   },
-  icon: {
+  iconContainer: {
     position: 'absolute',
+  },
+  icon: {
     padding: 16,
   },
   hamburger: {
