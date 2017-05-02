@@ -19,11 +19,11 @@ class ChapterList extends Component {
             <TouchableWithoutFeedback
               key={`chapter-${i}`}
               onPress={this.props.onChapterTap.bind(null, i + 1)}>
-              <View style={styles.row}>
-                <Text style={[styles.item, styles.index]}>
-                  {`${chapter.story}. `}
+              <View style={this.getRowStyle()}>
+                <Text style={[styles.index, this.getItemStyle()]}>
+                  {chapter.story}
                 </Text>
-                <Text style={[styles.item, styles.title]}>
+                <Text style={[styles.title, this.getItemStyle()]}>
                   {chapter.title}
                 </Text>
               </View>
@@ -34,16 +34,14 @@ class ChapterList extends Component {
     );
   }
 
-  getItemStyle(index) {
-    const {
-      selectedChapterId,
-      language,
-    } = this.props;
+  getRowStyle() {
+    return this.props.language.align === 'left' ? styles.ltrRow : styles.rtlRow; 
+  }
 
+  getItemStyle() {
     return [
       styles.item,
-      index + 1 === selectedChapterId ? styles.selectedItem : null,
-      language.align === 'left' ? styles.ltr : styles.rtl,
+      this.props.language.align === 'left' ? styles.ltr : styles.rtl,
     ];
   }
 }
@@ -62,8 +60,14 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     backgroundColor: theme.menuBackground,
   },
-  row: {
+  ltrRow: {
     flexDirection: 'row',
+  },
+  rtlRow: {
+    flexDirection: 'row-reverse',
+  },
+  index: {
+    width: 35,
   },
   item: {
     color: theme.menuText,
@@ -71,10 +75,6 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     paddingBottom: 8,
     fontWeight: "500",
-  },
-  index: {
-    textAlign: 'left',
-    width: 35,
   },
   title: {
     flex: 1,
