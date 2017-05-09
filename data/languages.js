@@ -2,7 +2,9 @@ export default {
   "supported_languages": [
     "EN",
     "SV",
-    "AR"
+    "AR",
+    "RO",
+    "TR",
   ],
   "languages": {
     "EN": {
@@ -12,6 +14,8 @@ export default {
       "display_names": {
         "EN": "English",
         "SV": "Engelska",
+        "RO": "Engleză",
+        "TR": "Ingilizce",
         "FA": "انگلیسی",
         "AR": "الإنجليزية"
       }
@@ -23,6 +27,8 @@ export default {
       "display_names": {
         "EN": "Swedish",
         "SV": "Svenska",
+        "RO": "Suedez",
+        "TR": "İsveççe",
         "FA": "سوئد",
         "AR": "اللغة السويدية"
       }
@@ -34,6 +40,8 @@ export default {
       "display_names": {
         "EN": "Farsi",
         "SV": "Persiska",
+        "RO": "Farsi",
+        "TR": "Farsi",
         "FA": "فارسی",
         "AR": "الفارسية"
       }
@@ -45,8 +53,36 @@ export default {
       "display_names": {
         "EN": "Arabic",
         "SV": "Arabiska",
+        "RO": "Arabic",
+        "TR": "Arapça",
         "FA": "عربی",
         "AR": "العربية"
+      }
+    },
+    "RO": {
+      "name": "Romanian",
+      "code": "RO",
+      "align": "left",
+      "display_names": {
+        "EN": "Romanian",
+        "SV": "Rumänska",
+        "RO": "Română",
+        "TR": "Romen",
+        "FA": "رومانیایی",
+        "AR": "روماني"
+      }
+    },
+    "TR": {
+      "name": "Turkish",
+      "code": "TR",
+      "align": "left",
+      "display_names": {
+        "EN": "Turkish",
+        "SV": "Turkiska",
+        "RO": "Turc",
+        "TR": "Türk",
+        "FA": "ترکی",
+        "AR": "اللغة التركية"
       }
     }
   }
