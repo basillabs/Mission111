@@ -1,4 +1,4 @@
-package com.mission111;
+package org.basiltech.storyshare;
 
 import com.facebook.react.ReactActivity;
 

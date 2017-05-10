@@ -1,0 +1,2 @@
+json_key_file "fastlane/key.json" # This file is not committed to the repo. Ask Sang for it.
+package_name "org.basiltech.storyshare"
