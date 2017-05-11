@@ -11,6 +11,7 @@ import ViewPager from 'react-native-viewpager';
 import ViewPageIndicator from './ViewPageIndicator';
 import Stories from '../../stories';
 import StoryCard from './story/StoryCard';
+import Slider from './story/Slider';
 import SideMenuContainer from '../containers/SideMenuContainer';
 import { TOOLBAR_HEIGHT, MID_HEIGHT } from './story/StoryCard';
 import {
@@ -37,11 +38,21 @@ class Story extends Component {
   }
 
   initializeDataSource(chapterId, topLanguage, bottomLanguage) {
-    const dataSource = new ViewPager.DataSource({
-      pageHasChanged: (r1, r2) => r1.text !== r2.text,
+    const chapterData = this.getChapterData(chapterId, topLanguage, bottomLanguage);
+
+    const topData = [];
+    const bottomData = [];
+
+    chapterData.forEach((data) => {
+      topData.push(data.topContent);
+      bottomData.push(data.bottomContent);
+
     });
 
-    return dataSource.cloneWithPages(this.getChapterData(chapterId, topLanguage, bottomLanguage));
+    return {
+      topData,
+      bottomData,
+    };
   }
 
   getChapterData(chapterId = this.props.chapterId,
@@ -54,10 +65,12 @@ class Story extends Component {
       topContent: {
         text: topChapter.title,
         align: topLanguage.align,
+        isTitleCard: true,
       },
       bottomContent: {
         text: bottomChapter.title,
         align: bottomLanguage.align,
+        isTitleCard: true,
       },
       isTitleCard: true,
       allowLanguageSelection: true,
@@ -108,8 +121,6 @@ class Story extends Component {
       // been refreshed.
       this.setState({
         data: this.initializeDataSource(nextProps.chapterId),
-      }, () => {
-        this.viewpager.goToPage(0, false);
       });
     }
 
@@ -197,12 +208,9 @@ class Story extends Component {
       <View style={styles.container}>
         <SideMenuContainer />
         <Animated.View style={{opacity: this.state.fadeAnim, flexGrow: 1}}>
-          <ViewPager
-            renderPageIndicator={() => <ViewPageIndicator isSplit={this.state.isSplit} /> }
-            ref={(viewpager) => { this.viewpager = viewpager; }}
-            dataSource={this.state.data}
-            onChangePage={this.onChangePage}
-            renderPage={this.renderPage}
+          <Slider
+            topData={this.state.data.topData}
+            bottomData={this.state.data.bottomData}
           />
           {this.renderMenuIcon()}
           {this.renderViewToggleIcon()}
