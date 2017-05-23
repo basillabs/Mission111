@@ -29,6 +29,9 @@ project.xcworkspace
 .gradle
 local.properties
 
+# Android build
+/android/fastlane/key.json
+
 # node.js
 #
 node_modules/

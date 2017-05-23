@@ -1,4 +1,4 @@
-package com.mission111;
+package org.basiltech.storyshare;
 
 import android.app.Application;
 import android.util.Log;

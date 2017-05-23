@@ -87,13 +87,23 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.mission111"
+        applicationId "org.basiltech.storyshare"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
+        }
+    }
+    signingConfigs {
+        release {
+            if (project.hasProperty('BASIL_MISSION111_RELEASE_STORE_FILE')) {
+                storeFile file(BASIL_MISSION111_RELEASE_STORE_FILE)
+                storePassword BASIL_MISSION111_RELEASE_STORE_PASSWORD
+                keyAlias BASIL_MISSION111_RELEASE_KEY_ALIAS
+                keyPassword BASIL_MISSION111_RELEASE_KEY_PASSWORD
+            }
         }
     }
     splits {
@@ -108,6 +118,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
