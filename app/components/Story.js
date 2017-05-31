@@ -165,29 +165,25 @@ class Story extends Component {
   }
 
   renderPage(data, index) {
-    return <StoryCard
-              topContent={data.topContent}
-              bottomContent={data.bottomContent}
-              isSplit={this.state.isSplit}
-              onToggleTap={this.onClickToggle}
-              isTitleCard={data.isTitleCard}
-              playAudioTrack={this.props.playAudioTrack}pauseAudioTrack={this.props.playAudioTrack}allowLanguageSelection={data.allowLanguageSelection}
-              {...this.props}
-            />;
+    return (
+      <StoryCard
+        topContent={data.topContent}
+        bottomContent={data.bottomContent}
+        isSplit={this.state.isSplit}
+        onToggleTap={this.onClickToggle}
+        isTitleCard={data.isTitleCard}
+        allowLanguageSelection={data.allowLanguageSelection}
+        {...this.props}
+      />
+    );
   }
 
   renderMenuIcon() {
     return (
       <View style={[styles.hamburger, this.getIconStyles()]}>
-        topText={data.topText}
-        bottomText={data.bottomText}
-        topTrackId={data.topTrackId}
         <TouchableWithoutFeedback onPress={this.props.showMenu}>
-        bottomTrackId={data.bottomTrackId}
           <View style={styles.icon}>
             <Icon name="hamburger" fill={theme.lightText} />
-        onToggleTap={this.onClickToggle}
-        playAudioTrack={this.props.playAudioTrack}
           </View>
         </TouchableWithoutFeedback>
       </View>
