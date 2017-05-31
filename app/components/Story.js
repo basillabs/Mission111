@@ -71,13 +71,15 @@ class Story extends Component {
           text: topChapter.sections[index],
           align: topLanguage.align,
           trackId: `${chapterId}-${index}-top`,
-          trackUrl: 'https://ia600706.us.archive.org/4/items/Sample_Audio_Clips_mp3/KuumbaPodcast1.mp3',
+          trackUrl: topLanguage.audio && topLanguage.audio[index]
+            ? topLanguage.audio[index] : null,
         },
         bottomContent: {
           text: bottomChapter.sections[index],
           align: bottomLanguage.align,
           trackId: `${chapterId}-${index}-bottom`,
-          trackUrl: 'https://ia600706.us.archive.org/4/items/Sample_Audio_Clips_mp3/KuumbaPodcast1.mp3',
+          trackUrl: bottomLanguage.audio && bottomLanguage.audio[index]
+            ? bottomLanguage.audio[index] : null,
         },
         index,
       }),
