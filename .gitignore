@@ -31,6 +31,8 @@ local.properties
 
 # Android build
 /android/fastlane/key.json
+/android/fastlane/README.md
+/android/fastlane/report.xml
 
 # node.js
 #
