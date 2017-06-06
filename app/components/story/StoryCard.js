@@ -120,9 +120,10 @@ class StoryCard extends Component {
           : null}
 
           <AudioButton
-            isMenuVisible={this.state.isTopAudioVisible}
+            highlighted={this.state.isTopAudioVisible}
             onToggle={this.onToggleTopAudio}
             trackId={topContent.trackId}
+            disabled={!topContent.trackUrl}
           />
           <AudioMenu
             isVisible={this.state.isTopAudioVisible}
@@ -151,9 +152,10 @@ class StoryCard extends Component {
           : null}
 
           <AudioButton
-            isMenuVisible={this.state.isBottomAudioVisible}
+            highlighted={this.state.isBottomAudioVisible}
             onToggle={this.onToggleBottomAudio}
             trackId={bottomContent.trackId}
+            disabled={!bottomContent.trackUrl}
           />
           <AudioMenu
             isVisible={this.state.isBottomAudioVisible}

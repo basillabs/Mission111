@@ -11,6 +11,9 @@ import Svg,{
   Path,
 } from 'react-native-svg';
 
+import {
+  S3_URL,
+} from '../../constants/audioConstants';
 
 import AudioStreamer from 'react-native-audio-streamer';
 
@@ -40,7 +43,7 @@ class AudioMenu extends Component {
           toValue: props.isVisible ? VISIBLE_Y : HIDDEN_Y,
           duration: 230,
         }
-      ).start();  
+      ).start();
     }
   }
 
@@ -49,7 +52,7 @@ class AudioMenu extends Component {
       AudioStreamer.pause();
       this.props.pauseAudioTrack();
     } else {
-      AudioStreamer.setUrl(this.props.trackUrl);
+      AudioStreamer.setUrl(`${S3_URL}${this.props.trackUrl}`);
       AudioStreamer.play();
       this.props.playAudioTrack(this.props.trackId);
     }
@@ -70,14 +73,14 @@ class AudioMenu extends Component {
     if (!this.props.trackId) {
       return null;
     }
-    
+
     return (
       <Animated.View style={[styles.container, { bottom: this.state.y }]}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={[styles.firstButton, styles.button]}
             onPress={this.onRewind}
-          > 
+          >
             <Svg
               width={20}
               height={20}
@@ -118,7 +121,7 @@ const styles = StyleSheet.create({
     elevation: 10,
     shadowColor: 'black',
     shadowRadius: 1,
-    shadowOpacity: .05, 
+    shadowOpacity: .05,
     shadowOffset: {height: 2},
     padding: 5,
     borderRadius: 25,
