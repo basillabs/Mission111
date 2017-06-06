@@ -45,10 +45,6 @@ class AudioButton extends Component {
   }
 
   render() {
-    if (!this.props.trackId) {
-      return null;
-    }
-
     if (this.props.disabled) {
       return (
         <View style={styles.player}>
@@ -78,10 +74,13 @@ const styles = StyleSheet.create({
 });
 
 AudioButton.propTypes = {
-  currentAudioTrack: React.PropTypes.string,
-  playAudioTrack: React.PropTypes.func,
+  onToggle: React.PropTypes.func.isRequired,
   disabled: React.PropTypes.bool,
   highlighted: React.PropTypes.bool,
-}
+};
+AudioButton.defaultProps = {
+  disabled: false,
+  highlighted: false,
+};
 
 export default AudioButton;

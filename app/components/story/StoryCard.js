@@ -122,7 +122,6 @@ class StoryCard extends Component {
           <AudioButton
             highlighted={this.state.isTopAudioVisible}
             onToggle={this.onToggleTopAudio}
-            trackId={topContent.trackId}
             disabled={!topContent.trackUrl}
           />
           <AudioMenu
@@ -154,7 +153,6 @@ class StoryCard extends Component {
           <AudioButton
             highlighted={this.state.isBottomAudioVisible}
             onToggle={this.onToggleBottomAudio}
-            trackId={bottomContent.trackId}
             disabled={!bottomContent.trackUrl}
           />
           <AudioMenu
