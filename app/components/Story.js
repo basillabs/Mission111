@@ -71,15 +71,15 @@ class Story extends Component {
           text: topChapter.sections[index],
           align: topLanguage.align,
           trackId: `${chapterId}-${index}-top`,
-          trackUrl: topLanguage.audio && topLanguage.audio[index]
-            ? topLanguage.audio[index] : null,
+          trackUrl: topChapter.audio && topChapter.audio[index]
+            ? topChapter.audio[index] : null,
         },
         bottomContent: {
           text: bottomChapter.sections[index],
           align: bottomLanguage.align,
           trackId: `${chapterId}-${index}-bottom`,
-          trackUrl: bottomLanguage.audio && bottomLanguage.audio[index]
-            ? bottomLanguage.audio[index] : null,
+          trackUrl: bottomChapter.audio && bottomChapter.audio[index]
+            ? bottomChapter.audio[index] : null,
         },
         index,
       }),
