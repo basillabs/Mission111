@@ -1,7 +1,7 @@
 import {
   PLAY_AUDIO_TRACK,
   PAUSE_AUDIO_TRACK,
-} from '../actions/audioActions';
+} from '../constants/audioConstants';
 
 const defaultState = {
   currentAudioTrack: null,
