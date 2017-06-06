@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Text,
   StyleSheet,
@@ -16,7 +16,6 @@ import {
 } from '../../constants/audioConstants';
 
 import AudioStreamer from 'react-native-audio-streamer';
-
 import { GOLD } from '../../constants/colorConstants';
 
 const HIDDEN_Y = -40;
@@ -105,9 +104,14 @@ class AudioMenu extends Component {
       </Animated.View>
     );
   }
-
 }
-
+AudioMenu.propTypes = {
+  isVisible: PropTypes.bool,
+  isPlaying: PropTypes.bool,
+  trackId: PropTypes.string,
+  pauseAudioTrack: PropTypes.func.isRequired,
+  playAudioTrack: PropTypes.func.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
