@@ -119,11 +119,13 @@ class StoryCard extends Component {
               onValueChange={this.setTopLanguage} />
           : null}
 
-          <AudioButton
-            highlighted={this.state.isTopAudioVisible}
-            onToggle={this.onToggleTopAudio}
-            disabled={!topContent.trackUrl}
-          />
+          {topContent.trackId && (
+            <AudioButton
+              highlighted={this.state.isTopAudioVisible}
+              onToggle={this.onToggleTopAudio}
+              disabled={!topContent.trackUrl}
+            />
+          )}
           <AudioMenu
             isVisible={this.state.isTopAudioVisible}
             playAudioTrack={this.props.playAudioTrack}
@@ -150,11 +152,13 @@ class StoryCard extends Component {
             />
           : null}
 
-          <AudioButton
-            highlighted={this.state.isBottomAudioVisible}
-            onToggle={this.onToggleBottomAudio}
-            disabled={!bottomContent.trackUrl}
-          />
+          {topContent.trackId && (
+            <AudioButton
+              highlighted={this.state.isBottomAudioVisible}
+              onToggle={this.onToggleBottomAudio}
+              disabled={!bottomContent.trackUrl}
+            />
+          )}
           <AudioMenu
             isVisible={this.state.isBottomAudioVisible}
             playAudioTrack={this.props.playAudioTrack}
