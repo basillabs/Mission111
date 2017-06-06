@@ -5,6 +5,7 @@ export default {
     "AR",
     "RO",
     "TR",
+    "FA",
   ],
   "languages": {
     "EN": {
