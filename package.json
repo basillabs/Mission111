@@ -10,6 +10,7 @@
     "moment": "^2.17.1",
     "react": "15.3.2",
     "react-native": "^0.36.0",
+    "react-native-audio-streamer": "0.0.7",
     "react-native-browser-polyfill": "^0.1.1",
     "react-native-google-analytics-bridge": "4.0.3",
     "react-native-page-swiper": "^0.3.0",
