@@ -166,7 +166,7 @@ class Story extends Component {
     this.props.pauseAudioTrack();
   }
 
-  renderPage(data, index) {
+  renderPage(data) {
     return (
       <StoryCard
         topContent={data.topContent}
