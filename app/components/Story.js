@@ -13,6 +13,7 @@ import Stories from '../../stories';
 import StoryCard from './story/StoryCard';
 import SideMenuContainer from '../containers/SideMenuContainer';
 import { TOOLBAR_HEIGHT, MID_HEIGHT } from './story/StoryCard';
+import AudioStreamer from 'react-native-audio-streamer';
 import {
   FRICTION, TENSION
 } from '../constants/animationConstants';
@@ -69,10 +70,16 @@ class Story extends Component {
         topContent: {
           text: topChapter.sections[index],
           align: topLanguage.align,
+          trackId: `${chapterId}-${index}-top`,
+          trackUrl: topChapter.audio && topChapter.audio[index]
+            ? topChapter.audio[index] : null,
         },
         bottomContent: {
           text: bottomChapter.sections[index],
           align: bottomLanguage.align,
+          trackId: `${chapterId}-${index}-bottom`,
+          trackUrl: bottomChapter.audio && bottomChapter.audio[index]
+            ? bottomChapter.audio[index] : null,
         },
         index,
       }),
@@ -154,18 +161,23 @@ class Story extends Component {
       label: this.props.chapterId.toString(),
       value: pageNumber + 1,
     });
+
+    AudioStreamer.pause();
+    this.props.pauseAudioTrack();
   }
 
   renderPage(data) {
-    return <StoryCard
-              topContent={data.topContent}
-              bottomContent={data.bottomContent}
-              isSplit={this.state.isSplit}
-              onToggleTap={this.onClickToggle}
-              isTitleCard={data.isTitleCard}
-              allowLanguageSelection={data.allowLanguageSelection}
-              {...this.props}
-            />;
+    return (
+      <StoryCard
+        topContent={data.topContent}
+        bottomContent={data.bottomContent}
+        isSplit={this.state.isSplit}
+        onToggleTap={this.onClickToggle}
+        isTitleCard={data.isTitleCard}
+        allowLanguageSelection={data.allowLanguageSelection}
+        {...this.props}
+      />
+    );
   }
 
   renderMenuIcon() {
@@ -227,6 +239,9 @@ Story.propTypes = {
   showMenu: React.PropTypes.func.isRequired,
   topLanguage: React.PropTypes.object.isRequired,
   bottomLanguage: React.PropTypes.object.isRequired,
+  playAudioTrack: React.PropTypes.func.isRequired,
+  pauseAudioTrack: React.PropTypes.func.isRequired,
+  currentAudioTrack: React.PropTypes.string,
 };
 
 const styles = StyleSheet.create({

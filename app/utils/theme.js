@@ -4,6 +4,7 @@ import {
   GRAY,
   DARK_GRAY,
   BLACK,
+  LIGHT_BLUE,
 } from '../constants/colorConstants';
 
 export default {
@@ -15,4 +16,5 @@ export default {
   text: BLACK,
   accent: BLUE,
   lightText: DARK_GRAY,
+  highlightedButton: LIGHT_BLUE,
 };

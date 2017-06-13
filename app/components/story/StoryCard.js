@@ -11,6 +11,8 @@ import {
 import theme from '../../utils/theme';
 import LanguagePicker from '../LanguagePicker';
 import tracker from '../../tracker';
+import AudioButton from './AudioButton';
+import AudioMenu from './AudioMenu';
 
 export const TOOLBAR_HEIGHT = 40;
 const WINDOW_HEIGHT = Dimensions.get('window').height;
@@ -26,10 +28,14 @@ class StoryCard extends Component {
     this.state = {
       topHeight: new Animated.Value(),
       bottomHeight: new Animated.Value(),
+      isTopAudioVisible: false,
+      isBottomAudioVisible: false,
     };
 
     this.setTopLanguage = this.setTopLanguage.bind(this);
     this.setBottomLanguage = this.setBottomLanguage.bind(this);
+    this.onToggleTopAudio = this.onToggleTopAudio.bind(this);
+    this.onToggleBottomAudio = this.onToggleBottomAudio.bind(this);
   }
 
   componentWillMount() {
@@ -61,6 +67,14 @@ class StoryCard extends Component {
       ).start();
     }
   };
+
+  onToggleTopAudio() {
+    this.setState({isTopAudioVisible: !this.state.isTopAudioVisible});
+  }
+
+  onToggleBottomAudio() {
+    this.setState({isBottomAudioVisible: !this.state.isBottomAudioVisible});
+  }
 
   setTopLanguage(language) {
     tracker.trackEvent('Tap', 'Top Language', {
@@ -95,35 +109,65 @@ class StoryCard extends Component {
           <Text style={this.getTextStyles(topContent)}>
             {topContent.text}
           </Text>
-
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
               <Icon name="chevron-right" size={30} fill={theme.accent} />
             </View>
           : null}
-
           {allowLanguageSelection ?
             <LanguagePicker selectedValue={topLanguage}
               onValueChange={this.setTopLanguage} />
           : null}
 
+          {topContent.trackId && (
+            <AudioButton
+              highlighted={this.state.isTopAudioVisible}
+              onToggle={this.onToggleTopAudio}
+              disabled={!topContent.trackUrl}
+            />
+          )}
+          <AudioMenu
+            isVisible={this.state.isTopAudioVisible}
+            playAudioTrack={this.props.playAudioTrack}
+            pauseAudioTrack={this.props.pauseAudioTrack}
+            isPlaying={this.props.currentAudioTrack === topContent.trackId}
+            currentAudioTrack={this.props.currentAudioTrack}
+            trackId={topContent.trackId}
+            trackUrl={topContent.trackUrl}
+          />
         </Animated.View>
         <Animated.View style={this.getBottomCardStyles()}>
           <Text style={this.getTextStyles(bottomContent)}>
             {bottomContent.text}
           </Text>
-
           {this.props.isTitleCard ?
             <View style={styles.chevron}>
               <Icon name="chevron-right" size={30} fill={theme.accent} />
             </View>
           : null}
-
           {allowLanguageSelection ?
-            <LanguagePicker selectedValue={bottomLanguage}
-              onValueChange={this.setBottomLanguage} />
+            <LanguagePicker
+              selectedValue={bottomLanguage}
+              onValueChange={this.setBottomLanguage}
+            />
           : null}
 
+          {topContent.trackId && (
+            <AudioButton
+              highlighted={this.state.isBottomAudioVisible}
+              onToggle={this.onToggleBottomAudio}
+              disabled={!bottomContent.trackUrl}
+            />
+          )}
+          <AudioMenu
+            isVisible={this.state.isBottomAudioVisible}
+            playAudioTrack={this.props.playAudioTrack}
+            pauseAudioTrack={this.props.pauseAudioTrack}
+            isPlaying={this.props.currentAudioTrack === bottomContent.trackId}
+            currentAudioTrack={this.props.currentAudioTrack}
+            trackId={bottomContent.trackId}
+            trackUrl={bottomContent.trackUrl}
+          />
         </Animated.View>
       </View>
     );
@@ -176,6 +220,11 @@ StoryCard.propTypes = {
   bottomContent: React.PropTypes.object.isRequired,
   onToggleTap: React.PropTypes.func.isRequired,
   allowLanguageSelection: React.PropTypes.bool,
+  currentAudioTrack: React.PropTypes.string,
+  topTrackId: React.PropTypes.string,
+  topTrackUrl: React.PropTypes.string,
+  bottomTrackId: React.PropTypes.string,
+  bottomTrackUrl: React.PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -191,6 +240,7 @@ const styles = StyleSheet.create({
     margin: 9,
     overflow: "hidden",
     justifyContent: 'space-between',
+    position: 'relative',
   },
   collapsedCard: {
     padding: 0,
