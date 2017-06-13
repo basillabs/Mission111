@@ -94,6 +94,60 @@ class StoryCard extends Component {
     this.props.setBottomLanguage(language);
   }
 
+  isPlayingTrack(track) {
+    return this.props.currentAudioTrack === track.trackId;
+  }
+
+  renderTextContent(content) {
+    return (
+      <Text style={this.getTextStyles(content)}>
+        {content.text}
+      </Text>
+    );
+  }
+
+  renderTitleIcon() {
+    return this.props.isTitleCard && (
+      <View style={styles.chevron}>
+        <Icon name="chevron-right" size={30} fill={theme.accent} />
+      </View>
+    );
+  }
+
+  renderLanguageSelector(language, onValueChange) {
+    return (
+      <LanguagePicker
+        selectedValue={language}
+        onValueChange={onValueChange}
+      />
+    );
+  }
+
+  renderAudioButton(content, highlighted, onToggle) {
+    return content.trackId && (
+      <AudioButton
+        highlighted={highlighted}
+        onToggle={onToggle}
+        disabled={!content.trackUrl}
+      />
+    );
+  }
+
+  renderAudioMenu(content, isVisible) {
+    return (
+      <AudioMenu
+        autoPlay
+        isVisible={isVisible}
+        playAudioTrack={this.props.playAudioTrack}
+        pauseAudioTrack={this.props.pauseAudioTrack}
+        isPlaying={this.isPlayingTrack(content)}
+        currentAudioTrack={this.props.currentTrack}
+        trackId={content.trackId}
+        trackUrl={content.trackUrl}
+      />
+    );
+  }
+
   render() {
     const {
       topContent,
@@ -106,68 +160,18 @@ class StoryCard extends Component {
     return (
       <View style={styles.container}>
         <Animated.View style={this.getTopCardStyles()}>
-          <Text style={this.getTextStyles(topContent)}>
-            {topContent.text}
-          </Text>
-          {this.props.isTitleCard ?
-            <View style={styles.chevron}>
-              <Icon name="chevron-right" size={30} fill={theme.accent} />
-            </View>
-          : null}
-          {allowLanguageSelection ?
-            <LanguagePicker selectedValue={topLanguage}
-              onValueChange={this.setTopLanguage} />
-          : null}
-
-          {topContent.trackId && (
-            <AudioButton
-              highlighted={this.state.isTopAudioVisible}
-              onToggle={this.onToggleTopAudio}
-              disabled={!topContent.trackUrl}
-            />
-          )}
-          <AudioMenu
-            isVisible={this.state.isTopAudioVisible}
-            playAudioTrack={this.props.playAudioTrack}
-            pauseAudioTrack={this.props.pauseAudioTrack}
-            isPlaying={this.props.currentAudioTrack === topContent.trackId}
-            currentAudioTrack={this.props.currentAudioTrack}
-            trackId={topContent.trackId}
-            trackUrl={topContent.trackUrl}
-          />
+          {this.renderTextContent(topContent)}
+          {this.renderTitleIcon()}
+          {allowLanguageSelection this.renderLanguageSelector(topLanguage, this.setTopLanguage)}
+          {this.renderAudioButton(topContent, this.state.isTopAudioVisible, this.onToggleTopAudio)}
+          {this.renderAudioMenu(topContent, this.state.isTopAudioVisible)}
         </Animated.View>
         <Animated.View style={this.getBottomCardStyles()}>
-          <Text style={this.getTextStyles(bottomContent)}>
-            {bottomContent.text}
-          </Text>
-          {this.props.isTitleCard ?
-            <View style={styles.chevron}>
-              <Icon name="chevron-right" size={30} fill={theme.accent} />
-            </View>
-          : null}
-          {allowLanguageSelection ?
-            <LanguagePicker
-              selectedValue={bottomLanguage}
-              onValueChange={this.setBottomLanguage}
-            />
-          : null}
-
-          {topContent.trackId && (
-            <AudioButton
-              highlighted={this.state.isBottomAudioVisible}
-              onToggle={this.onToggleBottomAudio}
-              disabled={!bottomContent.trackUrl}
-            />
-          )}
-          <AudioMenu
-            isVisible={this.state.isBottomAudioVisible}
-            playAudioTrack={this.props.playAudioTrack}
-            pauseAudioTrack={this.props.pauseAudioTrack}
-            isPlaying={this.props.currentAudioTrack === bottomContent.trackId}
-            currentAudioTrack={this.props.currentAudioTrack}
-            trackId={bottomContent.trackId}
-            trackUrl={bottomContent.trackUrl}
-          />
+          {this.renderTextContent(bottomContent)}
+          {this.renderTitleIcon()}
+          {allowLanguageSelection this.renderLanguageSelector(bottomLanguage, this.setBottomLanguage)}
+          {this.renderAudioButton(bottomContent, this.state.isBottomAudioVisible, this.onToggleBottomAudio)}
+          {this.renderAudioMenu(bottomContent, this.state.isBottomAudioVisible)}
         </Animated.View>
       </View>
     );
