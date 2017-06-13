@@ -43,22 +43,34 @@ class AudioMenu extends Component {
           duration: 230,
         }
       ).start();
+
+      if (props.isVisible && props.autoPlay) {
+        this.play();
+      }
     }
   }
 
   onTogglePlay() {
     if (this.props.isPlaying) {
-      AudioStreamer.pause();
-      this.props.pauseAudioTrack();
+      this.pause();
     } else {
-      AudioStreamer.setUrl(`${S3_URL}${this.props.trackUrl}`);
-      AudioStreamer.play();
-      this.props.playAudioTrack(this.props.trackId);
+      this.play();
     }
   }
 
   onRewind() {
     AudioStreamer.seekToTime(0);
+  }
+
+  play() {
+    AudioStreamer.setUrl(`${S3_URL}${this.props.trackUrl}`);
+    AudioStreamer.play();
+    this.props.playAudioTrack(this.props.trackId);
+  }
+
+  pause() {
+    AudioStreamer.pause();
+    this.props.pauseAudioTrack();
   }
 
   renderPlayButton() {
@@ -106,11 +118,18 @@ class AudioMenu extends Component {
   }
 }
 AudioMenu.propTypes = {
+  autoPlay: PropTypes.bool,
   isVisible: PropTypes.bool,
   isPlaying: PropTypes.bool,
   trackId: PropTypes.string,
   pauseAudioTrack: PropTypes.func.isRequired,
   playAudioTrack: PropTypes.func.isRequired,
+};
+AudioMenu.defaultProps = {
+  autoPlay: false,
+  isVisible: false,
+  isPlaying: false,
+  trackId: null,
 };
 
 const styles = StyleSheet.create({
