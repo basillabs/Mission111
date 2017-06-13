@@ -162,14 +162,14 @@ class StoryCard extends Component {
         <Animated.View style={this.getTopCardStyles()}>
           {this.renderTextContent(topContent)}
           {this.renderTitleIcon()}
-          {allowLanguageSelection this.renderLanguageSelector(topLanguage, this.setTopLanguage)}
+          {allowLanguageSelection && this.renderLanguageSelector(topLanguage, this.setTopLanguage)}
           {this.renderAudioButton(topContent, this.state.isTopAudioVisible, this.onToggleTopAudio)}
           {this.renderAudioMenu(topContent, this.state.isTopAudioVisible)}
         </Animated.View>
         <Animated.View style={this.getBottomCardStyles()}>
           {this.renderTextContent(bottomContent)}
           {this.renderTitleIcon()}
-          {allowLanguageSelection this.renderLanguageSelector(bottomLanguage, this.setBottomLanguage)}
+          {allowLanguageSelection && this.renderLanguageSelector(bottomLanguage, this.setBottomLanguage)}
           {this.renderAudioButton(bottomContent, this.state.isBottomAudioVisible, this.onToggleBottomAudio)}
           {this.renderAudioMenu(bottomContent, this.state.isBottomAudioVisible)}
         </Animated.View>
